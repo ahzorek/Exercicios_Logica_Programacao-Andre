@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - O Dobre e o Terço</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>O Dobro e o Terço</h1>
+    <section>
+      <input type="number" name="num" id="num" placeholder="Digite um valor:">
+      <input type="button" value="Enviar" onclick="doubleAndThird()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <span>Saída: <output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    function doubleAndThird() {
+      const num = Number(document.getElementById('num').value)
+      const double = num * 2
+      const third = num * (1 / 3)
+
+      console.log(`O dobro de ${num} é ${double}. A terça parte de ${num} é ${third}`)
+      document.getElementById('resultado').innerText = `O dobro de ${num} é ${double}. 
+      A terça parte de ${num} é ${third}`
+
+    }
+  </script>
+</body>
+
+</html>

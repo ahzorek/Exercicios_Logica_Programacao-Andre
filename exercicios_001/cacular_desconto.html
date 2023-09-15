@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Cálcular Desconto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Aplique seu Desconto</h1>
+    <section>
+      <input type="number" name="precoBase" id="precoBase" placeholder="Preço original do Produto:">
+
+      <input type="button" value="Enviar" onclick="desconto()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <h3>Saída: <output id="resultado"></output></h3>
+    </section>
+
+  </main>
+
+  <script>
+    function desconto() {
+      const precoBase = Number(document.getElementById('precoBase').value)
+      const descontoPercentual = 0.05
+      const descontoAplicado = precoBase * descontoPercentual
+      const precoPromocional = precoBase - descontoAplicado
+
+      console.log(`Seu preço promocional é R$${precoPromocional.toFixed(2)}, com ${descontoPercentual * 100}% de desconto.`)
+      document.getElementById('resultado').innerText = `Seu preço promocional é R$${precoPromocional.toFixed(2)}, com ${descontoPercentual * 100}% de desconto.`
+    }
+
+  </script>
+</body>

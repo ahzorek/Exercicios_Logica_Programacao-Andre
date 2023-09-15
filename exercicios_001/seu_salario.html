@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Funcionário + Salário</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Seu Salário</h1>
+    <section>
+      <input type="text" name="nomeCompleto2" id="nomeCompleto2" placeholder="Nome do Funcionário:">
+      <input type="number" name="seuSalario" id="seuSalario" placeholder="Salário:">
+      <input type="button" value="Enviar" onclick="dizSeuSalario()">
+
+      <!-- <input type="text" name="Resultado Nome + Salário" id="resultado2" readonly> -->
+      <span>Saída: <output id="resultado2"></output></span>
+    </section>
+  </main>
+
+  <script>
+    function dizSeuSalario() {
+      const funcionario = document.getElementById('nomeCompleto2').value
+      const salario = document.getElementById('seuSalario').value
+      let resultado2 = document.getElementById('resultado2')
+
+      const funcionarioMaisSalario = `O funcionário ${funcionario} tem um salário de R$ ${salario} em Junho.`
+
+      console.log(funcionarioMaisSalario)
+      resultado2.innerText = funcionarioMaisSalario
+    }
+  </script>
+</body>
+
+</html>

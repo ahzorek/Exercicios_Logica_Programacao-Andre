@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Real vs Dólar</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Converter Reais em Dólar</h1>
+    <section>
+      <input type="number" name="valorBRL" id="valorBRL" placeholder="Digite sua quantia em Reais (R$):">
+      <input type="button" value="Enviar" onclick="converter()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <h3>Saída: <output id="resultado"></output></h3>
+    </section>
+
+  </main>
+
+  <script>
+    function converter() {
+      const valorBRL = Number(document.getElementById('valorBRL').value)
+      const cotacao = 4.87
+      const valorUSD = valorBRL / cotacao
+
+      console.log(`Você possui USD $${valorUSD.toFixed(2)}`)
+      document.getElementById('resultado').innerText = `Você possui USD $${valorUSD.toFixed(2)}`
+    }
+
+  </script>
+</body>
+
+</html>

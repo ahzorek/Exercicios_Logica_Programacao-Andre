@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Média Notas</h1>
+    <section>
+      <input type="number" name="nota1" id="nota1" placeholder="Nota 1:">
+      <input type="number" name="nota2" id="nota2" placeholder="Nota 2:">
+      <input type="button" value="Enviar" onclick="calculaMediaNotas()">
+
+      <span>Saída: <output id="resultado4"></output></span>
+
+    </section>
+  </main>
+
+  <script>
+    function calculaMediaNotas() {
+      const nota1 = document.getElementById('nota1').value
+      const nota2 = document.getElementById('nota2').value
+      const qtdNotas = 2
+      let resultado4 = document.getElementById('resultado4')
+
+      const mediaCalculada = (Number(nota1) + Number(nota2)) / qtdNotas
+
+      console.log(mediaCalculada)
+      resultado4.innerText = `A média entre a nota ${nota1} e ${nota2} é igual a ${mediaCalculada}`
+    }
+  </script>
+</body>
+
+</html>

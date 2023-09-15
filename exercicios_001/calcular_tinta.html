@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Cálculo Tinta</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Quanta Tinta Vai Aqui?</h1>
+    <section>
+      <input type="number" name="paredeAltura" id="paredeAltura"
+        placeholder="Digite a altura de sua parede, em Metros:">
+      <input type="number" name="paredeComprimento" id="paredeComprimento"
+        placeholder="Digite o comprimento de sua parede, em Metros:">
+      <input type="button" value="Enviar" onclick="converter()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <h3>Saída: <output id="resultado"></output></h3>
+    </section>
+
+  </main>
+
+  <script>
+    function converter() {
+      const paredeAltura = Number(document.getElementById('paredeAltura').value)
+      const paredeComprimento = Number(document.getElementById('paredeComprimento').value)
+      const tintaM2 = 2
+      const qtdTinta = (paredeAltura * paredeComprimento) / tintaM2
+
+      console.log(`Você irá usar ${qtdTinta.toFixed(2)}l de tinta`)
+      document.getElementById('resultado').innerText = `Você irá usar ${qtdTinta.toFixed(2)}l de tinta`
+    }
+
+  </script>
+</body>
+
+</html>

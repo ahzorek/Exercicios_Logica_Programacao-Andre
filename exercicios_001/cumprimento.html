@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Cumprimento</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Cumprimenta</h1>
+    <section>
+      <input type="text" name="nomeCompleto1" id="nomeCompleto1" placeholder="Qual é o seu nome?">
+      <input type="button" value="Enviar" onclick="cumprimente()">
+
+      <!-- <input type="text" name="Resultado Nome" id="resultado1" readonly> -->
+      <span>Saída: <output id="resultado1"></output></span>
+
+    </section>
+  </main>
+
+  <script>
+    function cumprimente() {
+      const seuNome = document.getElementById('nomeCompleto1').value
+      let resultado1 = document.getElementById('resultado1')
+      const greet = `Olá ${seuNome}, é um prazer te conhecer!`
+
+      console.log(greet)
+      resultado1.innerText = greet
+
+    }
+  </script>
+</body>
+
+</html>

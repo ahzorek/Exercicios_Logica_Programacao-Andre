@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Distância e Medidas</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Converter Medidas</h1>
+    <section>
+      <input type="number" name="distanciaM" id="distanciaM" placeholder="Digite uma distância em metros:">
+      <input type="button" value="Enviar" onclick="converter()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <span>Saída: <output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    function converter() {
+      const distanciaM = Number(document.getElementById('distanciaM').value)
+      const distanciaKm = distanciaM / 1000 // Kilômetros (km)
+      const distanciaCm = distanciaM * 100  // Centímetros (cm)
+      const distanciaMm = distanciaM * 1000  // Milímetros (mm)
+      const distanciaDam = distanciaM / 10   // Decâmetros (dam)
+      const distanciaHm = distanciaM / 100    // Hectômetros (hm)
+      const distanciaDm = distanciaM * 10     // Decímetros (dm)
+
+      document.getElementById('resultado').innerText = `
+      A distância de ${distanciaM} m corresponde a:
+            ${distanciaKm} Km
+            ${distanciaHm} Hm
+            ${distanciaDam} Dam
+            ${distanciaDm} dm
+            ${distanciaCm}cm
+            ${distanciaMm}mm `
+
+    }
+  </script>
+</body>
+
+</html>

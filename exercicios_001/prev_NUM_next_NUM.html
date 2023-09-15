@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 001 - Soma dois números</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Número Anterior e Próximo Número</h1>
+    <section>
+      <input type="number" name="num" id="num" placeholder="Digite um valor:">
+      <input type="button" value="Enviar" onclick="prevAndNext()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <span>Saída: <output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    function prevAndNext() {
+      const num = Number(document.getElementById('num').value)
+      const prev = num - 1
+      const next = num + 1
+
+      console.log(`O antecessor de ${num} é ${prev} e o sucessor é ${next}`)
+      document.getElementById('resultado').innerText = `O antecessor de ${num} é ${prev} e o sucessor é ${next}`
+
+    }
+  </script>
+</body>
+
+</html>
