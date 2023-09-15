@@ -17,12 +17,12 @@
 
 <body>
   <main>
-    <form action="">
+    <form>
       <input id="tosse" id type="text" placeholder="Tosse? (S ou N)" required>
       <input id="dorDeGarganta" type="text" placeholder="Dor de Garganta? (S ou N)" required>
       <input id="tempCorpo" type="number" placeholder="Temperatura Aferida:" required>
       <input id="faltaAr" type="text" placeholder="Falta de Ar? (S ou N)" required>
-      <input id="testar" type="button" value="Avaliar" onclick="avaliarRiscoSaude()">
+      <button id="testar" type="submit" value="Avaliar" onclick="avaliarRiscoSaude(event)">Testar</button>
       <input id="resultado" type="text" value="Aguardando" readonly>
     </form>
   </main>
@@ -37,8 +37,9 @@
     // let tempCorpo = 39
     // let faltaAr = true
 
-    function avaliarRiscoSaude() {
+    function avaliarRiscoSaude(event) {
       console.time('Tempo de execução')
+      event.preventDefault()
 
       const SIM = "S"
       const procureServico = "Procure um serviço de saúde."
