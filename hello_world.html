@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hello World</title>
+</head>
+<style>
+  form {
+    display: flex;
+    max-width: 200px;
+    margin-inline: auto;
+    flex-direction: column;
+  }
+</style>
+
+<body>
+  <main>
+    <form action="">
+      <input id="tosse" id type="text" placeholder="Tosse? (S ou N)" required>
+      <input id="dorDeGarganta" type="text" placeholder="Dor de Garganta? (S ou N)" required>
+      <input id="tempCorpo" type="number" placeholder="Temperatura Aferida:" required>
+      <input id="faltaAr" type="text" placeholder="Falta de Ar? (S ou N)" required>
+      <input id="testar" type="button" value="Avaliar" onclick="avaliarRiscoSaude()">
+      <input id="resultado" type="text" value="Aguardando" readonly>
+    </form>
+  </main>
+
+  <script>
+    const world = "World"
+    var name = "Andre"
+    console.log("Hello " + world + " , " + name)
+
+    // let tosse = true
+    // let dorDeGarganta = true
+    // let tempCorpo = 39
+    // let faltaAr = true
+
+    function avaliarRiscoSaude() {
+      console.time('Tempo de execução')
+
+      const SIM = "S"
+      const procureServico = "Procure um serviço de saúde."
+      const podeRelaxar = "Fique em casa e monitore seus sintomas."
+
+      const listInputs = document.querySelectorAll('input')
+      const resultado = document.getElementById('resultado')
+      const inputs = {}
+
+      Array.from(listInputs).forEach((elemento) => {
+        inputs[elemento.id] = elemento.value
+
+      })
+
+      const { tosse, dorDeGarganta, tempCorpo, faltaAr } = inputs
+
+      if ((dorDeGarganta === SIM && tosse === SIM) || (faltaAr === SIM && tempCorpo > 38)) {
+        console.log(procureServico)
+        resultado.value = procureServico
+      } else {
+        console.log(podeRelaxar)
+        resultado.value = podeRelaxar
+      }
+
+      console.timeEnd('Tempo de execução')
+    }
+  </script>
+</body>
+
+</html>
