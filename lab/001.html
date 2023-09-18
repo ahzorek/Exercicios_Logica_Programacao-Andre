@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste 1</title>
+</head>
+
+<body>
+  <main>
+    <section>
+      <h1>Lab Testes - 001</h1>
+      <form>
+        <input type="text" name="firstName" id="firstName">
+        <input type="text" name="lastName" id="lastName">
+        <input type="submit" value="Executar">
+        <output id="saida"></output>
+      </form>
+    </section>
+  </main>
+  <script>
+    document.querySelector('form').addEventListener('submit', e => {
+      e.preventDefault()
+      const rawForm = new FormData(e.target)
+      const data = [...rawForm.entries()]
+      console.table(typeof (data), data)
+    })
+
+    // const firstName = document.getElementById('firstName').value
+    // const lastName = document.getElementById('lastName').value
+    const saida = document.querySelector('#saida')
+
+    // const tellsName = (event) => {
+    //   event.preventDefault()
+    //   console.log(event)
+    //   const firstName = document.querySelector('#firstName').value
+    //   const lastName = document.querySelector('#lastName').value
+    //   saida.innerText = `Nome completo é: ${firstName} ${lastName}`
+
+    // }
+
+    // function tellsName(event) {
+    //   console.log(event)
+    //   saida.innerText = `Nome completo é: ${firstName} ${lastName}`
+    // }
+
+  </script>
+
+</body>
+
+</html>
