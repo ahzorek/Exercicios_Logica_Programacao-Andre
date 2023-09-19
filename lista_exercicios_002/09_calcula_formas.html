@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercícios 002 - Cálculadora Lucro</title>
+  <title>Exercícios 002 - Calculadora Formas</title>
   <link rel="stylesheet" href="../shared_assets/styles.css">
 </head>
 
 <body>
   <main>
-    <h1>Calculadora Lucro</h1>
+    <h1>Calculadora Formas</h1>
     <section>
       <input type="number" name="valorBruto" id="valorBruto" placeholder="Valor de compra do produto em Reais (R$):">
       <input type="button" value="Enviar" onclick="calcularValorVenda()">
@@ -22,20 +22,6 @@
   </main>
 
   <script>
-    function calcularValorVenda() {
-      const valorBruto = Number(document.querySelector('#valorBruto').value)
-      const gatilhoPreco = 20
-      const faixaLucro_1 = 0.5
-      const faixaLucro_2 = 0.35
-      const saida = document.querySelector('#resultado')
-      let valorFinal
-
-      if (valorBruto < gatilhoPreco) {
-        valorFinal = valorBruto + (valorBruto * faixaLucro_1)
-      } else valorFinal = valorBruto + (valorBruto * faixaLucro_2)
-
-      saida.value = `O valor de venda para este produto deve ser R$ ${valorFinal.toFixed(2)}`
-    }
 
   </script>
 </body>
