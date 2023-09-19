@@ -14,8 +14,6 @@
     <section>
       <input type="number" name="valorBruto" id="valorBruto" placeholder="Valor de compra do produto em Reais (R$):">
       <input type="button" value="Enviar" onclick="calcularValorVenda()">
-
-      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
       <h3>O valor de venda deste item deve ser: <output id="resultado"></output></h3>
     </section>
 
@@ -52,16 +50,15 @@
         valorDeCalculo = faixasINSS.faixa1.INSS
       }
 
-      else if ((valorBruto <= faixasINSS.faixa2.topo) && (valorBruto > faixasINSS.faixa1.topo)) { valorDeCalculo = faixasINSS.faixa2.INSS }
+      else if ((valorBruto <= faixasINSS.faixa2.topo) && (valorBruto > faixasINSS.faixa1.topo)) {
+        valorDeCalculo = faixasINSS.faixa2.INSS
+      }
 
-      else if ((valorBruto <= faixasINSS.faixa3.topo) && (valorBruto > faixasINSS.faixa2.topo)) { valorDeCalculo = faixasINSS.faixa3.INSS }
-
-      else valorDeCalculo = faixasINSS.faixa4.INSS
-
-      //console.log(valorDeCalculo)
+      else if ((valorBruto <= faixasINSS.faixa3.topo) && (valorBruto > faixasINSS.faixa2.topo)) {
+        valorDeCalculo = faixasINSS.faixa3.INSS
+      } else valorDeCalculo = faixasINSS.faixa4.INSS
 
       valorLiquido = valorBruto - (valorBruto * valorDeCalculo)
-
       saida.value = `O salário líquido com descontos de INSS deve ser R$ ${valorLiquido.toFixed(2)}`
     }
 
