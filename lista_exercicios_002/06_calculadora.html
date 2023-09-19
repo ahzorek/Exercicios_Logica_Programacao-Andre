@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 002 - Calculadora</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Calculadora</h1>
+    <section>
+      <input type="number" step="1" name="num1" id="num1" placeholder="Digite um valor:">
+      <input type="text" name="op" id="op" placeholder="Operação: (+ , - , *, /)">
+      <input type="number" step="1" name="num2" id="num2" placeholder="Digite um valor:">
+      <input type="button" value="Testar" onclick="calcular()">
+
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    const calcular = () => {
+      const num1 = Number(document.querySelector('#num1').value)
+      const num2 = Number(document.querySelector('#num2').value)
+      const operador = document.querySelector('#op').value
+      const saida = document.querySelector('#resultado')
+      const SOM = "+"; const SUB = "-";
+      const MUL = "*"; const DIV = "/";
+
+
+      let res;
+      //verifica o tipo da operação atraves de uma comparação no switch case statement
+      switch (operador) {
+        case SOM:
+          res = num1 + num2
+          break;
+        case SUB:
+          res = num1 - num2
+          break;
+        case MUL:
+          res = num1 * num2
+          break;
+        case DIV:
+          res = num1 / num2
+          break
+        default:
+          res = 'não pôde ser resolvido.'
+          console.error('Houve um erro com a operação: parâmetro operador não corresponde');
+          break;
+      }
+      saida.value = `O Resultado da operação é ${res}`
+      console.log(res);
+    }
+  </script>
+</body>
+
+</html>
