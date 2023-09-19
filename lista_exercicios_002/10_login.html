@@ -50,16 +50,19 @@
       //usa o metodo .find() pra localizar se algum usuario dentro do objeto "base de dados" corresponde ao usuario informado pelo usuario
       const login = USERS.find(user => userId === user.id)
 
-
       // se o .find() não encontrar um usuario valido retorna undefined, portanto encerra a execução aqui e nao altera o valor de saida
-      if (login === undefined) { return }
+      if (login === undefined) {
+        //atualiza valor de saida e sai da função
+        saida.value = loginStatus
+        return
+      }
 
       // apos confirmar que existe um usuario valido, checa explicitamente se a senha confere com o valor na "base de dados"
-      else if (login.senha === userPass) {
+      if (login.senha === userPass) {
         loginStatus = 'Acesso Permitido'
-      } else if (login.senha !== userPass) {
-        loginStatus = "Senha incorreta"
       }
+      else loginStatus = "Senha incorreta"
+
       //atualiza valor de saida
       saida.value = loginStatus
     }
