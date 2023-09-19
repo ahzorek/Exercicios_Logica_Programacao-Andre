@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 002 - Igual, maior ou menor (que 20)</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Igual, maior ou menor (que 20)</h1>
+    <section>
+      <input type="number" step="1" name="num1" id="num1" placeholder="Digite um valor:">
+      <input type="button" value="Testar" onclick="conferir()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <span>Saída: <output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    function conferir() {
+      const num1 = Number(document.getElementById('num1').value)
+      const saida = document.querySelector('#resultado')
+      const refNum = 20
+
+      if (num1 === refNum) {
+        saida.value = `${num1} é IGUAL ${refNum}`
+      } else if (num1 > refNum) { saida.value = `${num1} é MAIOR que ${refNum}` }
+      else saida.value = `${num1} é MENOR que ${refNum}`
+
+    }
+  </script>
+</body>
+
+</html>

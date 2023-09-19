@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 002 - Cálculadora Salário</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Cálculadora Salário</h1>
+    <section>
+      <input type="number" name="valorBruto" id="valorBruto" placeholder="Valor de compra do produto em Reais (R$):">
+      <input type="button" value="Enviar" onclick="calcularValorVenda()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <h3>O valor de venda deste item deve ser: <output id="resultado"></output></h3>
+    </section>
+
+  </main>
+
+  <script>
+    function calcularValorVenda() {
+      const valorBruto = Number(document.querySelector('#valorBruto').value)
+      const saida = document.querySelector('#resultado')
+      let valorLiquido, valorDeCalculo
+      const faixasINSS = {
+        faixa1: {
+          base: 0,
+          topo: 600.00,
+          INSS: 0
+        },
+        faixa2: {
+          base: 600.00,
+          topo: 1200.00,
+          INSS: .25
+        },
+        faixa3: {
+          base: 1200.00,
+          topo: 2000.00,
+          INSS: .30
+        },
+        faixa4: {
+          base: 2000.00,
+          INSS: .35
+        }
+      }
+
+      if (valorBruto <= faixasINSS.faixa1.topo) {
+        valorDeCalculo = faixasINSS.faixa1.INSS
+      }
+
+      else if ((valorBruto <= faixasINSS.faixa2.topo) && (valorBruto > faixasINSS.faixa1.topo)) { valorDeCalculo = faixasINSS.faixa2.INSS }
+
+      else if ((valorBruto <= faixasINSS.faixa3.topo) && (valorBruto > faixasINSS.faixa2.topo)) { valorDeCalculo = faixasINSS.faixa3.INSS }
+
+      else valorDeCalculo = faixasINSS.faixa4.INSS
+
+      //console.log(valorDeCalculo)
+
+      valorLiquido = valorBruto - (valorBruto * valorDeCalculo)
+
+      saida.value = `O salário líquido com descontos de INSS deve ser R$ ${valorLiquido.toFixed(2)}`
+    }
+
+  </script>
+</body>
+
+</html>
