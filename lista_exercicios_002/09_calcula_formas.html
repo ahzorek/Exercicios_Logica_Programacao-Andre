@@ -17,7 +17,7 @@
         <option value="circulo">Circulo</option>
         <option value="retangulo">Retângulo</option>
         <option value="trianguloRetangulo">Triângulo Retângulo</option>
-        <option value="trianguloEquilatero">Triângulo Equiatero</option>
+        <option value="trianguloEquilatero">Triângulo Equilatero</option>
       </select>
       <!-- <input type="button" value="Selecionar" onclick="selecionaForma()"> -->
 
@@ -60,7 +60,7 @@
       `,
       trianguloEquilatero: `
         <div id="trianguloEquilatero">
-          <input type="number" id="valorLado" placeholder="Medida do Lado do Triângulo" step="0.1">
+          <input type="number" id="trianguloLado" placeholder="Medida do Lado do Triângulo" step="0.1">
           <input type="button" value="Calcular" onclick="calcAreaTrianguloEqui()">
         </div>
       `,
@@ -69,27 +69,43 @@
 
     function selecionaForma() {
       const formaSelecionada = document.getElementById('forma').value
-
-      console.log(formaSelecionada);
+      // console.log(formaSelecionada);
 
       //usando como chave o value extraido do input select seleciona o respectivo form ref a forma selecionada e insere dentro do campo html output
       containerInputs.innerHTML = formas[formaSelecionada]
+
+      // limpa resultados anteriores pra não causar confusão
+      saida.value = ""
     }
 
     function calcAreaCirculo() {
-      saida.value = 'cilculo'
+      const raio = document.getElementById('raio').value
+      const area = Math.PI * (raio * raio)
+
+      saida.value = area.toFixed(2)
     }
 
     function calcAreaRetangulo() {
-      saida.value = 'retungolo'
+      const retBase = document.getElementById('retBase').value
+      const retAltura = document.getElementById('retAltura').value
+      const area = retBase * retAltura
+
+      saida.value = area.toFixed(2)
     }
 
     function calcAreaTrianguloRet() {
-      saida.value = 'triang retinho'
+      const trianguloRetanguloBase = document.getElementById('trianguloRetanguloBase').value
+      const trianguloRetanguloAltura = document.getElementById('trianguloRetanguloAltura').value
+      const area = (trianguloRetanguloBase * trianguloRetanguloAltura) / 2
+
+      saida.value = area.toFixed(2)
     }
 
     function calcAreaTrianguloEqui() {
-      saida.value = 'triang certinho'
+      const trianguloLado = document.getElementById('trianguloLado').value
+      const area = (trianguloLado * trianguloLado) * Math.sqrt(3) / 4
+
+      saida.value = area.toFixed(2)
     }
   </script>
 </body>
