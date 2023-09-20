@@ -48,9 +48,9 @@
           res = num1 / num2
           break
         default:
-          res = 'não pôde ser resolvido.'
+          saida.value = 'A operação não pode ser resolvida. Operador inválido'
           console.error('Houve um erro com a operação: parâmetro operador não corresponde');
-          break;
+          return
       }
       saida.value = `O Resultado da operação é ${res}`
       console.log(res);

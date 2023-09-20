@@ -12,17 +12,85 @@
   <main>
     <h1>Calculadora Formas</h1>
     <section>
-      <input type="number" name="valorBruto" id="valorBruto" placeholder="Valor de compra do produto em Reais (R$):">
-      <input type="button" value="Enviar" onclick="calcularValorVenda()">
+      <select id="forma" onchange="selecionaForma()">
+        <option value="none" disabled selected>Escolha uma</option>
+        <option value="circulo">Circulo</option>
+        <option value="retangulo">Retângulo</option>
+        <option value="trianguloRetangulo">Triângulo Retângulo</option>
+        <option value="trianguloEquilatero">Triângulo Equiatero</option>
+      </select>
+      <!-- <input type="button" value="Selecionar" onclick="selecionaForma()"> -->
 
-      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
-      <h3>O valor de venda deste item deve ser: <output id="resultado"></output></h3>
+      <output id="containerInputs">
+        <!-- container que ira receber as inputs -->
+      </output>
+
+      <output id="resultadoCalculos">
+        <!-- aqui vai entrar o resultado final dos calculos das respectivas areas -->
+      </output>
     </section>
-
   </main>
 
   <script>
+    //seleciona e salva ref aos elementos da pagina que serao manipulados
+    const containerInputs = document.getElementById('containerInputs')
+    const saida = document.getElementById('resultadoCalculos')
 
+    //object literal definem a estrutura dos inputs referentes a cada forma que sera calculada
+    const formas = {
+      circulo: `
+        <div id="circulo">
+          <input type="number" id="raio" placeholder="Medida do raio" step="0.1">
+          <input type="button" value="Calcular" onclick="calcAreaCirculo()">
+        </div>
+      `,
+      retangulo: `
+        <div id="retangulo">
+          <input type="number" id="retBase" placeholder="Medida da Base do Retângulo" step="0.1">
+          <input type="number" id="retAltura" placeholder="Medida da Altura do Retângulo" step="0.1">
+          <input type="button" value="Calcular" onclick="calcAreaRetangulo()">
+        </div>
+      `,
+      trianguloRetangulo: `
+        <div id="trianguloRetangulo">
+          <input type="number" id="trianguloRetanguloBase" placeholder="Medida da Base do Trinângulo" step="0.0">
+          <input type="number" id="trianguloRetanguloAltura" placeholder="Medida da Altura do Trinângulo" step="0.1">
+          <input type="button" value="Calcular" onclick="calcAreaTrianguloRet()">
+        </div>
+      `,
+      trianguloEquilatero: `
+        <div id="trianguloEquilatero">
+          <input type="number" id="valorLado" placeholder="Medida do Lado do Triângulo" step="0.1">
+          <input type="button" value="Calcular" onclick="calcAreaTrianguloEqui()">
+        </div>
+      `,
+      none: 'Não foi selecionada nenhuma forma'
+    }
+
+    function selecionaForma() {
+      const formaSelecionada = document.getElementById('forma').value
+
+      console.log(formaSelecionada);
+
+      //usando como chave o value extraido do input select seleciona o respectivo form ref a forma selecionada e insere dentro do campo html output
+      containerInputs.innerHTML = formas[formaSelecionada]
+    }
+
+    function calcAreaCirculo() {
+      saida.value = 'cilculo'
+    }
+
+    function calcAreaRetangulo() {
+      saida.value = 'retungolo'
+    }
+
+    function calcAreaTrianguloRet() {
+      saida.value = 'triang retinho'
+    }
+
+    function calcAreaTrianguloEqui() {
+      saida.value = 'triang certinho'
+    }
   </script>
 </body>
 
