@@ -12,7 +12,7 @@
   <main>
     <h1>Aplique seu Desconto</h1>
     <section>
-      <input type="number" name="precoBase" id="precoBase" placeholder="Preço original do Produto:">
+      <input type="number" min="0" step="0.05" name="precoBase" id="precoBase" placeholder="Preço original do Produto:">
 
       <input type="button" value="Enviar" onclick="desconto()">
 
@@ -24,13 +24,21 @@
 
   <script>
     function desconto() {
-      const precoBase = Number(document.getElementById('precoBase').value)
+      const inputPreco = document.getElementById('precoBase')
+      const precoBase = Number(inputPreco.value)
+      const saida = document.getElementById('resultado')
+
+      if (precoBase <= 0) {
+        alert(`O valor atribuido é negativo ou 0 e não pode ser calculado.`)
+        inputPreco.focus()
+        return
+      }
+
       const descontoPercentual = 0.05
       const descontoAplicado = precoBase * descontoPercentual
       const precoPromocional = precoBase - descontoAplicado
 
-      console.log(`Seu preço promocional é R$${precoPromocional.toFixed(2)}, com ${descontoPercentual * 100}% de desconto.`)
-      document.getElementById('resultado').innerText = `Seu preço promocional é R$${precoPromocional.toFixed(2)}, com ${descontoPercentual * 100}% de desconto.`
+      saida.innerText = `Seu preço promocional é R$${precoPromocional.toFixed(2)}, com ${descontoPercentual * 100}% de desconto.`
     }
 
   </script>
