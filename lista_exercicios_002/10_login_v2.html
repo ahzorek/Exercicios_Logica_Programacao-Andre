@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 002 - Login</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Login</h1>
+    <section>
+      <input type="text" name="userId" id="userId" placeholder="Nome de usuário" value="">
+      <input type="password" name="userPass" id="userPass" placeholder="Senha" value="">
+      <input type="button" value="Entrar" onclick="login()">
+
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+
+    const USERS = [
+      {
+        id: 'Aluno1',
+        senha: 'Trocar123'
+      },
+      {
+        id: 'Aluno2',
+        senha: 'Senha@123'
+      },
+      {
+        id: 'Aluno3',
+        senha: '123Trocar'
+      }
+    ]
+
+    function login() {
+      //declaracoes de topo
+      const userId = document.getElementById('userId').value
+      const userPass = document.getElementById('userPass').value
+      const saida = document.getElementById('resultado')
+
+      //inicializa com o texto padrao de usuario nao encontrado
+      let loginStatus = 'Usuário não encontrado'
+
+      //usa o metodo .find() pra localizar se algum usuario dentro do objeto "base de dados" corresponde ao usuario informado pelo usuario
+      const login = USERS.find(user => userId === user.id)
+
+      // se o .find() não encontrar um usuario valido retorna undefined, portanto encerra a execução aqui e nao altera o valor de saida
+      if (login === undefined) {
+        //atualiza valor de saida e sai da função
+        saida.value = loginStatus
+        return
+      }
+
+      // apos confirmar que existe um usuario valido, checa explicitamente se a senha confere com o valor na "base de dados"
+      if (login.senha === userPass) {
+        loginStatus = 'Acesso Permitido'
+      }
+      else loginStatus = "Senha incorreta"
+
+      //atualiza valor de saida
+      saida.value = loginStatus
+    }
+
+  </script>
+</body>
+
+</html>

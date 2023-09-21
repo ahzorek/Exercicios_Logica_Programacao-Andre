@@ -23,20 +23,12 @@
 
   <script>
 
-    const USERS = [
-      {
-        id: 'Aluno1',
-        senha: 'Trocar123'
-      },
-      {
-        id: 'Aluno2',
-        senha: 'Senha@123'
-      },
-      {
-        id: 'Aluno3',
-        senha: '123Trocar'
-      }
-    ]
+    const USERS = {
+      user1: { id: 'Aluno1', senha: 'Trocar123' },
+      user2: { id: 'Aluno2', senha: 'Senha@123' },
+      user3: { id: 'Aluno3', senha: '123Trocar' }
+    }
+
 
     function login() {
       //declaracoes de topo
@@ -44,27 +36,27 @@
       const userPass = document.getElementById('userPass').value
       const saida = document.getElementById('resultado')
 
-      //inicializa com o texto padrao de usuario nao encontrado
-      let loginStatus = 'Usuário não encontrado'
-
-      //usa o metodo .find() pra localizar se algum usuario dentro do objeto "base de dados" corresponde ao usuario informado pelo usuario
-      const login = USERS.find(user => userId === user.id)
-
-      // se o .find() não encontrar um usuario valido retorna undefined, portanto encerra a execução aqui e nao altera o valor de saida
-      if (login === undefined) {
-        //atualiza valor de saida e sai da função
-        saida.value = loginStatus
-        return
-      }
-
-      // apos confirmar que existe um usuario valido, checa explicitamente se a senha confere com o valor na "base de dados"
-      if (login.senha === userPass) {
-        loginStatus = 'Acesso Permitido'
-      }
-      else loginStatus = "Senha incorreta"
-
-      //atualiza valor de saida
-      saida.value = loginStatus
+      //refazendo a logica para priorizar uso de estruturar de seleção
+      if (userId === USERS.user1.id) {
+        if (userPass === USERS.user1.senha) {
+          saida.value = 'Acesso Permitido'
+        } else {
+          saida.value = "Senha incorreta"
+        }
+      } else if (userId === USERS.user2.id) {
+        if (userPass === USERS.user2.senha) {
+          saida.value = 'Acesso Permitido'
+        } else {
+          saida.value = "Senha incorreta"
+        }
+      } else if (userId === USERS.user3.id) {
+        if (userPass === USERS.user3.senha) {
+          saida.value = 'Acesso Permitido'
+        } else {
+          saida.value = "Senha incorreta"
+        }
+      } else
+        saida.value = 'Usuário não encontrado'
     }
 
   </script>

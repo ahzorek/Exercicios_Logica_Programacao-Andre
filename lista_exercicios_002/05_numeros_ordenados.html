@@ -17,7 +17,7 @@
       <input type="number" step="1" name="num3" id="num3" placeholder="Digite um valor:">
       <input type="button" value="Testar" onclick="ordenados()">
 
-      <span>O números, em ordem descrescente são: <output id="resultado"></output></span>
+      <span>O números, em ordem descrescente são: <resultadoput id="resultado"></resultadoput></span>
     </section>
 
   </main>
@@ -27,17 +27,40 @@
       const numInputs = document.querySelectorAll('input[type="number"]')
       const resultado = document.querySelector('#resultado')
       let nums = []
+
+      //joga o valor de cada campo input, convertido para numero, para uma posição na array
       Array.from(numInputs).forEach(input => {
-        nums.push(Number(input.value)) //joga o valor de cada campo input, convertido para numero, para uma posição na array
+        nums.push(Number(input.value))
       })
       //usa o metodo sort dado os parametros a e b para ordenar a array e ao final usa ordem descrescente com metodo reverse()
-      nums = nums.sort((a, b) => a - b).reverse()
+      // nums = nums.sort((a, b) => a - b).reverse()
 
       //desconstroi a array nums para obter individualmente os valores num1, num2, e num3
       const [num1, num2, num3] = nums
 
       //retorna
-      resultado.value = num1 + ", " + num2 + " e " + num3
+      // resultado.value = num1 + ", " + num2 + " e " + num3
+
+      //refazendo a logica priorizando uso de estruturas de seleção
+      if (num1 < num2 && num2 < num3) {
+        resultado.value = num3 + " - " + num2 + " - " + num1
+
+      } else if (num1 > num2 && num2 > num3) {
+        resultado.value = num1 + " - " + num2 + " - " + num3
+
+      } else if (num1 < num2 && num2 > num3 && num1 > num3) {
+        resultado.value = num2 + " - " + num1 + " - " + num3
+
+      } else if (num1 > num2 && num2 < num3 && num1 > num3) {
+        resultado.value = num1 + " - " + num3 + " - " + num2
+
+      } else if (num1 > num2 && num2 > num3 && num1 < num3) {
+        resultado.value = num2 + " - " + num3 + " - " + num1
+
+      } else if (num1 > num2 && num2 < num3 && num1 < num3) {
+        resultado.value = num3 + " - " + num1 + " - " + num2
+
+      }
 
     }
   </script>
