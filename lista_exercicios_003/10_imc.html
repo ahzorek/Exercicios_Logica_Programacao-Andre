@@ -43,7 +43,7 @@ valor do IMC, podemos classificar o indivíduo dentro de certas faixas.
       const sobrePeso = 30
       const obesidade = 40
 
-      if (IMC < abaixoDoPeso) {
+      if (IMC <= abaixoDoPeso) {
         return `Seu IMC é ${IMC}. Você está abaixo do peso ideal.`
       } else if (IMC > abaixoDoPeso && IMC <= pesoIdeal) {
         return `Seu IMC é ${IMC}. Você está no seu peso ideal.`
