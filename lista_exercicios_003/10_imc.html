@@ -24,8 +24,9 @@ valor do IMC, podemos classificar o indivíduo dentro de certas faixas.
   <main>
     <h1>Calculadora IMC</h1>
     <section>
-      <input type="number" step="1" name="peso" id="peso" placeholder="Seu peso:">
-      <input type="number" step="1" name="altura" id="altura" placeholder="Sua altura:">
+      <input type="number" step="0.05" name="peso" id="peso" placeholder="Seu peso: (74kg)">
+      <input type="number" step="0.01" min="0" max="250" name="altura" id="altura"
+        placeholder="Sua altura em cm: (180cm)">
       <input type="button" value="Verificar" onclick="calcIMC()">
 
       <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
@@ -35,14 +36,33 @@ valor do IMC, podemos classificar o indivíduo dentro de certas faixas.
   </main>
 
   <script>
+
+    function faixaIMC(IMC) {
+      const abaixoDoPeso = 18.5
+      const pesoIdeal = 25
+      const sobrePeso = 30
+      const obesidade = 40
+
+      if (IMC < abaixoDoPeso) {
+        return `Seu IMC é ${IMC}. Você está abaixo do peso ideal.`
+      } else if (IMC > abaixoDoPeso && IMC <= pesoIdeal) {
+        return `Seu IMC é ${IMC}. Você está no seu peso ideal.`
+      } else if (IMC > pesoIdeal && IMC <= sobrePeso) {
+        return `Seu IMC é ${IMC}. Você está com sobrepeso.`
+      } else if (IMC > sobrePeso && IMC <= obesidade) {
+        return `Seu IMC é ${IMC}. Você está na faixa de obesidade. Tenha cuidado.`
+      } else return `Seu IMC é ${IMC}. Você está na faixa de obesidade mórbida. Procure acompanhamento.`
+    }
+
     function calcIMC() {
-      const peso = Number(document.getElementById('num1').value)
-      const altura = Number(document.getElementById('num2').value)
+      const peso = Number(document.getElementById('peso').value)
+      const altura = (Number(document.getElementById('altura').value) / 100)
       const saida = document.querySelector('#resultado')
+      const IMC = (peso / (altura * altura))
 
-      let IMC = peso / (altura ** 2)
+      console.log((Math.round(IMC * 10) / 10))
 
-      console.log(IMC)
+      saida.value = faixaIMC((Math.round(IMC * 10) / 10))
 
     }
   </script>
