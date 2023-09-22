@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Radar de Velocidade</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Radar de Velocidade</h1>
+    <section>
+      <input type="number" step="1" name="nm_driverSpeed" id="driverSpeed" placeholder="Velocidade:">
+      <input type="button" value="Testar" onclick="checkSpeed()">
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    const speedLimit = 80
+    const saida = document.querySelector('#resultado')
+
+    function ticketValue(overSpeed, ticketValue = 5) {
+      return (overSpeed * ticketValue).toFixed(2)
+    }
+
+    function printTicket(driverSpeed, overSpeedLimit) {
+      return `Motorista estava a ${driverSpeed}km/h, ${overSpeedLimit}km/h acima da velocidade permitida. Foi emitida uma multa no valor de R$${ticketValue(overSpeedLimit)}`
+    }
+
+    function checkSpeed() {
+      const driverSpeed = Number(document.querySelector('#driverSpeed').value)
+      let overSpeedLimit
+
+      if (driverSpeed > speedLimit) {
+        overSpeedLimit = driverSpeed - speedLimit
+        saida.value = printTicket(driverSpeed, overSpeedLimit)
+      } else {
+        saida.value = 'Motorista estava dentro do limite de velocidade'
+      }
+
+    }
+  </script>
+</body>
+
+</html>
