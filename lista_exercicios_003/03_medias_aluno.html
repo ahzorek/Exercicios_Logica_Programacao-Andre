@@ -13,8 +13,8 @@
     <h1>Média Notas</h1>
     <section>
       <input type="text" name="nm_nome" id="nome" placeholder="Nome aluno" required>
-      <input type="number" name="nota1" id="nota1" placeholder="Nota 1">
-      <input type="number" name="nota2" id="nota2" placeholder="Nota 2">
+      <input type="number" min="0" max="10" step="0.1" name="nota1" id="nota1" placeholder="Nota 1">
+      <input type="number" min="0" max="10" step="0.1" name="nota2" id="nota2" placeholder="Nota 2">
       <input type="button" value="Enviar" onclick="calculaMediaNotas()">
 
       <span><output id="resultado"></output></span>
@@ -24,20 +24,21 @@
 
   <script>
     function calculaMediaNotas() {
-      const qtdNotas = 2
+      let qtdNotas
       const nome = document.querySelector('#nome').value || 'John Doe'
-      const resultado = document.getElementById('resultado')
       const inputNotas = document.querySelectorAll('input[type="number"]')
+      const resultado = document.querySelector('#resultado')
       // const nota1 = document.getElementById('nota1').value
       // const nota2 = document.getElementById('nota2').value
       let notas = []
 
       Array.from(inputNotas).forEach((elemento) => {
-        notas[elemento.id] = elemento.value
+        notas.push(elemento.value)
       })
 
-      const { nota1, nota2 } = notas
-      const mediaCalculada = (Number(nota1) + Number(nota2)) / qtdNotas
+      qtdNotas = notas.length || 2
+      const [nota1, nota2] = notas
+      const mediaCalculada = ((Number(nota1) + Number(nota2)) / qtdNotas)
 
 
       if (mediaCalculada > 7) {

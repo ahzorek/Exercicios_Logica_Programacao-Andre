@@ -82,7 +82,7 @@
       const raio = document.getElementById('raio').value
       const area = Math.PI * (raio * raio)
 
-      saida.value = area.toFixed(2)
+      saida.value = `${area.toFixed(2)}cm2`
     }
 
     function calcAreaRetangulo() {
@@ -90,7 +90,7 @@
       const retAltura = document.getElementById('retAltura').value
       const area = retBase * retAltura
 
-      saida.value = area.toFixed(2)
+      saida.value = `${area.toFixed(2)}cm2`
     }
 
     function calcAreaTrianguloRet() {
@@ -98,14 +98,14 @@
       const trianguloRetanguloAltura = document.getElementById('trianguloRetanguloAltura').value
       const area = (trianguloRetanguloBase * trianguloRetanguloAltura) / 2
 
-      saida.value = area.toFixed(2)
+      saida.value = `${area.toFixed(2)}cm2`
     }
 
     function calcAreaTrianguloEqui() {
       const trianguloLado = document.getElementById('trianguloLado').value
       const area = (trianguloLado * trianguloLado) * Math.sqrt(3) / 4
 
-      saida.value = area.toFixed(2)
+      saida.value = `${area.toFixed(2)}cm2`
     }
   </script>
 </body>

@@ -32,13 +32,7 @@
       return parseInt((TODAY - dateOfBirth) / YEAR_LEN)
     }
 
-    function yesCanVote(age) {
-      if (age < 18 || age > 70) {
-        return `O usuário possui ${age} anos e pode optar por votar.`
-      } else {
-        return `O usuário possui ${age} anos e é obrigado a votar.`
-      }
-    }
+
 
     const noCantVote = (age) => `O usuário possui ${age} anos e não pode votar.`
 
@@ -47,12 +41,13 @@
       const dateOfBirth = document.querySelector('#dateOfBirth').value
       const age = calcAge(dateOfBirth)
 
-      if (age <= 0) {
-        saida.value = 'Erro. Idade informada é negativa.'
-      } else if (age < 16) {
-        saida.value = noCantVote(age)
+      if (age === 18) {
+        saida.value = 'Você deve se alistar AGORA! (Corra! Ainda dá tempo.)'
+      } else if (age < 18) {
+        saida.value = `Você deve se alistar em ${18 - age} ano(s).`
       } else
-        saida.value = yesCanVote(age)
+        saida.value = `Você se alistou há ${age - 18} ano(s).`
+
     }
   </script>
 </body>
