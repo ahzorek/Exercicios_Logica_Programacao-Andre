@@ -1,0 +1,51 @@
+<!-- 10. O Índice de Massa Corpórea (IMC) é um valor calculado baseado na altura e no peso de uma pessoa. De acordo com o
+valor do IMC, podemos classificar o indivíduo dentro de certas faixas.
+44 - abaixo de 18.5: Abaixo do peso
+45 - entre 18.5 e 25: Peso ideal
+46 - entre 25 e 30: Sobrepeso
+47 - entre 30 e 40: Obesidade
+48 - acima de 40: Obesidade mórbida
+49
+50 Obs: O IMC é calculado pela expressão peso/altura² (peso dividido pelo quadrado da altura)
+51
+52 Crie um programa que receba o peso e a altura de uma pessoa e informe na tela em que faixa de IMC ela se encontra. -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - IMC</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Calculadora IMC</h1>
+    <section>
+      <input type="number" step="1" name="peso" id="peso" placeholder="Seu peso:">
+      <input type="number" step="1" name="altura" id="altura" placeholder="Sua altura:">
+      <input type="button" value="Verificar" onclick="calcIMC()">
+
+      <!-- <input type="text" name="Resultado Soma" id="resultado3" readonly> -->
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+    function calcIMC() {
+      const peso = Number(document.getElementById('num1').value)
+      const altura = Number(document.getElementById('num2').value)
+      const saida = document.querySelector('#resultado')
+
+      let IMC = peso / (altura ** 2)
+
+      console.log(IMC)
+
+    }
+  </script>
+</body>
+
+</html>

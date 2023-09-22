@@ -1,0 +1,46 @@
+<!-- 8. Faça um algoritmo que pergunte a distância que um passageiro deseja percorrer em Km. Calcule o preço da passagem,
+cobrando R$0.50 por Km para viage ns até 200Km e R$0.45 para viagens mais longas. -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Calculadora Viagem</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Calculadora Viagem</h1>
+    <section>
+      <input type="number" min="0" step="0.05" name="distancia" id="distancia"
+        placeholder="A distância em km até seu destino:">
+      <input type="button" value="Enviar" onclick="calcularValorViagem()">
+
+      <h3><output id="resultado"></output></h3>
+    </section>
+
+  </main>
+
+  <script>
+    function calcularValorViagem() {
+      const distancia = Number(document.querySelector('#distancia').value)
+      const gatilhoDistancia = 200
+      const faixaPreco1 = 0.50
+      const faixaPreco2 = 0.45
+      const saida = document.querySelector('#resultado')
+      let valorFinal
+
+      if (distancia > gatilhoDistancia) {
+        valorFinal = distancia * (faixaPreco2)
+      } else valorFinal = distancia * (faixaPreco1)
+
+      saida.value = `O valor da viagem de ${distancia}km será R$${valorFinal.toFixed(2)}`
+    }
+
+  </script>
+</body>
+
+</html>

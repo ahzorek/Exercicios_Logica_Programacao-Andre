@@ -1,0 +1,64 @@
+<!-- 7. Numa promoção exclusiva para o Dia da Mulher, uma loja quer dar descontos para todos, mas especialmente para
+mulheres. Faça um programa que leia no me, sexo e o valor das compras do cliente e calcule o preço com desconto. Sabendo
+que:
+34
+35 - Homens ganham 5% de desconto
+36 - Mulheres ganham 13% de desconto -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Promoção dia das Mulheres</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Promoção dia das Mulheres</h1>
+    <section>
+      <input type="text" name="nm_nome" id="nome" placeholder="Nome" required>
+      <select id="sexo">
+        <option value="none" disabled selected>Escolha uma</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+      </select>
+      <input type="number" min="0" step="0.01" name="valorCompra" id="valorCompra" placeholder="R$">
+      <input type="button" value="Enviar" onclick="calcDescontoPromo()">
+
+      <span><output id="resultado"></output></span>
+
+    </section>
+  </main>
+
+  <script>
+    function calcDescontoPromo() {
+      const nome = document.querySelector('#nome').value
+      const sexo = document.querySelector('#sexo').value
+      const valorCompra = Number(document.querySelector('#valorCompra').value)
+      const saida = document.querySelector('#resultado')
+      let valorDesconto, valorFinal
+
+      switch (sexo) {
+        case 'masculino':
+          valorDesconto = 0.05
+          break
+        case 'feminino':
+          valorDesconto = 0.13
+          break
+        default:
+          valorDesconto = 0
+          break
+      }
+
+      valorFinal = valorCompra - (valorDesconto * valorCompra)
+
+      saida.value = `A compra do cliente ${nome} no valor total de R$${valorCompra.toFixed(2)} ficará R$${valorFinal.toFixed(2)} com ${valorDesconto * 100}% de desconto.`
+
+    }
+  </script>
+</body>
+
+</html>
