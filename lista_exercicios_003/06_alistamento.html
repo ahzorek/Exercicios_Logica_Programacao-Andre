@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Alistamento</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Alistamento</h1>
+    <section>
+      <label for="dateOfBirth">
+        Sua data de nascimento
+      </label>
+      <input type="date" name="nm_DateofBirth" id="dateOfBirth">
+      <input type="button" value="Testar" onclick="canVote()">
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+
+  <script>
+
+    function calcAge(userBirthday) {
+      const YEAR_LEN = 31557600000
+      const TODAY = new Date()
+      const dateOfBirth = new Date(userBirthday)
+
+      return parseInt((TODAY - dateOfBirth) / YEAR_LEN)
+    }
+
+    function yesCanVote(age) {
+      if (age < 18 || age > 70) {
+        return `O usuário possui ${age} anos e pode optar por votar.`
+      } else {
+        return `O usuário possui ${age} anos e é obrigado a votar.`
+      }
+    }
+
+    const noCantVote = (age) => `O usuário possui ${age} anos e não pode votar.`
+
+    function canVote() {
+      const saida = document.querySelector('#resultado')
+      const dateOfBirth = document.querySelector('#dateOfBirth').value
+      const age = calcAge(dateOfBirth)
+
+      if (age <= 0) {
+        saida.value = 'Erro. Idade informada é negativa.'
+      } else if (age < 16) {
+        saida.value = noCantVote(age)
+      } else
+        saida.value = yesCanVote(age)
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Radar de Velocidade</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Radar de Velocidade</h1>
+    <section>
+      <input type="number" step="1" name="nm_intNum" id="intNum" onchange="checaParouImpar()"
+        placeholder="Número Inteiro:">
+      <input type="button" value="Testar" onclick="checaParouImpar()">
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+  <script>
+    function isOdd(num) {
+      return num % 2
+    }
+
+    function checaParouImpar() {
+      const saida = document.querySelector('#resultado')
+      const intNum = parseInt(document.querySelector('#intNum').value)
+
+      if (intNum % 2) {
+        saida.value = `O número ${intNum} é ímpar.`
+      } else saida.value = `O número ${intNum} é par.`
+    }
+  </script>
+</body>
+
+</html>

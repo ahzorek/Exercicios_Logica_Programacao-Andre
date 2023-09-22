@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - É bissexto?</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>É bissexto?</h1>
+    <section>
+      <input type="number" step="1" name="nm_intAno" id="intAno" onchange="checaAno()" placeholder="Número Inteiro:">
+      <input type="button" value="Testar" onclick="checaAno()">
+      <span><output id="resultado"></output></span>
+    </section>
+
+  </main>
+  <script>
+
+    function eBissexto(ano) {
+      if (ano % 4 === 0) {
+        if (ano % 100 === 0) {
+          if (ano % 400 === 0) {
+            return true
+          } else {
+            return false
+          }
+        } else {
+          return true
+        }
+      } else {
+        return false
+      }
+    }
+
+    function checaAno() {
+      const saida = document.querySelector('#resultado')
+      const intAno = parseInt(document.querySelector('#intAno').value)
+
+      if (typeof (intAno) !== 'number') {
+        console.error('Erro. Input inválido.')
+        return
+      }
+
+      if (eBissexto(intAno)) {
+        saida.value = `O ano ${intAno} é bissexto.`
+      } else saida.value = `O ano ${intAno} não é bissexto.`
+
+    }
+
+
+  </script>
+</body>
+
+</html>
