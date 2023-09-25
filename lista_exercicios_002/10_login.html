@@ -12,8 +12,8 @@
   <main>
     <h1>Login</h1>
     <section>
-      <input type="text" name="userId" id="userId" placeholder="Nome de usuário" value="">
-      <input type="password" name="userPass" id="userPass" placeholder="Senha" value="">
+      <input type="text" name="userId" id="userId" placeholder="Nome de usuário" value="" required>
+      <input type="password" name="userPass" id="userPass" placeholder="Senha" value="" required>
       <input type="button" value="Entrar" onclick="login()">
 
       <span><output id="resultado"></output></span>
@@ -29,7 +29,7 @@
       user3: { id: 'Aluno3', senha: '123Trocar' }
     }
 
-    let timesTried = 0
+    let timesTried = 1
 
     function login() {
       //declaracoes de topo
@@ -39,8 +39,13 @@
       const button = document.querySelector('input[type=button]')
       let isLoged = false
 
+      //status do usuario logado no console pra debugging
+      console.table(
+        'usuario ' + userId, 'senha ' + userPass.toString(), 'tentativas de login ' + timesTried
+      )
+
       //refazendo a logica para priorizar uso de estruturar de seleção
-      if (timesTried < 4) {
+      if (timesTried < 3) {
         if (userId === USERS.user1.id) {
           if (userPass === USERS.user1.senha) {
             isLoged = true
@@ -65,7 +70,7 @@
           return
         }
       } else {
-        saida.value = 'BLOQUEADO. Tentativas excedidas.'
+        saida.value = 'BLOQUEADO. Número de tentativas é muito grande.'
         button.disabled = true
         return
       }
@@ -73,10 +78,8 @@
       if (isLoged) {
         saida.value = 'Acesso Permitido'
       } else {
-        console.log(isLoged, timesTried)
-
         saida.value = "Senha incorreta"
-        timesTried = timesTried + 1
+        timesTried++
       }
     }
 
