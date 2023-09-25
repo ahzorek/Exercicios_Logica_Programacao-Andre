@@ -33,21 +33,21 @@
     }
 
     function yesCanVote(age) {
-      if (age < 18 || age > 70) {
-        return `O usuário possui ${age} anos e pode optar por votar.`
+      if (age < 18 || age >= 70) {
+        return `O usuário tem ${age} anos e pode optar por votar.`
       } else {
-        return `O usuário possui ${age} anos e é obrigado a votar.`
+        return `O usuário tem ${age} anos e é obrigado a votar.`
       }
     }
 
-    const noCantVote = (age) => `O usuário possui ${age} anos e não pode votar.`
+    const noCantVote = (age) => `O usuário tem ${age} anos e não pode votar.`
 
     function canVote() {
       const saida = document.querySelector('#resultado')
       const dateOfBirth = document.querySelector('#dateOfBirth').value
       const age = calcAge(dateOfBirth)
 
-      if (age <= 0) {
+      if (age < 0) {
         saida.value = 'Erro. Idade informada é negativa.'
       } else if (age < 16) {
         saida.value = noCantVote(age)

@@ -1,3 +1,8 @@
+<!-- 29 6. Escreva um programa que leia o ano de nascimento de um rapaz e mostre a sua situação em relação ao alistamento
+militar.
+30 - Se estiver antes dos 18 anos, mostre em quantos anos faltam para o alistamento.
+31 - Se já tiver depois dos 18 anos, mostre quantos anos já se passaram do alistamento. -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -16,7 +21,7 @@
         Sua data de nascimento
       </label>
       <input type="date" name="nm_DateofBirth" id="dateOfBirth">
-      <input type="button" value="Testar" onclick="canVote()">
+      <input type="button" value="Testar" onclick="checaAlistamento()">
       <span><output id="resultado"></output></span>
     </section>
 
@@ -32,21 +37,21 @@
       return parseInt((TODAY - dateOfBirth) / YEAR_LEN)
     }
 
-
-
-    const noCantVote = (age) => `O usuário possui ${age} anos e não pode votar.`
-
-    function canVote() {
+    function checaAlistamento() {
+      const IDADE_ALISTAMENTO = 18
       const saida = document.querySelector('#resultado')
       const dateOfBirth = document.querySelector('#dateOfBirth').value
       const age = calcAge(dateOfBirth)
+      const ateAlistamento = (IDADE_ALISTAMENTO - age)
 
-      if (age === 18) {
+      if (age <= 0) {
+        saida.value = 'Erro. Idade informada é negativa.'
+      } else if (age === IDADE_ALISTAMENTO) {
         saida.value = 'Você deve se alistar AGORA! (Corra! Ainda dá tempo.)'
-      } else if (age < 18) {
-        saida.value = `Você deve se alistar em ${18 - age} ano(s).`
+      } else if (age < IDADE_ALISTAMENTO) {
+        saida.value = `Você deve se alistar em ${ateAlistamento} ${(ateAlistamento === 1) ? 'ano.' : 'anos.'}`
       } else
-        saida.value = `Você se alistou há ${age - 18} ano(s).`
+        saida.value = `Você se alistou há ${(ateAlistamento * -1)} ${((ateAlistamento * -1) === 1) ? 'ano.' : 'anos.'}`
 
     }
   </script>

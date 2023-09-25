@@ -36,7 +36,7 @@
     const containerInputs = document.getElementById('containerInputs')
     const saida = document.getElementById('resultadoCalculos')
 
-    //object literal definem a estrutura dos inputs referentes a cada forma que sera calculada
+    //object define a estrutura dos inputs referentes a cada forma que sera calculada
     const formas = {
       circulo: `
         <div id="circulo">
@@ -71,7 +71,7 @@
       const formaSelecionada = document.getElementById('forma').value
       // console.log(formaSelecionada);
 
-      //usando como chave o value extraido do input select seleciona o respectivo form ref a forma selecionada e insere dentro do campo html output
+      //usando como chave o value extraido do input select seleciona o respectivo form e insere dentro do innerhtml de output
       containerInputs.innerHTML = formas[formaSelecionada]
 
       // limpa resultados anteriores pra não causar confusão

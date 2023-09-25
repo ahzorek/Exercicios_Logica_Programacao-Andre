@@ -29,34 +29,55 @@
       user3: { id: 'Aluno3', senha: '123Trocar' }
     }
 
+    let timesTried = 0
 
     function login() {
       //declaracoes de topo
       const userId = document.getElementById('userId').value
       const userPass = document.getElementById('userPass').value
       const saida = document.getElementById('resultado')
+      const button = document.querySelector('input[type=button]')
+      let isLoged = false
 
       //refazendo a logica para priorizar uso de estruturar de seleção
-      if (userId === USERS.user1.id) {
-        if (userPass === USERS.user1.senha) {
-          saida.value = 'Acesso Permitido'
+      if (timesTried < 4) {
+        if (userId === USERS.user1.id) {
+          if (userPass === USERS.user1.senha) {
+            isLoged = true
+          } else {
+            isLoged = isLoged
+          }
+        } else if (userId === USERS.user2.id) {
+          if (userPass === USERS.user2.senha) {
+            isLoged = true
+          } else {
+            isLoged = isLoged
+
+          }
+        } else if (userId === USERS.user3.id) {
+          if (userPass === USERS.user3.senha) {
+            isLoged = true
+          } else {
+            isLoged = isLoged
+          }
         } else {
-          saida.value = "Senha incorreta"
+          saida.value = 'Usuário não encontrado'
+          return
         }
-      } else if (userId === USERS.user2.id) {
-        if (userPass === USERS.user2.senha) {
-          saida.value = 'Acesso Permitido'
-        } else {
-          saida.value = "Senha incorreta"
-        }
-      } else if (userId === USERS.user3.id) {
-        if (userPass === USERS.user3.senha) {
-          saida.value = 'Acesso Permitido'
-        } else {
-          saida.value = "Senha incorreta"
-        }
-      } else
-        saida.value = 'Usuário não encontrado'
+      } else {
+        saida.value = 'BLOQUEADO. Tentativas excedidas.'
+        button.disabled = true
+        return
+      }
+
+      if (isLoged) {
+        saida.value = 'Acesso Permitido'
+      } else {
+        console.log(isLoged, timesTried)
+
+        saida.value = "Senha incorreta"
+        timesTried = timesTried + 1
+      }
     }
 
   </script>
