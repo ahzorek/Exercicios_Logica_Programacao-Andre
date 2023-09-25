@@ -49,37 +49,30 @@
         if (userId === USERS.user1.id) {
           if (userPass === USERS.user1.senha) {
             isLoged = true
-          } else {
-            isLoged = isLoged
           }
         } else if (userId === USERS.user2.id) {
           if (userPass === USERS.user2.senha) {
             isLoged = true
-          } else {
-            isLoged = isLoged
-
           }
         } else if (userId === USERS.user3.id) {
           if (userPass === USERS.user3.senha) {
             isLoged = true
-          } else {
-            isLoged = isLoged
           }
         } else {
-          saida.value = 'Usuário não encontrado'
+          saida.value = 'Usuário não encontrado 😕'
           timesTried++
           return
         }
       } else {
-        saida.value = 'BLOQUEADO. Número de tentativas é muito grande.'
+        saida.value = 'BLOQUEADO. Número de tentativas é muito grande. 😵😵😵'
         button.disabled = true
         return
       }
 
       if (isLoged) {
-        saida.value = 'Acesso Permitido'
+        saida.value = 'Acesso Permitido ✅'
       } else {
-        saida.value = "Senha incorreta"
+        saida.value = "Senha incorreta 🔴"
         timesTried++
       }
     }
