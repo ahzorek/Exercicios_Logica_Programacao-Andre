@@ -26,8 +26,12 @@
 
     function calcAge(userBirthday) {
       const YEAR_LEN = 31557600000
-      const TODAY = new Date()
-      const dateOfBirth = new Date(userBirthday)
+      const TODAY = new Date(Date.now())
+      const _TODAY = Date()
+      const dateOfBirth = new Date(userBirthday + 'T00:00:00')
+      // const dateOfBirth = new Date(userBirthday)
+      // const formatedBirthDate = new Date(userBirthday).toUTCString()
+      // const dateOfBirth = Date.parse(formatedBirthDate)
 
       return parseInt((TODAY - dateOfBirth) / YEAR_LEN)
     }

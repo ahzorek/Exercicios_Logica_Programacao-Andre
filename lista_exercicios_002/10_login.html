@@ -18,7 +18,7 @@
         <label for="showPassword">Mostrar senha</label>
         <input type="checkbox" name="showPassword" id="showsPassword" onchange="togglePassVis()">
       </div>
-      <input type="button" value="Entrar" onclick="login()">
+      <input type="button" value="Entrar" onclick="handlesLogin()">
       <span><output id="resultado"></output></span>
     </section>
 
@@ -45,7 +45,11 @@
       passVis = !passVis
     }
 
-    function login() {
+    function matchesLogin() {
+
+    }
+
+    function handlesLogin() {
       const userPass = passWordInput.value
       const userIdTela = document.getElementById('userIdTela').value
       let isLoged = false
