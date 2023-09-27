@@ -27,7 +27,6 @@
     function calcAge(userBirthday) {
       const YEAR_LEN = 31557600000
       const TODAY = new Date(Date.now())
-      const _TODAY = Date()
       const dateOfBirth = new Date(userBirthday + 'T00:00:00')
       // const dateOfBirth = new Date(userBirthday)
       // const formatedBirthDate = new Date(userBirthday).toUTCString()
@@ -39,9 +38,9 @@
     function yesCanVote(age) {
       if (age < 18 || age >= 70) {
         return `O usuário tem ${age} anos e pode optar por votar.`
-      } else {
+      } else
         return `O usuário tem ${age} anos e é obrigado a votar.`
-      }
+
     }
 
     const noCantVote = (age) => `O usuário tem ${age} anos e não pode votar.`
@@ -53,10 +52,11 @@
 
       if (age < 0) {
         saida.value = 'Erro. Idade informada é negativa.'
-      } else if (age < 16) {
-        saida.value = noCantVote(age)
       } else
-        saida.value = yesCanVote(age)
+        if (age < 16) {
+          saida.value = noCantVote(age)
+        } else
+          saida.value = yesCanVote(age)
     }
   </script>
 </body>

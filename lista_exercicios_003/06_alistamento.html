@@ -46,12 +46,14 @@ militar.
 
       if (age <= 0) {
         saida.value = 'Erro. Idade informada é negativa.'
-      } else if (age === IDADE_ALISTAMENTO) {
-        saida.value = 'Você deve se alistar AGORA! Corra! Ainda dá tempo.'
-      } else if (age < IDADE_ALISTAMENTO) {
-        saida.value = `Você deve se alistar em ${ateAlistamento} ano(s).`
       } else
-        saida.value = `Você se alistou há ${(ateAlistamento * -1)} ano(s).`
+        if (age === IDADE_ALISTAMENTO) {
+          saida.value = 'Você deve se alistar AGORA! Corra! Ainda dá tempo.'
+        } else
+          if (age < IDADE_ALISTAMENTO) {
+            saida.value = `Você deve se alistar em ${ateAlistamento} ano(s).`
+          } else
+            saida.value = `Você se alistou há ${(ateAlistamento * -1)} ano(s).`
 
     }
   </script>

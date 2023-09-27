@@ -29,13 +29,19 @@
     const saida = document.getElementById('resultado')
     const button = document.querySelector('input[type=button]')
 
+    const USERS_list = [
+      { id: 'Aluno1', senha: 'Trocar123', loginAttempts: 0 },
+      { id: 'Aluno2', senha: 'Senha@123', loginAttempts: 0 },
+      { id: 'Aluno3', senha: '123Trocar', loginAttempts: 0 }
+    ]
+
     const USERS = {
-      user1: { id: 'Aluno1', senha: 'Trocar123', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 },
-      user2: { id: 'Aluno2', senha: 'Senha@123', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 },
-      user3: { id: 'Aluno3', senha: '123Trocar', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 }
+      Aluno1: { id: 'Aluno1', senha: 'Trocar123', },
+      Aluno2: { id: 'Aluno2', senha: 'Senha@123', },
+      Aluno3: { id: 'Aluno3', senha: '123Trocar', }
     }
 
-    let timesTried = 1
+    let timesTried = 0
     let passVis = false
 
     function togglePassVis() {
@@ -45,44 +51,66 @@
       passVis = !passVis
     }
 
-    function matchesLogin() {
-
-    }
-
     function handlesLogin() {
-      const userPass = passWordInput.value
       const userIdTela = document.getElementById('userIdTela').value
+      const userPass = passWordInput.value
       let isLoged = false
 
-      // console.log(
-      //   'usuario ' + userIdTela, 'senha ' + userPass.toString(), 'tentativas de login ' + timesTried
+      // USERS[userIdTela].tryMe()
+
+      // const UserObject = {
+      //   getAllUsers: (list) => list.map(user => console.log(user)),
+
+      //   getUsersMatching: (userTela, list) => list.find((index, { id }) => {
+      //     userTela === id
+      //     return { index }
+      //   }),
+
+      //   getPasswordMatching: (passTela, user) => {
+      //     if (passTela === user.senha) {
+      //       console.log('logado')
+      //       return true
+      //     } else console.error('senha incorreta')
+      //   },
+      // getLoginAttempts: (userTela, list) => list.find(list_user => {
+      //   userTela === list_user.id && list_user.loginAttempts
+      // }),
+      // }
+
+      // console.log(currLoginAttempts)
+      // UserObject.getAllUsers(USERS_list)
+
+      // UserObject.getUsersMatching('Aluno1', USERS_list)
+
+      // console.log(UserObject.getUsersMatching('Aluno1', USERS_list))
+
+      // UserObject.getPasswordMatching(
+      //   userPass,
+      //   UserObject.getUsersMatching(userIdTela, USERS_list)
       // )
 
-      //refazendo a logica para priorizar uso de estruturar de seleção
+      // refazendo a logica para priorizar uso de estruturar de seleção
+
       if (timesTried < 3) {
+        timesTried++
         if (userIdTela === USERS.user1.id) {
-          USERS.user1.incrementLoginAttempts()
           if (userPass === USERS.user1.senha) {
             isLoged = !isLoged
           }
         } else if (userIdTela === USERS.user2.id) {
           if (userPass === USERS.user2.senha) {
-            USERS.user2.incrementLoginAttempts()
             isLoged = !isLoged
           }
         } else if (userIdTela === USERS.user3.id) {
           if (userPass === USERS.user3.senha) {
-            USERS.user3.incrementLoginAttempts()
             isLoged = !isLoged
           }
         } else {
           saida.value = 'Usuário não encontrado 😕'
-          timesTried++
           return
         }
       } else {
-        saida.value = 'BLOQUEADO. Número de tentativas é muito grande. 😵😵😵'
-        button.disabled = true
+        saida.value = 'BLOQUEADO. Número de tentativas PARA ESSE USUÁRIO é muito grande. 😵😵😵'
         return
       }
 
@@ -90,7 +118,6 @@
         saida.value = 'Acesso Permitido ✅'
       } else {
         saida.value = "Senha incorreta 🔴"
-        timesTried++
       }
     }
 
