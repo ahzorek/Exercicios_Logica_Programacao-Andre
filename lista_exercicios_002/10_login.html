@@ -12,51 +12,64 @@
   <main>
     <h1>Login</h1>
     <section>
-      <input type="text" name="userId" id="userId" placeholder="Nome de usuário" value="" required>
+      <input type="text" name="userIdTela" id="userIdTela" placeholder="Nome de usuário" value="" required>
       <input type="password" name="userPass" id="userPass" placeholder="Senha" value="" required>
+      <div>
+        <label for="showPassword">Mostrar senha</label>
+        <input type="checkbox" name="showPassword" id="showsPassword" onchange="togglePassVis()">
+      </div>
       <input type="button" value="Entrar" onclick="login()">
-
       <span><output id="resultado"></output></span>
     </section>
 
   </main>
 
   <script>
+    const passWordInput = document.getElementById('userPass')
+    const saida = document.getElementById('resultado')
+    const button = document.querySelector('input[type=button]')
 
     const USERS = {
-      user1: { id: 'Aluno1', senha: 'Trocar123' },
-      user2: { id: 'Aluno2', senha: 'Senha@123' },
-      user3: { id: 'Aluno3', senha: '123Trocar' }
+      user1: { id: 'Aluno1', senha: 'Trocar123', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 },
+      user2: { id: 'Aluno2', senha: 'Senha@123', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 },
+      user3: { id: 'Aluno3', senha: '123Trocar', login_attempts: 0, incrementLoginAttempts: () => this.login_attempts + 1 }
     }
 
     let timesTried = 1
+    let passVis = false
+
+    function togglePassVis() {
+      if (!passVis) {
+        passWordInput.type = 'text'
+      } else passWordInput.type = 'password'
+      passVis = !passVis
+    }
 
     function login() {
-      //declaracoes de topo
-      const userId = document.getElementById('userId').value
-      const userPass = document.getElementById('userPass').value
-      const saida = document.getElementById('resultado')
-      const button = document.querySelector('input[type=button]')
+      const userPass = passWordInput.value
+      const userIdTela = document.getElementById('userIdTela').value
       let isLoged = false
 
-      //status do usuario logado no console pra debugging
-      console.log(
-        'usuario ' + userId, 'senha ' + userPass.toString(), 'tentativas de login ' + timesTried
-      )
+      // console.log(
+      //   'usuario ' + userIdTela, 'senha ' + userPass.toString(), 'tentativas de login ' + timesTried
+      // )
 
       //refazendo a logica para priorizar uso de estruturar de seleção
       if (timesTried < 3) {
-        if (userId === USERS.user1.id) {
+        if (userIdTela === USERS.user1.id) {
+          USERS.user1.incrementLoginAttempts()
           if (userPass === USERS.user1.senha) {
-            isLoged = true
+            isLoged = !isLoged
           }
-        } else if (userId === USERS.user2.id) {
+        } else if (userIdTela === USERS.user2.id) {
           if (userPass === USERS.user2.senha) {
-            isLoged = true
+            USERS.user2.incrementLoginAttempts()
+            isLoged = !isLoged
           }
-        } else if (userId === USERS.user3.id) {
+        } else if (userIdTela === USERS.user3.id) {
           if (userPass === USERS.user3.senha) {
-            isLoged = true
+            USERS.user3.incrementLoginAttempts()
+            isLoged = !isLoged
           }
         } else {
           saida.value = 'Usuário não encontrado 😕'
