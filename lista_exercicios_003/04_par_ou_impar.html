@@ -20,17 +20,14 @@
 
   </main>
   <script>
-    function isOdd(num) {
-      return num % 2
-    }
-
     function checaParouImpar() {
       const saida = document.querySelector('#resultado')
       const intNum = parseInt(document.querySelector('#intNum').value)
 
       if (intNum % 2) {
         saida.value = `O número ${intNum} é ímpar.`
-      } else saida.value = `O número ${intNum} é par.`
+      } else
+        saida.value = `O número ${intNum} é par.`
     }
   </script>
 </body>
