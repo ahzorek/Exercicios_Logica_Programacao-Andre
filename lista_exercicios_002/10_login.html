@@ -80,7 +80,7 @@
     function capturaLogin() {
       const usuarioTentativa = userInput.value
       const senhaTentativa = passWordInput.value
-      if (usuarioTentativa !== '' && senhaTentativa !== '') {
+      if (usuarioTentativa !== '' || senhaTentativa !== '') {
         saida.value = realizarLogin(usuarioTentativa, senhaTentativa)
       } else saida.value = 'Campos não podem estar vazios'
     }
