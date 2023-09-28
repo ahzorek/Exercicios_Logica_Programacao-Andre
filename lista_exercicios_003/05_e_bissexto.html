@@ -40,13 +40,6 @@
       const saida = document.querySelector('#resultado')
       const intAno = parseInt(document.querySelector('#intAno').value)
 
-
-
-      if (typeof (intAno) !== 'number') {
-        console.error('Erro. Input inválido.')
-        return
-      }
-
       if (eBissexto(intAno)) {
         saida.value = `O ano ${intAno} é bissexto.`
       } else saida.value = `O ano ${intAno} não é bissexto.`
