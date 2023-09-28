@@ -31,10 +31,11 @@ cobrando R$0.50 por Km para viage ns até 200Km e R$0.45 para viagens mais longa
       const faixaPreco1 = 0.50
       const faixaPreco2 = 0.45
       const saida = document.querySelector('#resultado')
-      let valorFinal
+      let kmExcedentes, valorFinal
 
       if (distancia > gatilhoDistancia) {
-        valorFinal = distancia * (faixaPreco2)
+        kmExcedentes = distancia - gatilhoDistancia
+        valorFinal = (kmExcedentes * faixaPreco2) + (faixaPreco1 * gatilhoDistancia)
       } else valorFinal = distancia * (faixaPreco1)
 
       saida.value = `O valor da viagem de ${distancia}km será R$${valorFinal.toFixed(2)}`

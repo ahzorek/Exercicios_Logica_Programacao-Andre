@@ -19,7 +19,7 @@ segmentos formarem um triângulo, o comp rimento de cada lado deve ser menor que
       <input type="number" min="0" step="1" name="reta1" id="reta1" placeholder="Reta 1:">
       <input type="number" min="0" step="1" name="reta2" id="reta2" placeholder="Reta 2:">
       <input type="number" min="0" step="1" name="reta3" id="reta3" placeholder="Reta 3:">
-      <input type="button" value="Testar" onclick="checar()">
+      <input type="button" value="Testar" onclick="checarTriangulo()">
 
       <span>
         <output id="resultado"></output>
@@ -27,25 +27,22 @@ segmentos formarem um triângulo, o comp rimento de cada lado deve ser menor que
     </section>
   </main>
   <script>
-    function podeSerTriangulo(retas) {
-      const [a, b, c] = retas
 
-      if (a + b > c) {
-        if (a + c > b) {
-          if (b + c > a) {
-            return `É possível formar um triângulo`
-          }
-        }
-      } else
-        return `Não é possível formar um triângulo`
-    }
-
-    function checar() {
+    function checarTriangulo() {
       const numInputs = document.querySelectorAll('input[type="number"]') //numInputs é inicialmente uma nodelist
       const saida = document.querySelector('#resultado')
       let retas = []; Array.from(numInputs).forEach(input => retas.push(Number(input.value)))
 
-      saida.value = podeSerTriangulo(retas)
+      const [reta1, reta2, reta3] = retas
+
+      if (reta1 + reta2 > reta3) {
+        if (reta1 + reta3 > reta2) {
+          if (reta2 + reta3 > reta1) {
+            saida.value = `É possível formar um triângulo`
+          }
+        }
+      } else
+        saida.value = `Não é possível formar um triângulo`
     }
   </script>
 </body>

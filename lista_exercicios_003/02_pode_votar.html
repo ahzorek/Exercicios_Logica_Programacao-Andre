@@ -23,14 +23,14 @@
   </main>
 
   <script>
+    // const dateOfBirth = new Date(userBirthday)
+    // const formatedBirthDate = new Date(userBirthday).toUTCString()
+    // const dateOfBirth = Date.parse(formatedBirthDate)
 
     function calcAge(userBirthday) {
-      const YEAR_LEN = 31557600000
+      const YEAR_LEN = 31556952000
       const TODAY = new Date(Date.now())
       const dateOfBirth = new Date(userBirthday + 'T00:00:00')
-      // const dateOfBirth = new Date(userBirthday)
-      // const formatedBirthDate = new Date(userBirthday).toUTCString()
-      // const dateOfBirth = Date.parse(formatedBirthDate)
 
       return parseInt((TODAY - dateOfBirth) / YEAR_LEN)
     }
