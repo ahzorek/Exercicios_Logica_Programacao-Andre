@@ -16,109 +16,73 @@
       <input type="password" name="userPass" id="userPass" placeholder="Senha" value="" required>
       <div>
         <label for="showPassword">Mostrar senha</label>
-        <input type="checkbox" name="showPassword" id="showsPassword" onchange="togglePassVis()">
+        <input type="checkbox" name="showPassword" id="showsPassword" onchange="alteraVisibilidadeDoCampoSenha()">
       </div>
-      <input type="button" value="Entrar" onclick="handlesLogin()">
+      <input type="button" value="Entrar" onclick="capturaLogin()">
       <span><output id="resultado"></output></span>
     </section>
 
   </main>
 
   <script>
+    //reformulado para incorporar logicas de login mais elaboradas
+    const USERS = [
+      { id: 'Aluno1', senha: 'Trocar123', failedLoginAttempts: 0 },
+      { id: 'Aluno2', senha: 'Senha@123', failedLoginAttempts: 0 },
+      { id: 'Aluno3', senha: '123Trocar', failedLoginAttempts: 0 }
+    ]
+    const userInput = document.getElementById('userIdTela')
     const passWordInput = document.getElementById('userPass')
     const saida = document.getElementById('resultado')
     const button = document.querySelector('input[type=button]')
+    let passwordIsVisible = false
 
-    const USERS_list = [
-      { id: 'Aluno1', senha: 'Trocar123', loginAttempts: 0 },
-      { id: 'Aluno2', senha: 'Senha@123', loginAttempts: 0 },
-      { id: 'Aluno3', senha: '123Trocar', loginAttempts: 0 }
-    ]
 
-    const USERS = {
-      Aluno1: { id: 'Aluno1', senha: 'Trocar123', },
-      Aluno2: { id: 'Aluno2', senha: 'Senha@123', },
-      Aluno3: { id: 'Aluno3', senha: '123Trocar', }
-    }
-
-    let timesTried = 0
-    let passVis = false
-
-    function togglePassVis() {
-      if (!passVis) {
+    //exibe ou esconde o campo senha, de acordo com a situação do toggle
+    function alteraVisibilidadeDoCampoSenha() {
+      if (!passwordIsVisible) {
         passWordInput.type = 'text'
-      } else passWordInput.type = 'password'
-      passVis = !passVis
+      } else
+        passWordInput.type = 'password'
+
+      passwordIsVisible = !passwordIsVisible
     }
 
-    function handlesLogin() {
-      const userIdTela = document.getElementById('userIdTela').value
-      const userPass = passWordInput.value
-      let isLoged = false
+    //logica de login principal, recebe usuario e senha do input do usuario. apos realizar uma busca de usuario atraves do metodo find. apos checar se o usuario nao excede o limite de tentativas de login, realiza a comparação do valor da senha. caso correta, conclui e retorna resultado positivo, caso negativa invoca a função que incrementa o campo de tentativas falhas de cada usuario.
+    function realizarLogin(usuario, senha) {
+      const user = USERS.find(user => user.id === usuario)
 
-      // USERS[userIdTela].tryMe()
-
-      // const UserObject = {
-      //   getAllUsers: (list) => list.map(user => console.log(user)),
-
-      //   getUsersMatching: (userTela, list) => list.find((index, { id }) => {
-      //     userTela === id
-      //     return { index }
-      //   }),
-
-      //   getPasswordMatching: (passTela, user) => {
-      //     if (passTela === user.senha) {
-      //       console.log('logado')
-      //       return true
-      //     } else console.error('senha incorreta')
-      //   },
-      // getLoginAttempts: (userTela, list) => list.find(list_user => {
-      //   userTela === list_user.id && list_user.loginAttempts
-      // }),
-      // }
-
-      // console.log(currLoginAttempts)
-      // UserObject.getAllUsers(USERS_list)
-
-      // UserObject.getUsersMatching('Aluno1', USERS_list)
-
-      // console.log(UserObject.getUsersMatching('Aluno1', USERS_list))
-
-      // UserObject.getPasswordMatching(
-      //   userPass,
-      //   UserObject.getUsersMatching(userIdTela, USERS_list)
-      // )
-
-      // refazendo a logica para priorizar uso de estruturar de seleção
-
-      if (timesTried < 3) {
-        timesTried++
-        if (userIdTela === USERS.Aluno1.id) {
-          if (userPass === USERS.Aluno1.senha) {
-            isLoged = !isLoged
-          }
-        } else if (userIdTela === USERS.Aluno2.id) {
-          if (userPass === USERS.Aluno2.senha) {
-            isLoged = !isLoged
-          }
-        } else if (userIdTela === USERS.Aluno3.id) {
-          if (userPass === USERS.Aluno3.senha) {
-            isLoged = !isLoged
+      if (user.failedLoginAttempts <= 3) {
+        if (user) {
+          if (user.senha === senha) {
+            console.log('Senha correta')
+            return 'Acesso Permitido ✅'
+          } else {
+            console.log('Senha incorreta')
+            incrementarTentativasFalhas(usuario)
+            return "Senha incorreta 🔴"
           }
         } else {
-          saida.value = 'Usuário não encontrado 😕'
-          return
+          console.log('Usuário não encontrado')
+          return 'Usuário não encontrado 😕'
         }
-      } else {
-        saida.value = 'BLOQUEADO. Número de tentativas PARA ESSE USUÁRIO é muito grande. 😵😵😵'
-        return
-      }
+      } else return 'BLOQUEADO. Número de tentativas PARA ESSE USUÁRIO é muito grande. 😵😵😵'
+    }
 
-      if (isLoged) {
-        saida.value = 'Acesso Permitido ✅'
-      } else {
-        saida.value = "Senha incorreta 🔴"
-      }
+    //recebe um usuario valido com tentativa de login falha. incrementa o numero de tentativas falhas.
+    function incrementarTentativasFalhas(usuario) {
+      const user = USERS.find(user => user.id === usuario)
+      user.failedLoginAttempts++
+
+    }
+
+    //invocada pelo botao login, captura os dados do usuario dos inputs e invoca a funcao que cuida do login
+    function capturaLogin() {
+      const usuarioTentativa = userInput.value
+      const senhaTentativa = passWordInput.value
+      if (usuarioTentativa !== '' && senhaTentativa !== '') {
+        saida.value = realizarLogin(usuarioTentativa, senhaTentativa)
+      } else saida.value = 'Campos não podem estar vazios'
     }
 
   </script>
