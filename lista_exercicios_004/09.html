@@ -54,13 +54,17 @@ os valores n o intervalo:
           saidaFor.value = currString
           await delayOutput()
         }
-      } else {
+      } else if (num1 > num2) {
         for (let i = num1; i >= num2; i = (i - add)) {
           console.log(currString)
           currString = `${currString} ${i}`
           saidaFor.value = currString
           await delayOutput()
         }
+      } else {
+        saidaFor.value = `Números são iguais`
+        return
+
       }
       console.log(num1, num2, add)
       saidaFor.value = `${currString} Acabou!`
