@@ -1,0 +1,72 @@
+<!-- 13 - Exercícios 1 à 4:
+14 Crie o programa utilizando um estrutura de repetição PARA, depois crie uma versão 2 utilizando a estrutura de
+repetição ENQUANTO . -->
+
+<!-- 28 4. Desenvolva um programa que mostre na tela a seguinte contagem: "Inicio 100 95 90 85 80 ... 0 Acabou!" -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Loop 4</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Loops 4</h1>
+    <section>
+      <input type="button" value="Iniciar FOR" onclick="startForLoop()">
+      <input type="button" value="Iniciar WHILE" onclick="startWhileLoop()">
+
+      <span><output id="resultado-for"></output></span>
+      <span><output id="resultado-while"></output></span>
+
+    </section>
+
+  </main>
+
+  <script>
+    const saidaFor = document.querySelector('#resultado-for')
+    const saidaWhile = document.querySelector('#resultado-while')
+    let currString
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    async function startForLoop() {
+      currString = 'Início '
+      saidaFor.value = currString
+
+      for (let i = 100; i >= 0; i = (i - 5)) {
+        console.log(currString)
+        currString = `${currString} ${i}`
+        saidaFor.value = currString
+        await delayOutput()
+      }
+      saidaFor.value = `${currString} Acabou!`
+      console.log(currString)
+    }
+
+    async function startWhileLoop() {
+      let x = 100
+      currString = 'Início '
+      saidaWhile.value = currString
+
+      while (x >= 0) {
+        console.log(currString)
+        currString = `${currString} ${x}`
+        x = (x - 5)
+        saidaWhile.value = currString
+        await delayOutput()
+      }
+      saidaWhile.value = `${currString} Acabou!`
+      console.log(currString)
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!-- 30 5. Faça um algoritmo que pergunte ao usuário um número inteiro e positivo qualquer e mostre uma contagem até esse valor:  
+ 31 Ex: Digite um valor: 77  
+ 32 Contagem: "Inicio 1 2 3 4 5 6 7 ... 75 76 77 Acabou!"  -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Loop 4</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Loops 4</h1>
+    <section>
+      <input type="number" min="0" step="1" name="num" id="num">
+      <input type="button" value="Iniciar" onclick="startForLoop()">
+      <span>
+        <output id="resultado-for"></output>
+      </span>
+
+    </section>
+
+  </main>
+
+  <script>
+    const numMax = document.querySelector('#num')
+    const saidaFor = document.querySelector('#resultado-for')
+    let currString
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    async function startForLoop() {
+      currString = 'Início '
+      saidaFor.value = currString
+
+      for (let i = 0; i <= numMax.value; i++) {
+        console.log(currString)
+        currString = `${currString} ${i}`
+        saidaFor.value = currString
+        await delayOutput()
+      }
+      saidaFor.value = `${currString} Acabou!`
+      console.log(currString)
+    }
+
+  </script>
+</body>
+
+</html>
