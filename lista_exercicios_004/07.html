@@ -1,0 +1,58 @@
+<!-- 37 7. Crie um programa que calcule e mostre na tela o resultado da soma entre 6 + 8 + 10 + 12 + 14 + ... + 98 + 100. -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Loop 7</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Loops 7</h1>
+    <section>
+      <!-- <input type="number" min="0" step="1" name="num" id="num"> -->
+      <input type="button" value="Iniciar" onclick="startWhileLoop()">
+      <span>
+        <output id="resultado-for"></output>
+      </span>
+
+    </section>
+
+  </main>
+
+  <script>
+    // const numMax = document.querySelector('#num')
+    const saidaFor = document.querySelector('#resultado-for')
+    let currString
+    let soma = 0
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+
+    async function startWhileLoop() {
+      let index = 6
+      while (index <= 100) {
+
+        console.log('iterando', index)
+
+        soma = soma + index
+        currString = ` Resultado da soma é ${soma}`
+        saidaFor.value = currString
+        console.log(currString)
+        index = (index + 2)
+
+        // break;
+        await delayOutput(50)
+      }
+    }
+
+  </script>
+</body>
+
+</html>

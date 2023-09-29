@@ -1,21 +1,22 @@
-<!-- 30 5. Faça um algoritmo que pergunte ao usuário um número inteiro e positivo qualquer e mostre uma contagem até esse valor:  
- 31 Ex: Digite um valor: 77  
- 32 Contagem: "Inicio 1 2 3 4 5 6 7 ... 75 76 77 Acabou!"  -->
+<!-- 
+34 6. Desenvolva um algoritmo que mostre uma contagem regressiva de 30 até 1, marcando os números que forem divisíveis
+por 4, exata mente como mostrado abaixo:
+35 30 29 [28] 27 26 25 [24] 23 22 21 [20] 19 18 17 [16]... -->
 <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercícios 003 - Loop 5</title>
+  <title>Exercícios 003 - Loop 6</title>
   <link rel="stylesheet" href="../shared_assets/styles.css">
 </head>
 
 <body>
   <main>
-    <h1>Loops 5</h1>
+    <h1>Loops 6</h1>
     <section>
-      <input type="number" min="0" step="1" name="num" id="num">
+      <!-- <input type="number" min="0" step="1" name="num" id="num"> -->
       <input type="button" value="Iniciar" onclick="startForLoop()">
       <span>
         <output id="resultado-for"></output>
@@ -38,11 +39,15 @@
       currString = 'Início '
       saidaFor.value = currString
 
-      for (let i = 1; i <= numMax.value; i++) {
+      for (let i = 30; i > 0; i--) {
         console.log(currString)
-        currString = `${currString} ${i}`
+        if (!(i % 4)) {
+          currString = `${currString} [${i}]`
+        } else
+          currString = `${currString} ${i}`
+
         saidaFor.value = currString
-        await delayOutput(60)
+        await delayOutput()
       }
       saidaFor.value = `${currString} Acabou!`
       console.log(currString)
