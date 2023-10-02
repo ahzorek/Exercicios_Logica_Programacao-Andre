@@ -113,7 +113,7 @@
       blocoCondicoes.forEach(bloco => bloco.setAttribute('style', 'display: block'))
 
       for (let cont = 0; cont < 20; cont++) {
-        let num = Math.floor(Math.random() * 10)
+        let num = Math.round(Math.random() * 10)
         if (num > 5) {
           maiorQue5++
         }
@@ -123,7 +123,7 @@
         addNumToDOM(num)
         saidaMaioresQue5.value = maiorQue5
         saidaDivPor3.value = divPor3
-        await delayOutput(160)
+        // await delayOutput(160)
       }
     }
 

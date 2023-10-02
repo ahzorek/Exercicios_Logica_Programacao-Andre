@@ -37,7 +37,7 @@
         return false
       }
       for (let i = 2; i <= (num ** 1 / 2); i++) {
-        if (!(num % i)) {
+        if (num % i === 0) {
           // se for divisível por algum número (index) até a raiz quadrada de num, num não é primo
           return false
         }
