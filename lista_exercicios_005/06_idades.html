@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 05 - 06 Idades</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de repetição</h1>
+    <p>6. Crie um algoritmo que leia a idade de 'n' pessoas, mostrando no final:
+      a) Qual é a média de idade do grupo <br>
+      b) Quantas pessoas tem mais de 18 anos <br>
+      c) Quantas pessoas tem menos de 5 anos <br>
+      d) Qual foi a maior idade lida</p>
+    <section>
+      <label for="preco">Idade</label>
+      <input type="number" min="0" step="1" name="idade" id="idade" placeholder="Idade">
+      <input type="button" value="Salvar Idade" onclick="salvarIdade()">
+      <input type="button" id="calcButton" value="Calcular" onclick="calcularMaioeMenor()" disabled>
+
+      <span>
+        <output id="resultado"></output><br>
+        <output id="resultado-A"></output><br>
+        <output id="resultado-B"></output><br>
+        <output id="resultado-C"></output><br>
+        <output id="resultado-D"></output>
+      </span>
+
+    </section>
+
+  </main>
+
+  <script>
+    // 32 6. Crie um algoritmo que leia a idade de 'n' pessoas, mostrando no final:
+    // 33 a) Qual é a média de idade do grupo  
+    // 34 b) Quantas pessoas tem mais de 18 anos
+    // 35 c) Quantas pessoas tem menos de 5 anos
+    // 36 d) Qual foi a maior idade lida
+
+    const inputIdade = document.querySelector('#idade')
+    const saida = document.querySelector('#resultado')
+    const saidaA = document.querySelector('#resultado-A')
+    const saidaB = document.querySelector('#resultado-B')
+    const saidaC = document.querySelector('#resultado-C')
+    const saidaD = document.querySelector('#resultado-D')
+    const calcButton = document.querySelector('#calcButton')
+    let idadesArray = []
+
+    function calcularMaioeMenor() {
+      saida.value = ''
+      const todasAsIdades = idadesArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0)
+      const mediaIdade = parseFloat(todasAsIdades / idadesArray.length)
+      const maioresDe18 = idadesArray.filter(idade => (idade > 18))
+      const menoresDe5 = idadesArray.filter(idade => (idade < 5))
+      const maiorIdade = Math.max(...idadesArray)
+
+      saidaA.value = `A média de idades é ${mediaIdade}`
+      saidaB.value = `${maioresDe18.length} pessoas tem mais de 18 anos`
+      saidaC.value = `${menoresDe5.length} pessoas tem menos de 5 anos`
+      saidaD.value = `A maior idade lida foi ${maiorIdade}`
+    }
+
+    function salvarIdade() {
+      const idade = parseInt(inputIdade.value)
+      if (idade == '') {
+        alert('Preço não pode estar vazio')
+        inputIdade.focus()
+        return
+      }
+      idadesArray.push(idade)
+      saida.value = 'Idade foi salva. Você pode adicionar mais idades ou verificar agora:'
+
+      //limpa o input de preco, ativa o botao para realizar o calculo final e altera o foco do usuario novamente para o input preco
+      inputIdade.value = ''
+      inputIdade.focus()
+      calcButton.disabled = false
+    }
+
+  </script>
+</body>
+
+</html>

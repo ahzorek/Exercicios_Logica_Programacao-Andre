@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 005 - Números entre 1 e 100 múltiplos de 3 ou 5</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de Repetição 01</h1>
+    <p>Crie um algoritmo que mostre na tela todos os números entre 1 e 100 que sejam múltiplos de 3 ou 5.</p>
+    <section>
+      <input type="button" value="Iniciar" onclick="startForLoop()">
+
+      <span><output id="resultado"></output></span>
+
+    </section>
+
+  </main>
+
+  <script>
+    //  18 1. Crie um algoritmo que mostre na tela todos os números entre 1 e 100 que sejam múltiplos de 3 ou 5.
+    const saida = document.querySelector('#resultado')
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    let currString = 'Números >> '
+
+    async function startForLoop() {
+      for (let i = 0; i <= 100; i++) {
+        if (i % 3 === 0 || i % 5 === 0) {
+          currString = `${currString} • ${i}`
+          saida.value = currString
+          await delayOutput(20)
+        }
+
+      }
+    }
+
+
+
+
+  </script>
+</body>
+
+</html>

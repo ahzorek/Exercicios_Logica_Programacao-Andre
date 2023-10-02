@@ -11,7 +11,7 @@ os valores n o intervalo:
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercícios 003 - Loops 9</title>
+  <title>Exercícios 004 - Loops 9</title>
   <link rel="stylesheet" href="../shared_assets/styles.css">
 </head>
 
@@ -42,12 +42,15 @@ os valores n o intervalo:
     async function startForLoop() {
       const num1 = parseInt(document.querySelector('#num1').value)
       const num2 = parseInt(document.querySelector('#num2').value)
-      let add = parseInt(document.querySelector('#incremento').value)
+      const addInput = document.querySelector('#incremento')
+      let add = parseInt(addInput.value)
 
       if (add < 0) {
         add = (add * -1)
       } else if (add === 0) {
         alert('Incremento não pode ser igual a zero')
+        addInput.focus()
+        return
       }
 
       currString = 'Início '

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 05 - Fibonacci</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de repetição</h1>
+    <section>
+      <input type="number" min="0" step="1" name="num1" id="num1" placeholder="Digite um valor">
+      <input type="number" min="0" step="1" name="num2" id="num2" placeholder="Digite um valor">
+      <input type="number" min="0" step="1" name="iterador" id="iterador" placeholder="Quantidade de Iterações (10)">
+
+      <input type="button" value="Iniciar" onclick="startForLoop()">
+      <span><output id="resultado-for"></output></span>
+      <span><output id="resultado-while"></output></span>
+
+    </section>
+
+  </main>
+  <script>
+    // 27 4. Faça um programa que mostre os 10 primeiros elementos da Sequência de Fibonacci:
+    // 28 0 1 1 2 3 5 8 13 21...
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    const saida = document.querySelector('#resultado-for')
+
+    async function startForLoop() {
+      const num1 = parseInt(document.querySelector('#num1').value)
+      const num2 = parseInt(document.querySelector('#num2').value)
+      const maxIteracoes = parseInt(document.querySelector('#iterador').value) || 10
+      let fibo1, fibo2, fiboX = 0
+
+      if (!(num1 >= 0) || !(num2 >= 0)) {
+        alert('Precisa preencher os dois valores')
+        document.querySelector('#num1').focus()
+        return
+      }
+
+      // if else pra definir o valor inicial da sequencia fibo. 
+      if (num2 < num1) {
+        fibo1 = num2; fibo2 = num1
+      }
+      else {
+        fibo1 = num1; fibo2 = num2;
+      }
+
+      let currString = 'Sequência Fibonacci >>'
+
+      for (let contador = fibo1; contador <= maxIteracoes; contador++) {
+        currString = `${currString} ${fibo1} • `
+        saida.value = currString
+        fiboX = fibo1 + fibo2
+        fibo1 = fibo2
+        fibo2 = fiboX
+
+        await delayOutput(33)
+      }
+    }
+  </script>
+</body>
+
+</html>

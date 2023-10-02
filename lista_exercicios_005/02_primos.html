@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 005 - Números primos</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de repetição</h1>
+    <section>
+      <input type="number" min="0" step="1" name="num1" id="num1" placeholder="Início (ou Fim)">
+      <input type="number" min="0" step="1" name="num2" id="num2" placeholder="Fim (ou Início)">
+      <!-- <input type="number" min="0" step="1" name="incremento" id="incremento" placeholder="Incremento(ou decremento)"> -->
+      <input type="button" value="Iniciar" onclick="startForLoop()">
+      <span>
+        <output id="resultado-for"></output>
+      </span>
+    </section>
+  </main>
+  <!-- 20 2. Crie um programa que leia os valores inicial e final de um intervalo e imprima todos os números primos contidos no
+    intervalo. -->
+  <script>
+    const saidaFor = document.querySelector('#resultado-for')
+    let currString
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    //recebe o valor de index e checa esse valor é primo, retorna boolean
+    function checaSeNumeroPrimo(num) {
+      if (num <= 1) {
+        return false
+      }
+      for (let i = 2; i <= (num ** 1 / 2); i++) {
+        if (!(num % i)) {
+          // se for divisível por algum número (index) até a raiz quadrada de num, num não é primo
+          return false
+        }
+      } return true
+    }
+
+    async function startForLoop() {
+      const start = parseInt(document.querySelector('#num1').value)
+      const end = parseInt(document.querySelector('#num2').value)
+
+      currString = 'Os números primos são: '
+      saidaFor.value = currString
+
+      if (start < end) {
+        for (let i = start; i <= end; i++) {
+          if (checaSeNumeroPrimo(i)) {
+            await delayOutput(50)
+            currString = `${currString} ${i}`
+            saidaFor.value = currString
+          }
+        }
+      } else if (start > end) {
+        for (let i = start; i >= end; i--) {
+          if (checaSeNumeroPrimo(i)) {
+            await delayOutput(50)
+            currString = `${currString} [${i}]`
+            saidaFor.value = currString
+          }
+        }
+      } else {
+        saidaFor.value = `Números são iguais, não pode realizar função`
+        return
+
+      }
+      //console.log('saiu da função')
+    }
+
+  </script>
+</body>
+
+</html>

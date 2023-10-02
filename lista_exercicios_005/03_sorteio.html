@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 005 - 03 Sorteio</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de repetição</h1>
+    <p>
+      3. Desenvolva um programa que faça o sorteio de 20 números entre 0 e 10 e mostre na tela: <br>
+      a) Quais foram os números sorteados <br>
+      b) Quantos números estão acima de 5 <br>
+      c) Quantos números são divisíveis por 3 <br>
+    </p>
+    <section>
+      <input type="button" value="Sortear" onclick="sortearNumeros()">
+
+      <section class="blocoSorteio">
+        <output class="todosNumerosSorteados">
+        </output>
+        <div class="blocoCondicoes">
+          <h2>Números maiores que 5</h2>
+          <output id="resultadoMaiorQue5"></output>
+        </div>
+        <div class="blocoCondicoes">
+          <h2>Números divisíveis por 3</h2>
+          <output id="resultadoDivPor3"></output>
+        </div>
+      </section>
+
+    </section>
+
+  </main>
+  <style>
+    .blocoSorteio {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    h2 {
+      font-size: smaller;
+      text-transform: uppercase;
+    }
+
+    div {
+      display: none;
+      text-align: center;
+      padding: 1.2rem;
+      background-color: cornflowerblue;
+      color: azure;
+      height: max-content;
+      border-radius: 1rem;
+    }
+
+    div output {
+      font-size: 2rem;
+    }
+
+    .todosNumerosSorteados {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.2rem;
+      grid-column: span 2;
+      height: max-content;
+    }
+
+    .numeroSorteado {
+      display: flex;
+      place-items: center;
+      justify-content: center;
+      aspect-ratio: 1/1;
+      background-color: cadetblue;
+      color: aliceblue;
+      font-size: 2rem;
+      border-radius: 100%;
+      font-weight: bold;
+    }
+  </style>
+
+  <script>
+    //  22 3. Desenvolva um programa que faça o sorteio de 20 números entre 0 e 10 e mostre na tela:
+    //   23 a) Quais foram os números sorteados
+    //   24 b) Quantos números estão acima de 5
+    //   25 c) Quantos números são divisíveis por 3  
+
+    const saida = document.querySelector('.todosNumerosSorteados')
+    const blocoCondicoes = document.querySelectorAll('.blocoCondicoes')
+    const saidaMaioresQue5 = document.querySelector('#resultadoMaiorQue5')
+    const saidaDivPor3 = document.querySelector('#resultadoDivPor3')
+
+    function addNumToDOM(num) {
+      let spanNum = document.createElement('span')
+      spanNum.setAttribute('class', 'numeroSorteado')
+      spanNum.innerText = num
+      saida.appendChild(spanNum)
+    }
+
+    async function delayOutput(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    async function sortearNumeros() {
+      let maiorQue5 = 0
+      let divPor3 = 0
+
+      saida.innerHTML = ''
+      blocoCondicoes.forEach(bloco => bloco.setAttribute('style', 'display: block'))
+
+      for (let cont = 0; cont < 20; cont++) {
+        let num = Math.floor(Math.random() * 10)
+        if (num > 5) {
+          maiorQue5++
+        }
+        if (num % 3 === 0) {
+          divPor3++
+        }
+        addNumToDOM(num)
+        saidaMaioresQue5.value = maiorQue5
+        saidaDivPor3.value = divPor3
+        await delayOutput(160)
+      }
+    }
+
+  </script>
+</body>
+
+</html>

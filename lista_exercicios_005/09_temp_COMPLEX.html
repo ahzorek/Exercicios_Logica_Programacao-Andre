@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 05 - Converter Temperatura</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body
+  class="bg-[url('https://www.toptal.com/designers/subtlepatterns/uploads/denim.png')] mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+  <h1 class="text-5xl text-center text-slate-400 my-8">Converter Temperaturas</h1>
+  <div class="indicator">
+    <span class="indicator-item indicator-start badge bg-blue-800">K</span>
+    <input id="tempK" min="0" step="0.1" type="number" placeholder="Temperatura Kelvin"
+      class="bg-slate-800/80 input input-bordered input-lg w-full max-w-xs" onfocuschange="convertFromC()"
+      onchange="convertFromK()" />
+  </div>
+  <div class="indicator">
+    <span class="indicator-item indicator-start badge bg-red-800">°C</span>
+    <input id="tempC" min="-273.15" step=".15" type="number" placeholder="Temperatura Celsius"
+      class="bg-slate-800/80 input input-bordered input-lg w-full max-w-xs" onfocuschange="convertFromC()"
+      onchange="convertFromC()" />
+  </div>
+  <div class="indicator">
+    <span class="indicator-item indicator-start badge bg-green-800">°F</span>
+    <input id="tempF" min="-60" step=".15" type="number" placeholder="Temperatura Fahrenheit"
+      class="bg-slate-800/80 input input-bordered input-lg w-full max-w-xs" onfocuschange="convertFromC()"
+      onchange="convertFromF()" />
+  </div>
+  <script>
+    //  42 9. Crie um novo programa a partir do exercício anterior e permita que o usuário escolha em que unidade de medida ele deseja informar     a temperatura(C, F ou K).O programa deverá converter deverá converter a temperatura para as outras unidades de medida. 
+
+    const inputTempK = document.querySelector('#tempK')
+    const inputTempC = document.querySelector('#tempC')
+    const inputTempF = document.querySelector('#tempF')
+
+
+    function convertFromK() {
+      let tempK = Number(inputTempK.value)
+      if (tempK < 0) {
+        tempK = 0
+      }
+      const tempC = tempK - 273.15
+      const tempF = (((tempK - 273.15) * 9) + 160) / 5
+      inputTempC.value = tempC.toFixed(1)
+      inputTempF.value = tempF.toFixed(1)
+    }
+
+    function convertFromC() {
+      let tempC = Number(inputTempC.value)
+      if (tempC < -273.15) {
+        tempC = -273.15
+      }
+      const tempK = tempC + 273.15
+      const tempF = (9 * tempC + 160) / 5
+      inputTempK.value = tempK.toFixed(2)
+      inputTempF.value = tempF.toFixed(1)
+    }
+
+    function convertFromF() {
+      const tempF = Number(inputTempF.value)
+      const tempC = ((tempF * 5) - 160) / 9
+      const tempK = tempC + 273.15
+      inputTempK.value = tempK.toFixed(2)
+      inputTempC.value = tempC.toFixed(1)
+
+
+    }
+
+  </script>
+</body>
+
+</html>

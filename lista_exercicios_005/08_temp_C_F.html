@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 003 - Loops 8</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de Repetição</h1>
+    <section>
+      <input type="number" min="-273.15" step="0.15" id="temp" placeholder="Temperatura em Celsius">
+      <input type="button" value="Converter" onclick="convertToF()">
+      <span>
+        <output id="resultado-for"></output>
+      </span>
+    </section>
+  </main>
+  <script>
+    // 40 8. Ler uma temperatura em graus Celsius e apresentá - la convertida em graus Fahrenheit.A fórmula de conversão é: F = (9 * C + 160) / 5, sendo     F a temperatura em Fahrenheit e C a temperatura em Celsius. 
+    const input = document.querySelector('#temp')
+    const saida = document.querySelector('#resultado-for')
+
+    function convertToF() {
+      const tempC = Number(input.value)
+      if (tempC < -273.15) {
+        saida.value = 'Essa temperatura está abaixo do mínimo possível para °C'
+      }
+      else {
+        const tempF = (9 * tempC + 160) / 5
+        saida.value = `A temperatura ${tempC}°C equivale a ${tempF.toFixed(1)}°F`
+      }
+    }
+  </script>
+</body>
+
+</html>

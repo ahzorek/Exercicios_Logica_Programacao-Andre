@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 05 - Jogo de Adivinhação</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- <link rel="stylesheet" href="../shared_assets/styles.css"> -->
+</head>
+
+
+<body class="relative text-cyan-50 bg-gradient-to-t from-blue-600 to-blue-800">
+  <main class="container mx-auto flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="text-center">
+      <h3 class="text-4xl">⭐️ ⭐️ ⭐️ ⭐️</h3>
+      <h1 class="text-titleLarge  my-4">Você consegue adivinhar este número?</h1>
+      <p class="text-lg ">É um número inteiro de 1 a 10.<br>
+      </p>
+    </div>
+    <section class="text-center">
+      <output class="my-5" id="retorno">Você receberá uma dica a
+        cada
+        tentativa.</output>
+      <h2 id="placarTexto" class="text-xl my-3">Você tem 3 vidas restantes</h2>
+      <h3 id="placarVidas" class="text-4xl my-2">❤️ ❤️ ❤️</h3>
+    </section>
+
+    <input
+      class="w-[3ch] text-inputLarge rounded-xl my-10 text-center bg-blue-400/50 focus:outline-none focus:border-slate-200"
+      type="number" min="1" max="10" step="1" id="numero" name="numero">
+    <button onclick="startGame()"
+      class="bg-white hover:bg-gray-100 text-gray-800 font-semibold my-4 py-3 px-6 border border-gray-400 rounded shadow">Jogar</button>
+
+
+  </main>
+  <div id="gameOver" style="display: none;"
+    class="absolute place-items-center top-0 bottom-0 left-0 right-0 bg-red-600/60 backdrop-blur-md">
+    <div class="text-center">
+      <h2 class="text-8xl my-5">☠️☠️☠️</h2>
+      <h3 class="text-2xl">Você perdeu 🥺😢😔<br>Clique para tentar novamente.</h3>
+    </div>
+  </div>
+  <div id="gameWinner" style="display: none;"
+    class="absolute place-items-center top-0 bottom-0 left-0 right-0 bg-green-700/60 backdrop-blur-md">
+    <div class="text-center">
+      <h2 class="text-8xl my-5">😜🥳🏆🥇</h2>
+      <h3 class="text-2xl">Você ganhou! Parabéns!!!<br>Clique para tentar novamente.</h3>
+    </div>
+  </div>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontSize: {
+            inputLarge: 'clamp(8rem, 15vw, 14rem)',
+            titleLarge: 'clamp(2.4rem, 5vw, 4rem)'
+          }
+        }
+      }
+    }
+    // 38 7. Em um jogo de adivinhação, o jogador deve descobrir um número entre 1 e 10 usando até três tentativas.A cada tentativa o jogador     é informado se o número foi descoberto, ou se ele é maior ou menor do que a tentativa.Se após três tentativas o jogador não descobri    r o número, então ele perde o jogo.Crie um algoritmo que implemente esse jogo.
+    const NUMEROCHAVE = parseInt(Math.floor((Math.random() * 10)) + 1)
+    console.log(NUMEROCHAVE)
+    const vidaPerdida = '❌'
+    const vidaIcone = '❤️'
+    const userInput = document.querySelector('#numero')
+    const saida = document.querySelector('#retorno')
+    const gameOver = document.querySelector('#gameOver')
+    const gameWinner = document.querySelector('#gameWinner')
+    let VIDAS_DISPONIVEIS = 3
+
+    limpaCampoeFocus()
+
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        startGame()
+      }
+    })
+
+
+    function reduzVidas() {
+      VIDAS_DISPONIVEIS--
+      const placarTexto = document.querySelector('#placarTexto')
+      const iconesVidas = document.querySelector('#placarVidas')
+      const newVidas = iconesVidas.innerHTML.replace(vidaIcone, vidaPerdida)
+      iconesVidas.innerHTML = newVidas
+
+      if (VIDAS_DISPONIVEIS > 1) {
+        placarTexto.innerHTML = `Você tem ${VIDAS_DISPONIVEIS} vidas restantes`
+      } else
+        placarTexto.innerHTML = 'Essa é sua última vida 😨😰😱'
+
+      console.log('VIDAS RESTANTS', newVidas)
+    }
+
+    function perdeJogo() {
+      gameOver.setAttribute('style', 'display: grid;')
+      console.log('PERDEU O JOGO, o NÚMERO CHAVE era::', NUMEROCHAVE)
+
+      userInput.disabled = true
+      gameOver.addEventListener(('click'), () => {
+        window.location.reload()
+      })
+    }
+
+    function ganhaJogo() {
+      gameWinner.setAttribute('style', 'display: grid;')
+      console.log('GANHOU O JOGO, você acertou o número')
+
+      userInput.disabled = true
+      gameWinner.addEventListener(('click'), () => {
+        window.location.reload()
+      })
+    }
+
+    function limpaCampoeFocus() {
+      userInput.value = ''
+      userInput.focus()
+    }
+
+
+    function startGame() {
+      if (userInput.value < 0 || userInput.value > 10 || userInput.value === '') {
+        alert('Entrada não é compatível')
+        limpaCampoeFocus()
+        return
+      }
+      const USERNUM = parseInt(userInput.value)
+      // console.log('O INPUT DO USUARIO É:::', USERNUM, typeof (USERNUM));
+      if (USERNUM === NUMEROCHAVE) {
+        ganhaJogo()
+      } else
+        reduzVidas()
+      if (VIDAS_DISPONIVEIS === 0) {
+        perdeJogo()
+      } else
+        if (USERNUM > NUMEROCHAVE) {
+          saida.innerHTML = `O <strong>NÚMERO CHAVE</strong> é menor que ${USERNUM}`
+        } else saida.innerHTML = `O <strong>NÚMERO CHAVE</strong> é maior que ${USERNUM}`
+
+      limpaCampoeFocus()
+    }
+
+  </script>
+  <style>
+    #numero[type=number] {
+      appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
+  </style>
+</body>
+
+</html>

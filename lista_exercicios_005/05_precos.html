@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 005 - Preços</title>
+  <link rel="stylesheet" href="../shared_assets/styles.css">
+</head>
+
+<body>
+  <main>
+    <h1>Exercícios 05 - Estruturas de repetição</h1>
+    <p>Crie um aplicativo que leia o preço de 'n' produtos. No final, mostre na tela qual foi o maior e qual foi o menor
+      preço
+      digitados.</p>
+    <section>
+      <label for="preco">Preço do produto</label>
+      <input type="number" min="0" step="0.01" name="preco" id="preco" placeholder="R$ 199,90">
+      <input type="button" value="Salvar Preço" onclick="salvarPreco()">
+      <input type="button" id="calcButton" value="Calcular" onclick="calcularMaioeMenor()" disabled>
+
+      <span>
+        <output id="resultado-for"></output>
+      </span>
+
+    </section>
+
+  </main>
+
+  <script>
+    //  30 5. Crie um aplicativo que leia o preço de 'n' produtos.No final, mostre na tela qual foi o maior e qual foi o menor preço digitados.
+    const inputPreco = document.querySelector('#preco')
+    const saida = document.querySelector('#resultado-for')
+    const calcButton = document.querySelector('#calcButton')
+    let precoArray = []
+
+    function calcularMaioeMenor() {
+      //usando a funcao spread de arrays e a biblioteca Math localiza o maior e menor preco
+      const maiorPreco = Math.max(...precoArray)
+      const menorPreco = Math.min(...precoArray)
+      saida.value = `O maior preço registrado foi R$${maiorPreco.toFixed(2)} e o menor preço registrado foi R$${menorPreco.toFixed(2)}`
+    }
+
+    function salvarPreco() {
+      const preco = Number(inputPreco.value)
+      //checa se ha um valor valido para preco, se nao, avisa o usuario e retorna a funcao
+      if (preco == '') {
+        alert('Preço não pode estar vazio')
+        inputPreco.focus()
+        return
+      }
+      //adiciona o preco capturado a uma array com os precos
+      precoArray.push(preco)
+      saida.value = 'Preço foi salvo. Você pode adicionar mais preços ou verificar agora:'
+
+      //limpa o input de preco, ativa o botao para realizar o calculo final e altera o foco do usuario novamente para o input preco
+      inputPreco.value = ''
+      inputPreco.focus()
+      calcButton.disabled = false
+    }
+
+  </script>
+</body>
+
+</html>
