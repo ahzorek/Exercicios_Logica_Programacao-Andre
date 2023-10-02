@@ -1,5 +1,145 @@
-<!-- 62 10. Elaborar um programa para a casa de câmbio que receba as cotações do dia e efetue a conversão de uma moeda para
-outra. O programa deverá permitir conversões entre Real, Dólar Americano, Euro, Libra Esterlina e Dólar Canadense.
-63 - O usuário pode selecionar o tipo de moeda de entrada e selecionar o tipo para o qual ele deseja converter.
-64
-65 --------> entra -- Dolar -- Destino -->
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios 5 - Conversor Câmbio</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Calculadora Câmbio</h1>
+
+    <div class="join join-item">
+      <div class="indicator">
+        <span class="indicator-item indicator-start badge badge-primary">de</span>
+        <select class="select select-start select-bordered join-item" id="currencyFrom" onchange="getCurrFrom()">
+          <option value="null" disabled selected>Moeda</option>
+          <option value="BRL">Real • R$</option>
+          <option value="USD">Dólar US • US$</option>
+          <option value="GBP">Libra • £ </option>
+          <option value="EUR">Euro • €</option>
+          <option value="CAD">Dólar CA • CA$</option>
+        </select>
+      </div>
+      <div>
+        <div>
+          <input type="number" min="0" step="0.05" class="input input-bordered join-item" placeholder="Valor"
+            id="val_From" />
+        </div>
+      </div>
+    </div>
+
+
+    <div class="join join-item">
+      <div class="indicator">
+        <span class="indicator-item indicator-start badge badge-secondary">para</span>
+        <select class="select select-start select-bordered join-item" id="currencyTo" onchange="getCurrTo()">
+          <option value="null" disabled selected>Moeda</option>
+          <option value="BRL">Real • R$</option>
+          <option value="USD">Dólar US • US$</option>
+          <option value="GBP">Libra • £ </option>
+          <option value="EUR">Euro • €</option>
+          <option value="CAD">Dólar CA • CA$</option>
+        </select>
+      </div>
+      <div>
+        <div>
+          <input type="number" min="0" step="0.05" class="input input-bordered join-item" placeholder="Valor"
+            id="val_TO" readonly />
+        </div>
+      </div>
+    </div>
+    <button onclick="convertCurrency()" class="btn btn-lg btn-wide btn-accent">Converter</button>
+    <script>
+      // 62 10. Elaborar um programa para a casa de câmbio que receba as cotações do dia e efetue a conversão de uma moeda para
+      // outra. O programa deverá permitir conversões entre Real, Dólar Americano, Euro, Libra Esterlina e Dólar Canadense.
+      // 63 - O usuário pode selecionar o tipo de moeda de entrada e selecionar o tipo para o qual ele deseja converter.
+      // 64
+      // 65 --------> entra -- Dolar -- Destino
+      const XCHANGE_RATES = {
+        "BRL_to_USD": 0.20,
+        "BRL_to_EUR": 0.19,
+        "BRL_to_GBP": 0.16,
+        "BRL_to_CAD": 0.27,
+        "USD_to_BRL": 5.07,
+        "USD_to_EUR": 0.95,
+        "USD_to_GBP": 0.82,
+        "USD_to_CAD": 1.37,
+        "EUR_to_BRL": 5.32,
+        "EUR_to_USD": 1.05,
+        "EUR_to_GBP": 0.87,
+        "EUR_to_CAD": 1.44,
+        "GBP_to_BRL": 6.15,
+        "GBP_to_USD": 1.21,
+        "GBP_to_EUR": 1.15,
+        "GBP_to_CAD": 1.66,
+        "CAD_to_BRL": 3.71,
+        "CAD_to_USD": 0.73,
+        "CAD_to_EUR": 0.70,
+        "CAD_to_GBP": 0.60,
+        "BRL_to_BRL": 1,
+        "USD_to_USD": 1,
+        "EUR_to_EUR": 1,
+        "GBP_to_GBP": 1,
+        "CAD_to_CAD": 1
+      }
+
+      const currencyFrom_SELECT_INPUT = document.querySelector('#currencyFrom')
+      const currencyTo_SELECT_INPUT = document.querySelector('#currencyTo')
+      const currencyFrom_VALUE = document.querySelector('#val_From')
+      const currencyTo_VALUE = document.querySelector('#val_TO')
+      const connector = '_to_'
+      let CURR_FROM, CURR_TO, CONVERT_VALUE
+
+      function getCurrFrom() {
+        if (currencyFrom_SELECT_INPUT.value !== 'null') {
+          CURR_FROM = currencyFrom_SELECT_INPUT.value
+          console.log(CURR_FROM)
+        } else {
+          alert('Valor precisa ser definido')
+          currencyFrom_SELECT_INPUT.focus()
+        }
+      }
+
+      function getCurrTo() {
+        if (currencyTo_SELECT_INPUT.value !== 'null') {
+          CURR_TO = currencyTo_SELECT_INPUT.value
+          console.log(CURR_TO)
+        } else {
+          alert('Valor precisa ser definido')
+          currencyTo_SELECT_INPUT.focus()
+        }
+      }
+
+      function convertCurrency() {
+        console.log('main func is firing')
+        CONVERT_VALUE = currencyFrom_VALUE.value
+        currencyFrom_VALUE.value = Number(CONVERT_VALUE).toFixed(2)
+        getCurrFrom()
+        getCurrTo()
+        if (CURR_FROM != undefined && CURR_TO != undefined && CONVERT_VALUE !== '') {
+          const KEY = CURR_FROM + connector + CURR_TO
+          setCurrToValue(KEY, CONVERT_VALUE)
+        } else {
+          alert('Algum valor não está definido')
+        }
+      }
+
+      function setCurrToValue(convert_key, value) {
+        console.log('input recebido em setCurrToValue', convert_key, 'valor de conversão', XCHANGE_RATES[convert_key])
+        const rateMultiplier = XCHANGE_RATES[convert_key]
+        const CONVERTED_RES = value * rateMultiplier
+        currencyTo_VALUE.value = CONVERTED_RES.toFixed(2)
+        console.log('valor convertido é', CONVERTED_RES)
+      }
+
+    </script>
+  </body>
+
+</html>
