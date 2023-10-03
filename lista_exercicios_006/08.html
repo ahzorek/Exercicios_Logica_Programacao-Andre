@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 7 Números</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <section class="absolute top-0" id="alerts">
+      <!-- alertas entram aqui -->
+    </section>
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Sortear Números</h1>
+
+    <div class="join join-horizontal gap-4">
+      <div class="tooltip" data-tip="8. Faça um algoritmo que preencha um vetor de 30 posições com números entre 1 e 15 sorteados pelo computador.
+            Depois disso, peça para o usuário digitar um número (chave) e seu programa deve mostrar em que posições essa
+            chave foi encontrada. Mostre também quantas vezes a chave foi sorteada.">
+        <button id="sortearButton" onclick="sortearNumeros()" class="btn btn-lg btn-wide">Sortear Números</button>
+      </div>
+
+      <input type="number" min="0" step="1" class="input input-bordered input-lg" placeholder="Número"
+        id="numeroEntrada" disabled />
+
+      <div class="tooltip" data-tip="Mostra em que posições essa
+            chave foi encontrada. Mostra também quantas vezes a chave foi sorteada.">
+        <button id="testarButton" class="btn btn-accent btn-lg" onclick="verificarNumeros()" disabled>Testar</button>
+      </div>
+    </div>
+
+    <output id="saida"></output>
+
+
+    <!-- <button onclick="salvarNumero()" class="btn btn-md btn-accent">Salvar Números</button>
+    <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button> -->
+
+    <script>
+      // 55 8. Faça um algoritmo que preencha um vetor de 30 posições com números entre 1 e 15 sorteados pelo computador.Depois disso, peça para     o usuário digitar um número(chave) e seu programa deve mostrar em que posições essa chave foi
+      // 56 encontrada.Mostre também quantas vezes a chave foi sorteada.
+
+      //declara o input de entrada e objeto de saida e a seção de alertas
+      const alertsField = document.querySelector('#alerts')
+      const entrada = document.querySelector('#numeroEntrada')
+      const saida = document.querySelector('#saida')
+      const sortearButton = document.querySelector('#sortearButton')
+      const testarButton = document.querySelector('#testarButton')
+
+      const buttonLoading = `
+          <span class="loading loading-spinner"></span>
+            Carregando
+      `
+      let numerosSorteados, acertosNumero
+
+      //funcao principal, sorteia os numeros e salva em uma array
+      function sortearNumeros() {
+        numerosSorteados = [] //variavel é inicializada aqui como array vazia, 
+        //para que, embora se tenha acesso a ela no escopo global, ela seja zerada a cada vez que o usuario clique a opção de sortear números
+        //exercicio pede 30 valores entre 1 e 15, esses valores serao hardcoded na funçao, ao menos inicialmente
+        for (let i = 0; i < 30; i++) {
+          numerosSorteados.push(Math.ceil(Math.random() * 15))
+        }
+        // console.log(':::Números sorteados foram:::')
+        // console.table(numerosSorteados)
+        habilitarCampos()
+      }
+      //essa função realiza a checagem do numero chave escolhido pelo usuario, contra os numeros sorteados salvos na array
+      function verificarNumeros() {
+        acertosNumero = []
+        if (entrada.value !== '') {
+          let num = entrada.value
+          for (let i = 0; i < numerosSorteados.length; i++) {
+            // console.log(num == numerosSorteados[i])
+            if (num == numerosSorteados[i]) {
+              acertosNumero.push(i)
+            }
+          }
+          printResultado(num, acertosNumero)
+        }
+      }
+
+      //essa função vai dar a saida do resultado na tela
+      function printResultado(num, arr) {
+        if (arr.length > 0) {
+          const qtdNumero = arr.length
+          const stringNumPosicoes = printArrayToStringFormatted(arr)
+          if (qtdNumero > 1) {
+            saida.value = `O número ${num} apareceu ${qtdNumero} vezes entre os números sorteados. Ele foi sorteado nas posições: ${stringNumPosicoes}.`
+          } else {
+            saida.value = `O número ${num} apareceu apenas uma vez entre os números sorteados. Ele foi sorteado na posição: ${stringNumPosicoes}.`
+
+          }
+        } else {
+          saida.value = 'Poxa! Parece que seu número não foi sorteado nenhuma vez.'
+        }
+      }
+
+      //essa função atrasa o tempo de resposta das coisas na tela, para criar uma **expectativa**
+      async function delayOutput(time = 120) {
+        await new Promise(resolve => setTimeout(resolve, time))
+      }
+
+      //essa função executa apos o sorteio e altera o comportamento dos inputs da tela. habilita o campo input numero e o botao de testar.
+      async function habilitarCampos() {
+        // let prevSortearButtonValue = sortearButton.innerHTML
+        sortearButton.innerHTML = buttonLoading
+        await delayOutput(1600) //espera forçada :)
+        entrada.disabled = false
+        testarButton.disabled = false
+        sortearButton.innerHTML = 'Digite seu número'
+        sortearButton.disabled = true
+        entrada.focus()
+      }
+
+      function printArrayToStringFormatted(arr, separador = ', ', isReverse = false) {
+        if (!arr || (typeof (separador) !== 'string') || typeof (arr) !== typeof ([])) {
+          console.error('Parâmetros foram passados indevidamente')
+          if (!arr) { console.error('Param1: Não foi passada a Array') }
+          if (typeof (arr) !== typeof ([])) { console.error('Param1: Parâmetro passado não é do tipo Array (objeto)') }
+          if (typeof (separador) !== 'string') { console.error('Param2: Tipo do separador é inválido. Deve ser String') }
+          return
+        }
+
+        if (isReverse) {
+          arr = arr.reverse()
+        }
+
+        let stringFormatted = ''
+
+        for (let i = 0; i < arr.length; i++) {
+          if (i !== (arr.length - 1)) {
+            stringFormatted = stringFormatted + arr[i] + separador
+          } else stringFormatted = stringFormatted + arr[i]
+        }
+        return stringFormatted
+      }
+
+    </script>
+  </body>
+
+</html>

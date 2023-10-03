@@ -60,34 +60,37 @@
         console.log('Array atual é:::', arrayNumeros)
       }
 
-      //mostra em ordem reversa os nomes salvos
+      //mostra na tela os numeros salvos e as posiçoes dos multiplos de 10
       function mostrarNumeros() {
-        const stringNums = printArrayToStringFormatted(arrayNumeros)
-        const textoSaida = 'Os números digitados foram: ' + stringNums
-        const multiplosPos = printArrayToStringFormatted(arrayMultiplosde10Pos)
-        const textoMultiplos = 'Os números múltiplos de 10 estavam nas posições: ' + multiplosPos
+        const textoArrayNums = 'Os números digitados foram: ' + printArrayToStringFormatted(arrayNumeros)
+        const textoMultiplosPosicoes = 'Os números múltiplos de 10 estavam nas posições: ' + printArrayToStringFormatted(arrayMultiplosde10Pos)
 
-        saida.value = textoSaida + ' - ' + textoMultiplos
+        saida.value = textoArrayNums + ' - ' + textoMultiplosPosicoes
       }
 
-      //essa função formata a array em uma string, mas aceita parametros para formatação
-      //param1 Array: arr (obrigatório) - a array que vai ser formata
-      //param2 Boolean: isReverse - formata a string de tras para frente, default false
-      //param3 String: separator - é a string que vai ser usada para separar is itens da array, default pra ', ' (vírgula e espaço)
-      //escrevi essa função para o exercicio 7 mas provavelmente vou voltar e readaptar para os outros
-
-      function printArrayToStringFormatted(arr, isReverse = false, separator = ', ') {
-        if (!arr || (typeof (separator) !== 'string')) {
+      //essa função formata a array em uma string, mas (diferentemente do metodo .toString()) aceita parametros para formatação
+      //param1 Array: arr (unico obrigatório) - a array que vai ser formatada
+      //param2 String: separador - é a string que vai ser usada para separar is itens da array, default pra ', ' (vírgula e espaço)
+      //param3 Boolean: isReverse - formata a string de tras para frente, default false
+      ////escrevi essa função para o exercicio 7 mas provavelmente vou voltar e aplicar nos outros
+      function printArrayToStringFormatted(arr, separador = ', ', isReverse = false) {
+        if (!arr || (typeof (separador) !== 'string') || typeof (arr) !== typeof ([])) {
           console.error('Parâmetros foram passados indevidamente')
+          if (!arr) { console.error('Param1: Não foi passada a Array') }
+          if (typeof (arr) !== typeof ([])) { console.error('Param1: Parâmetro passado não é do tipo Array (objeto)') }
+          if (typeof (separador) !== 'string') { console.error('Param2: Tipo do separador é inválido. Deve ser String') }
           return
         }
+
         if (isReverse) {
           arr = arr.reverse()
         }
+
         let stringFormatted = ''
+
         for (let i = 0; i < arr.length; i++) {
           if (i !== (arr.length - 1)) {
-            stringFormatted = stringFormatted + arr[i] + separator
+            stringFormatted = stringFormatted + arr[i] + separador
           } else stringFormatted = stringFormatted + arr[i]
         }
         return stringFormatted
