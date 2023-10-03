@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 6 Nomes</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 6 Nomes</h1>
+    <p class="text-md text-gray-100 p-8 text-center">
+      6. Faça um programa que leia "n" nomes de pessoas e guarde - os em um vetor.<br>
+      No final, mostre uma listagem com todos os nomes informados, na ordem inversa daquela em que eles foram
+      informados.
+    </p>
+    <div>
+      <input type="text" class="input input-bordered join-item" placeholder="Nome" id="nomeEntrada" />
+    </div>
+    <div class="join join-horizontal gap-4">
+
+      <button onclick="salvarNome()" class="btn btn-md btn-accent">Salvar Nome</button>
+      <button onclick="mostrarNomes()" class="btn btn-md btn-primary">Mostrar Nomes</button>
+    </div>
+
+    <output id="saida"></output>
+    <script>
+      // 47 6. Faça um programa que leia "n" nomes de pessoas e guarde - os em um vetor.No
+      // 48 final, mostre uma listagem com todos os nomes informados, na ordem inversa
+      // 49 daquela em que eles foram informados.
+
+      //declara o input de entrada e objeto de saida
+      const entrada = document.querySelector('#nomeEntrada')
+      const saida = document.querySelector('#saida')
+
+      //inicializa a array de nomes
+      let arrayNomes = []
+
+      //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
+      function salvarNome() {
+        if (entrada.value !== '') {
+          arrayNomes.push(entrada.value)
+          entrada.value = ''
+          entrada.focus()
+        } else alert('valor não é uma string')
+      }
+
+      //mostra em ordem reversa os nomes salvos
+      function mostrarNomes() {
+        let outputString = 'Os nomes são:  '
+        for (let i = (arrayNomes.length - 1); i >= 0; i--) {
+          if (i === 0) {
+            outputString = outputString + arrayNomes[i]
+          } else outputString = outputString + arrayNomes[i] + ', '
+          saida.value = outputString
+        }
+      }
+
+    </script>
+  </body>
+
+</html>

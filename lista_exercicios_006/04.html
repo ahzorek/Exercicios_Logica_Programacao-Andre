@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 4 Fibonacci</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 4 Fibonacci</h1>
+    <p class="text-md text-primary"></p>
+    <button onclick="start()" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
+    <output id="saida"></output>
+    <script>
+      // 36 4. Crie um programa que preencha automaticamente(usando lógica, não apenas atribuindo diretamente) um vetor numérico com 15 posições     com os primeiros elementos da sequência de Fibonacci:
+      // 37
+      // 38 | 1 | 1 | 2 | 3 | 5 | 8 | 13 | 21 | 34 | 55 | 89 | 144 | 233 | 377 | 610 | 987 |
+      // 39 | ----|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|
+      // 40 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
+
+      //declara o objeto de saida
+      const saida = document.querySelector('#saida')
+
+      function start() {
+        const arrayFibonacci = []
+        let maxIteracoes = 16
+        let fibo1 = 1
+        let fibo2 = 1
+        let fibox
+
+        for (let i = fibo1; i <= maxIteracoes; i++) {
+          arrayFibonacci.push(fibo1)
+          fiboX = fibo1 + fibo2
+          fibo1 = fibo2
+          fibo2 = fiboX
+
+        }
+        console.log(arrayFibonacci)
+        saida.value = arrayFibonacci.toString()
+      }
+
+    </script>
+  </body>
+
+</html>

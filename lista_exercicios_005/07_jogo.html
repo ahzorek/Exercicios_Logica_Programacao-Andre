@@ -61,8 +61,8 @@
       }
     }
     // 38 7. Em um jogo de adivinhação, o jogador deve descobrir um número entre 1 e 10 usando até três tentativas.A cada tentativa o jogador     é informado se o número foi descoberto, ou se ele é maior ou menor do que a tentativa.Se após três tentativas o jogador não descobri    r o número, então ele perde o jogo.Crie um algoritmo que implemente esse jogo.
-    const NUMEROCHAVE = parseInt(Math.floor((Math.random() * 10)) + 1)
-    console.log(NUMEROCHAVE)
+    const NUMEROCHAVE = parseInt(Math.round((Math.random() * 10)))
+    // console.log(NUMEROCHAVE)
     const vidaPerdida = '❌'
     const vidaIcone = '❤️'
     const userInput = document.querySelector('#numero')
@@ -129,17 +129,19 @@
       }
       const USERNUM = parseInt(userInput.value)
       // console.log('O INPUT DO USUARIO É:::', USERNUM, typeof (USERNUM));
+
       if (USERNUM === NUMEROCHAVE) {
         ganhaJogo()
-      } else
+      } else {
         reduzVidas()
-      if (VIDAS_DISPONIVEIS === 0) {
-        perdeJogo()
-      } else
+      }
+      if (VIDAS_DISPONIVEIS > 0) {
         if (USERNUM > NUMEROCHAVE) {
           saida.innerHTML = `O <strong>NÚMERO CHAVE</strong> é menor que ${USERNUM}`
         } else saida.innerHTML = `O <strong>NÚMERO CHAVE</strong> é maior que ${USERNUM}`
-
+      } else {
+        perdeJogo()
+      }
       limpaCampoeFocus()
     }
 

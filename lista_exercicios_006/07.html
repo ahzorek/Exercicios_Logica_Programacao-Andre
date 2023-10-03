@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 7 Números</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 7 Números</h1>
+    <p class="text-md text-gray-100 p-8 text-center">
+      7. Escreva um programa que leia "n" números e guarde-os em um vetor. <br>
+      No final, mostre o vetor inteiro na tela e em seguida mostre em que posições foram digitados valores que são
+      múltiplos de 10.
+    </p>
+    <div>
+      <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Número"
+        id="numeroEntrada" />
+    </div>
+    <div class="join join-horizontal gap-4">
+      <button onclick="salvarNumero()" class="btn btn-md btn-accent">Salvar Números</button>
+      <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button>
+    </div>
+
+    <output id="saida"></output>
+    <script>
+      // 51 7. Escreva um programa que leia "n" números e guarde - os em um vetor.No final,
+      // 52 mostre o vetor inteiro na tela e em seguida mostre em que posições foram
+      // 53 digitados valores que são múltiplos de 10.
+
+      //declara o input de entrada e objeto de saida
+      const entrada = document.querySelector('#numeroEntrada')
+      const saida = document.querySelector('#saida')
+
+      //inicializa as arrays
+      let arrayNumeros = []
+      let arrayMultiplosde10Pos = []
+
+      //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
+      function salvarNumero() {
+        let num = entrada.value
+
+        if (num !== '') {
+          arrayNumeros.push(num)
+          if (num % 10 === 0) {
+            let currArrayindex = (arrayNumeros.length - 1)
+            arrayMultiplosde10Pos.push(currArrayindex)
+          }
+          entrada.value = ''
+          entrada.focus()
+        } else
+          alert('valor não é válido')
+
+        console.log('Array atual é:::', arrayNumeros)
+      }
+
+      //mostra em ordem reversa os nomes salvos
+      function mostrarNumeros() {
+        const stringNums = printArrayToStringFormatted(arrayNumeros)
+        const textoSaida = 'Os números digitados foram: ' + stringNums
+        const multiplosPos = printArrayToStringFormatted(arrayMultiplosde10Pos)
+        const textoMultiplos = 'Os números múltiplos de 10 estavam nas posições: ' + multiplosPos
+
+        saida.value = textoSaida + ' - ' + textoMultiplos
+      }
+
+      //essa função formata a array em uma string, mas aceita parametros para formatação
+      //param1 Array: arr (obrigatório) - a array que vai ser formata
+      //param2 Boolean: isReverse - formata a string de tras para frente, default false
+      //param3 String: separator - é a string que vai ser usada para separar is itens da array, default pra ', ' (vírgula e espaço)
+      //escrevi essa função para o exercicio 7 mas provavelmente vou voltar e readaptar para os outros
+
+      function printArrayToStringFormatted(arr, isReverse = false, separator = ', ') {
+        if (!arr || (typeof (separator) !== 'string')) {
+          console.error('Parâmetros foram passados indevidamente')
+          return
+        }
+        if (isReverse) {
+          arr = arr.reverse()
+        }
+        let stringFormatted = ''
+        for (let i = 0; i < arr.length; i++) {
+          if (i !== (arr.length - 1)) {
+            stringFormatted = stringFormatted + arr[i] + separator
+          } else stringFormatted = stringFormatted + arr[i]
+        }
+        return stringFormatted
+      }
+
+    </script>
+  </body>
+
+</html>

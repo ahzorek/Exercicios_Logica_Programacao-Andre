@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 2</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 2</h1>
+    <p class="text-md text-primary"></p>
+    <button onclick="start()" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
+    <output id="saida"></output>
+    <script>
+      //  24 2. Crie um programa que preencha automaticamente(usando lógica, não apenas atribuindo diretamente) um vetor numérico com 10 posições, conforme abaixo:
+      //   25
+      //   26 | 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+      //   27 | ----|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|
+      //   28 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
+
+      //declara o objeto de saida
+      const saida = document.querySelector('#saida')
+
+      function start() {
+
+        const arrayDeNumerosDescendentesDe9 = []
+        let num = 9
+
+        for (let i = num; i >= 0; i--) {
+          arrayDeNumerosDescendentesDe9.push(num)
+          num--
+        }
+        console.log(arrayDeNumerosDescendentesDe9)
+        saida.value = arrayDeNumerosDescendentesDe9.toString()
+      }
+
+    </script>
+  </body>
+
+</html>
