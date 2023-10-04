@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista 06 - Arrays 7 Números</title>
+  <title>Lista 06 - Arrays 8 Sortear Números</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -12,34 +12,33 @@
 
 <body>
 
-  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+  <body class="relative container mx-auto gap-2 flex flex-col justify-center items-center p-2 min-h-screen">
     <section class="absolute top-0" id="alerts">
       <!-- alertas entram aqui -->
     </section>
-    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Sortear Números</h1>
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 8 Sortear Números</h1>
 
-    <div class="join join-horizontal gap-4">
-      <div class="tooltip" data-tip="8. Faça um algoritmo que preencha um vetor de 30 posições com números entre 1 e 15 sorteados pelo computador.
-            Depois disso, peça para o usuário digitar um número (chave) e seu programa deve mostrar em que posições essa
-            chave foi encontrada. Mostre também quantas vezes a chave foi sorteada.">
-        <button id="sortearButton" onclick="sortearNumeros()" class="btn btn-lg btn-wide">Sortear Números</button>
-      </div>
-
-      <input type="number" min="0" step="1" class="input input-bordered input-lg" placeholder="Número"
-        id="numeroEntrada" disabled />
-
-      <div class="tooltip" data-tip="Mostra em que posições essa
-            chave foi encontrada. Mostra também quantas vezes a chave foi sorteada.">
-        <button id="testarButton" class="btn btn-accent btn-lg" onclick="verificarNumeros()" disabled>Testar</button>
+    <div class="flex justify-center px-8 py-16">
+      <div class="join join-vertical lg:join-horizontal gap-4">
+        <div class="tooltip" data-tip="8. Faça um algoritmo que preencha um vetor de 30 posições com números entre 1 e 15 sorteados pelo computador.
+                  Depois disso, peça para o usuário digitar um número (chave) e seu programa deve mostrar em que posições essa
+                  chave foi encontrada. Mostre também quantas vezes a chave foi sorteada.">
+          <button id="sortearButton" onclick="sortearNumeros()" class="btn btn-lg btn-secondary btn-wide">Sortear
+            Números</button>
+        </div>
+        <div class="join-item">
+          <input type="number" min="0" step="1" class="input input-bordered input-lg" placeholder="Número"
+            id="numeroEntrada" disabled />
+        </div>
+        <div class="tooltip" data-tip="Mostra em que posições essa
+                  chave foi encontrada. Mostra também quantas vezes a chave foi sorteada.">
+          <button id="testarButton" class="btn btn-accent btn-lg btn-wide" onclick="verificarNumeros()"
+            disabled>Testar</button>
+        </div>
       </div>
     </div>
 
     <output id="saida"></output>
-
-
-    <!-- <button onclick="salvarNumero()" class="btn btn-md btn-accent">Salvar Números</button>
-    <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button> -->
-
     <script>
       // 55 8. Faça um algoritmo que preencha um vetor de 30 posições com números entre 1 e 15 sorteados pelo computador.Depois disso, peça para     o usuário digitar um número(chave) e seu programa deve mostrar em que posições essa chave foi
       // 56 encontrada.Mostre também quantas vezes a chave foi sorteada.

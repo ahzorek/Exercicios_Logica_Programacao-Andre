@@ -15,8 +15,15 @@
   <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
     <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 4 Fibonacci</h1>
     <p class="text-md text-primary"></p>
-    <button onclick="start()" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
-    <output id="saida"></output>
+    <div class="join-item">
+      <input type="number" min="0" step="1" class="input input-bordered input-lg" placeholder="Iterações (padrão 16)"
+        id="numeroEntrada" />
+      <button onclick="start()" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
+    </div>
+    <div class="">
+      <output id="saida"></output>
+    </div>
+
     <script>
       // 36 4. Crie um programa que preencha automaticamente(usando lógica, não apenas atribuindo diretamente) um vetor numérico com 15 posições     com os primeiros elementos da sequência de Fibonacci:
       // 37
@@ -24,12 +31,13 @@
       // 39 | ----|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|: --:|
       // 40 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 |
 
-      //declara o objeto de saida
+      //captura referencias aos objetos do dom
+      const entrada = document.querySelector('#numeroEntrada')
       const saida = document.querySelector('#saida')
 
       function start() {
         const arrayFibonacci = []
-        let maxIteracoes = 16
+        let maxIteracoes = entrada.value || 16
         let fibo1 = 1
         let fibo2 = 1
         let fibox
@@ -42,7 +50,44 @@
 
         }
         console.log(arrayFibonacci)
-        saida.value = arrayFibonacci.toString()
+        saida.value = printArrayToStringFormatted(arrayFibonacci)
+      }
+
+      //////////////
+      //////////////
+      //////////////
+      //essa função formata a array em uma string, mas (diferentemente do metodo .toString()) aceita parametros para formatação
+      //param1 Array: arr (unico obrigatório) - a array que vai ser formatada
+      //param2 String: separador - é a string que vai ser usada para separar is itens da array, default pra ', ' (vírgula e espaço)
+      //param3 Boolean: isReverse - formata a string de tras para frente, default false
+      ////escrevi essa função para o exercicio 7 mas provavelmente vou voltar e aplicar nos outros
+      function printArrayToStringFormatted(arr, separador = ', ', isReverse = false) {
+        if (!arr || (typeof (separador) !== 'string') || typeof (arr) !== typeof ([])) {
+          console.error('Parâmetros foram passados indevidamente')
+          if (!arr) {
+            console.error('Param1: Não foi passada a Array')
+          }
+          if (typeof (arr) !== typeof ([])) {
+            console.error('Param1: Parâmetro passado não é do tipo Array (objeto)')
+          }
+          if (typeof (separador) !== 'string') {
+            console.error('Param2: Tipo do separador é inválido. Deve ser String')
+          }
+          return
+        }
+
+        if (isReverse) {
+          arr = arr.reverse()
+        }
+
+        let stringFormatted = ''
+
+        for (let i = 0; i < arr.length; i++) {
+          if (i !== (arr.length - 1)) {
+            stringFormatted = stringFormatted + arr[i] + separador
+          } else stringFormatted = stringFormatted + arr[i]
+        }
+        return stringFormatted
       }
 
     </script>
