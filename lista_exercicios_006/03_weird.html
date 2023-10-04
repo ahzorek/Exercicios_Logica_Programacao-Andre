@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 3</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 3 (rápido. corta pela metade as iterações)
+    </h1>
+    <button onclick="run()" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
+    <output id="saida"></output>
+    <script>
+      const s = document.querySelector('#saida')
+
+      let a = []
+
+      function run() {
+        x = 0
+        for (i = 0; i < 10; i++) {
+          a[i++] = 5
+          a[i] = 3
+        }
+        console.log(a)
+        s.value = a.toString()
+      }
+    </script>
+  </body>
+
+</html>

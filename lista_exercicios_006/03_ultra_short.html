@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 06 - Arrays 3</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <h1 class="text-5xl text-center text-slate-400 my-8">Lista 06 - Arrays 3 (péssima legibilidade)</h1>
+    <p>retorno apenas no console</p>
+    <button onclick="run([])" class="btn btn-lg btn-wide btn-accent">Iniciar</button>
+    <script>
+
+      //esse exemplo sacrifica a legibilidade para ter todo o codigo em uma unica linha
+      run = a => { for (i = 0; i < 10; i++) a.push(i % 2 ? 3 : 5); console.log(a) }
+
+    </script>
+  </body>
+
+</html>

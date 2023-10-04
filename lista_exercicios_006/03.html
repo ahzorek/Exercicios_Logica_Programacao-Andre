@@ -32,10 +32,10 @@
         const arrayDeNumeros = []
 
         for (let i = 0; i < 10; i++) {
-          if (i % 2 === 0) {
-            arrayDeNumeros.push(5)
-          } else
+          if (i % 2) {
             arrayDeNumeros.push(3)
+          } else
+            arrayDeNumeros.push(5)
         }
         console.log(arrayDeNumeros)
         saida.value = arrayDeNumeros.toString()
