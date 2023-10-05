@@ -77,10 +77,12 @@
         if (!arr || (typeof (separador) !== 'string') || typeof (arr) !== typeof ([])) {
           console.error('Parâmetros foram passados indevidamente')
           if (!arr) { console.error('Param1: Não foi passada a Array') }
-          if (typeof (arr) !== typeof ([])) { console.error('Param1: Parâmetro passado não é do tipo Array (objeto)') }
+          if (!(Array.isArray(arr))) { console.error('Param1: Parâmetro atribuído não é do tipo Array') }
           if (typeof (separador) !== 'string') { console.error('Param2: Tipo do separador é inválido. Deve ser String') }
           return
         }
+        //ternario verifica se separador passado não é um _ (blank statement)
+        separador = (separador === '_') ? ', ' : separador
 
         if (isReverse) {
           arr = arr.reverse()

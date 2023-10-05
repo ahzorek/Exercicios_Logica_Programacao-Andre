@@ -70,33 +70,37 @@
       }
       //essa função realiza a checagem do numero chave escolhido pelo usuario, contra os numeros sorteados salvos na array
       function verificarNumeros() {
-        acertosNumero = []
-        if (entrada.value !== '') {
-          let num = entrada.value
-          for (let i = 0; i < numerosSorteados.length; i++) {
-            // console.log(num == numerosSorteados[i])
-            if (num == numerosSorteados[i]) {
-              acertosNumero.push(i)
+        if (numerosSorteados !== undefined) {
+          acertosNumero = []
+          if (entrada.value !== '') {
+            let num = entrada.value
+            for (let i = 0; i < numerosSorteados.length; i++) {
+              // console.log(num == numerosSorteados[i])
+              if (num == numerosSorteados[i]) {
+                acertosNumero.push(i)
+              }
             }
+            printResultado(num, acertosNumero)
           }
-          printResultado(num, acertosNumero)
-        }
+        } else
+          console.error('Array numerosSorteados está vazia')
+        return
       }
 
       //essa função vai dar a saida do resultado na tela
       function printResultado(num, arr) {
         if (arr.length > 0) {
-          const qtdNumero = arr.length
-          const stringNumPosicoes = printArrayToStringFormatted(arr)
-          if (qtdNumero > 1) {
-            saida.value = `O número ${num} apareceu ${qtdNumero} vezes entre os números sorteados. Ele foi sorteado nas posições: ${stringNumPosicoes}.`
+          const qtdVezesNumero = arr.length
+          const stringNumPosicoes = printArrayToStringFormatted(arr, null, true)
+          if (qtdVezesNumero > 1) {
+            saida.value = `O número ${num} apareceu ${qtdVezesNumero} vezes entre os números sorteados. Ele foi sorteado nas posições: ${stringNumPosicoes}.`
           } else {
             saida.value = `O número ${num} apareceu apenas uma vez entre os números sorteados. Ele foi sorteado na posição: ${stringNumPosicoes}.`
-
           }
         } else {
           saida.value = 'Poxa! Parece que seu número não foi sorteado nenhuma vez.'
         }
+        console.log(saida.value)
       }
 
       //essa função atrasa o tempo de resposta das coisas na tela, para criar uma **expectativa**
@@ -108,7 +112,7 @@
       async function habilitarCampos() {
         // let prevSortearButtonValue = sortearButton.innerHTML
         sortearButton.innerHTML = buttonLoading
-        await delayOutput(1600) //espera forçada :)
+        await delayOutput(1200) //espera forçada :)
         entrada.disabled = false
         testarButton.disabled = false
         sortearButton.innerHTML = 'Digite seu número'
@@ -116,26 +120,43 @@
         entrada.focus()
       }
 
-      function printArrayToStringFormatted(arr, separador = ', ', isReverse = false) {
-        if (!arr || (typeof (separador) !== 'string') || typeof (arr) !== typeof ([])) {
+      //formata a array em uma string, mas (diferentemente do metodo .toString()) aceita parametros para formatação
+      //param1 Array: arr (unico obrigatório) - a array que vai ser formatada
+      //param2 String: spacer(separador) - é a string que vai ser usada para separar is itens da array, default (se null, por ex) pra ', ' (vírgula e espaço)
+      //param3 Boolean: isReverse - formata a string de tras para frente, default false
+      function printArrayToStringFormatted(arr, spacer, isReverse = false) {
+        //principa check, verifica se param arr foi atribuido e é de fato uma array
+        if (!arr || !(Array.isArray(arr))) {
           console.error('Parâmetros foram passados indevidamente')
-          if (!arr) { console.error('Param1: Não foi passada a Array') }
-          if (typeof (arr) !== typeof ([])) { console.error('Param1: Parâmetro passado não é do tipo Array (objeto)') }
-          if (typeof (separador) !== 'string') { console.error('Param2: Tipo do separador é inválido. Deve ser String') }
+          if (!arr) { console.error('Param1: Não foi atribuida a Array') }
+          if (!(Array.isArray(arr))) { console.error('Param1: Parâmetro atribuído não é do tipo Array') }
           return
         }
-
-        if (isReverse) {
-          arr = arr.reverse()
+        // verifica se spacer (separador) passado não é null, undefined ou string vazia
+        // objetivo é em caso de undefined ou objeto diferente de string, manter a string padrao, mas alertar o usuario
+        // em caso de null considera-se que o usuario optou por passar o param como nulo para acessar o terceiro param
+        // entao nao retorna erro ou warning, apenas formata tambem com a string padrao ', '
+        if ((spacer === undefined) || (spacer === null) || (spacer.length === 0)) {
+          if (spacer !== null) {
+            console.warn('Param2: spacer atribuído não é do tipo String ou esta vazio. Será usado ", "')
+          }
+          spacer = ', '
         }
 
+        //se isReverse é true, inverte a array com metodo reverse()
+        if (isReverse) arr = arr.reverse()
+
+        //inicializa a string de saida como string
         let stringFormatted = ''
 
+        //itera por todos os iten da array e interpola, 'conteudo anterior' + 'item' + 'separador'
+        // ou se for ultimo item, nao adiciona separador
         for (let i = 0; i < arr.length; i++) {
           if (i !== (arr.length - 1)) {
-            stringFormatted = stringFormatted + arr[i] + separador
+            stringFormatted = stringFormatted + arr[i] + spacer
           } else stringFormatted = stringFormatted + arr[i]
         }
+
         return stringFormatted
       }
 
