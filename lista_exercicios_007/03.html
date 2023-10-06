@@ -60,9 +60,16 @@
 
       //salva os dados passados na tela até que as arrays tenham 9 itens, apos, trava a entrada de dados e habilita o botao processar
       function salvarDados() {
-        nomes.push(inputNome.value)
-        salarios.push(inputSalarios.value)
-        sexos.push(inputSexo.value)
+        const nome = inputNome.value
+        const salario = Number(inputSalarios.value)
+
+        if (validarCampos(nome, 'string') && validarCampos(salario, 'number')) {
+          nomes.push(inputNome.value)
+          salarios.push(Number(inputSalarios.value))
+          sexos.push(inputSexo.value)
+        } else {
+          alert('inputs não são válidos')
+        }
         if (nomes.length === 5) {
           document.querySelector('#salvarButton').disabled = true
           document.querySelector('#processarButton').disabled = false
@@ -91,6 +98,24 @@
           }
         }
         saida.setAttribute('style', 'display: contents;')
+      }
+      //funcao deve validar valores passados pelos inputs de entrada
+      function validarCampos(inputValue, expInput) {
+        // console.log('valor esperado :::', expInput)
+        console.log('valor recebido :::', inputValue, typeof (inputValue))
+        if (expInput == 'number') {
+          inputValue = Number(inputValue)
+          if (typeof (inputValue) != 'number' || isNaN(inputValue)) {
+            console.error('falhou o teste de number :::', typeof (inputValue))
+            return false
+          }
+        } else return true
+        if (expInput === 'string') {
+          if (typeof (inputValue) != 'string') {
+            console.error('falhou o teste de string :::', typeof (inputValue))
+            return false
+          }
+        } else return true
       }
 
     </script>

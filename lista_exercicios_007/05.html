@@ -21,11 +21,22 @@
 e">
       <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Numeros ordenados</h1>
     </div>
-    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Nota"
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Número"
       id="numeroEntrada" />
+    <div class="join join-horizontal gap-8">
+      <label class="join-item label cursor-pointer gap-4" for="crescente">
+        <span class="label-text">Crescente</span>
+        <input type="radio" value="crescente" name="ordemNumeros" id="crescente" class="radio radio-accent" checked />
+      </label>
+      <label class="join-item label cursor-pointer gap-4" for="decrescente">
+        <span class="label-text">Decrescente</span>
+        <input type="radio" value="decrescente" name="ordemNumeros" id="decrescente" class="radio radio-accent" />
+      </label>
+    </div>
     <div class="join join-horizontal gap-4">
       <button onclick="salvarNumeros()" class="btn btn-md btn-accent">Salvar Número</button>
-      <!-- <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button> -->
+      <button onclick="mostrarNumeros()" id="mostrarNumeros" class="btn btn-md btn-primary" disabled>Mostrar
+        Números</button>
     </div>
 
     <output id="saida"></output>
@@ -41,20 +52,116 @@ e">
       const entrada = document.querySelector('#numeroEntrada')
       const saida = document.querySelector('#saida')
 
-      let numeros = []
+      // console.log(ordem.value)
+
+      const numeros = []
 
       //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
       function salvarNumeros() {
         const num = entrada.value
-        if (num !== '') {
-          numeros.push(num)
+        if (validarCampos(num, 'number')) {
+
+          numeros.push(Number(num))
         } else {
-          alert('valor não é válido')
+          alert('valor de entrada não é válido')
+        }
+        if (numeros.length > 10) {
+          document.querySelector('#mostrarNumeros').disabled = false
         }
         //limpa e prepara o campo pra proxima invocação
         entrada.value = ''
         entrada.focus()
       }
+
+      function mostrarNumeros() {
+        const ordem = document.querySelector('input[name="ordemNumeros"]:checked').value
+        const numerosOrdenados = bubbleSort(numeros)
+        let textoSaida
+        if (ordem === 'crescente') {
+          textoSaida = printArrayToStringFormatted(numerosOrdenados, ' • ', false)
+        } else textoSaida = printArrayToStringFormatted(numerosOrdenados, ' • ', true)
+
+        saida.value = 'Os números na ordem ' + ordem + ' são: ' + textoSaida
+      }
+
+      //funcao deve validar valores passados pelos inputs de entrada
+      function validarCampos(inputValue, expInput) {
+        // console.log('valor esperado :::', expInput)
+        console.log('valor recebido :::', inputValue, typeof (inputValue))
+        if (expInput == 'number') {
+          inputValue = Number(inputValue)
+          if (typeof (inputValue) != 'number' || isNaN(inputValue)) {
+            console.error('falhou o teste de number :::', typeof (inputValue))
+            return false
+          }
+        } else return true
+        if (expInput === 'string') {
+          if (typeof (inputValue) != 'string') {
+            console.error('falhou o teste de string :::', typeof (inputValue))
+            return false
+          }
+        } else return true
+      }
+
+      //implementa um algoritmo bubble sort para ordenar a array
+      function bubbleSort(arr) {
+        const size = arr.length // size é o tamanho da array
+        let itemTrocado // verifica se houve alguma troca
+
+        do {
+          itemTrocado = false // inicializa como falso, pq ate aqui nao fora feitas trocas
+          for (let i = 0; i < size - 1; i++) {
+            // itera o primeiro elemento do array e compara com o seguinte
+            if (arr[i] > arr[i + 1]) {
+              // se o item atual for maior que o próximo
+              // troca os itens de posição
+              const temp = arr[i] // item temporario 
+              arr[i] = arr[i + 1]
+              arr[i + 1] = temp
+              itemTrocado = true // sinaliza que uma troca foi feita, oq retornara ao laço
+            }
+          }
+        } while (itemTrocado) // quando não houver trocas a ser feitas, sai do laço
+
+        return arr // retorna o array ordenado
+      }
+
+      function printArrayToStringFormatted(arr, spacer, isReverse = false) {
+        //principa check, verifica se param arr foi atribuido e é de fato uma array
+        if (!arr || !(Array.isArray(arr))) {
+          console.error('Parâmetros foram passados indevidamente')
+          if (!arr) { console.error('Param1: Não foi atribuida a Array') }
+          if (!(Array.isArray(arr))) { console.error('Param1: Parâmetro atribuído não é do tipo Array') }
+          return
+        }
+        // verifica se spacer (separador) passado não é null, undefined ou string vazia
+        // objetivo é em caso de undefined ou objeto diferente de string, manter a string padrao, mas alertar o usuario
+        // em caso de null considera-se que o usuario optou por passar o param como nulo para acessar o terceiro param
+        // entao nao retorna erro ou warning, apenas formata tambem com a string padrao ', '
+        if ((spacer === undefined) || (spacer === null) || (spacer.length === 0)) {
+          if (spacer !== null) {
+            console.warn('Param2: spacer atribuído não é do tipo String ou esta vazio. Será usado ", "')
+          }
+          spacer = ', '
+        }
+
+        //se isReverse é true, inverte a array com metodo reverse()
+        if (isReverse) arr = arr.reverse()
+
+        //inicializa a string de saida como string
+        let stringFormatted = ''
+
+        //itera por todos os iten da array e interpola, 'conteudo anterior' + 'item' + 'separador'
+        // ou se for ultimo item, nao adiciona separador
+        for (let i = 0; i < arr.length; i++) {
+          if (i !== (arr.length - 1)) {
+            stringFormatted = stringFormatted + arr[i] + spacer
+          } else stringFormatted = stringFormatted + arr[i]
+        }
+
+        return stringFormatted
+      }
+
     </script>
   </body>
 
