@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 07 - Numeros ordenados</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="tooltip" data-tip="5. Crie um programa para:
+- Ler 10 números.
+- Permitir ao usuário que escolha entre:
+- Ordenar em ordem crescente
+- Ordenar em ordem decrescente
+e">
+      <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Numeros ordenados</h1>
+    </div>
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Nota"
+      id="numeroEntrada" />
+    <div class="join join-horizontal gap-4">
+      <button onclick="salvarNumeros()" class="btn btn-md btn-accent">Salvar Número</button>
+      <!-- <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button> -->
+    </div>
+
+    <output id="saida"></output>
+    <script>
+      // 32 5. Crie um programa para:
+      // 33 - Ler 10 números.
+      // 34 - Permitir ao usuário que escolha entre:
+      // 35 - Ordenar em ordem crescente
+      // 36 - Ordenar em ordem decrescente
+
+
+      //captura o input de entrada e objeto de saida
+      const entrada = document.querySelector('#numeroEntrada')
+      const saida = document.querySelector('#saida')
+
+      let numeros = []
+
+      //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
+      function salvarNumeros() {
+        const num = entrada.value
+        if (num !== '') {
+          numeros.push(num)
+        } else {
+          alert('valor não é válido')
+        }
+        //limpa e prepara o campo pra proxima invocação
+        entrada.value = ''
+        entrada.focus()
+      }
+    </script>
+  </body>
+
+</html>

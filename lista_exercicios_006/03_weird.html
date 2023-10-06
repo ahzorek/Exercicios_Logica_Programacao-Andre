@@ -20,16 +20,15 @@
     <script>
       const s = document.querySelector('#saida')
 
-      let a = []
+      let vetor = []
 
       function run() {
-        x = 0
         for (i = 0; i < 10; i++) {
-          a[i++] = 5
-          a[i] = 3
+          vetor[i++] = 5
+          vetor[i] = 3
         }
-        console.log(a)
-        s.value = a.toString()
+        console.log(vetor)
+        s.value = vetor.toString()
       }
     </script>
   </body>

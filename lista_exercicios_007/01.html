@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 07 - Array Notas</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="tooltip" data-tip="1. Faça um algoritmo que leia a nota de n alunos de uma turma e guarde-as em um
+    vetor. No final, mostre:
+    a) Qual e a media da turma 
+    b) Quantos alunos estão acima da média da turma 
+    c) Qual foi a maior nota digitada
+    d) Em que posições a maior nota aparece">
+      <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Arrays 1 Notas</h1>
+    </div>
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Nota"
+      id="numeroEntrada" />
+    <div class="join join-horizontal gap-4">
+      <button onclick="salvarNotas()" class="btn btn-md btn-accent">Salvar Notas</button>
+      <!-- <button onclick="mostrarNumeros()" class="btn btn-md btn-primary">Mostrar Números</button> -->
+    </div>
+
+    <output id="saida"></output>
+    <script>
+      // 16 1. Faça um algoritmo que leia a nota de "n" alunos de uma turma e guarde - as em um vetor.No final, mostre:
+      // 17 a) Qual e a media da turma
+      // 18 b) Quantos alunos estão acima da média da turma
+      // 19 c) Qual foi a maior nota digitada
+      // 20 d) Em que posições a maior nota aparece
+
+      //captura o input de entrada e objeto de saida
+      const entrada = document.querySelector('#numeroEntrada')
+      const saida = document.querySelector('#saida')
+
+      //inicializa as variaveis de escopo global
+      let arrayNotas = []
+      let maiorNota = 0
+      let somaNotas = 0
+
+      //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
+      function salvarNotas() {
+        const nota = entrada.value
+        if (nota !== '') {
+          //grava nota na arrayNotas e eexecuta funcoes que somam o total de notas e checa se a nota recem adicionada é a maior, valores que sao mantidos e atualizados no escopo global
+          arrayNotas.push(Number(nota))
+          calcSomaNotas(nota)
+          checaMaior(nota)
+
+          //executa funcoes que realizam calculos baseados nas notas salvas e sao zerados no escopo local da funçao
+          const numNotasRegistradas = arrayNotas.length
+          const mediaTurma = calcMediaTurma(somaNotas, numNotasRegistradas)
+          const acimaDaMedia = calcAcimaDaMedia(arrayNotas, mediaTurma)
+          const indexMelhoresNotas = saveMelhorNotaIndex(arrayNotas, maiorNota)
+
+          //saida na tela
+          saida.value = `A média da turma é ${mediaTurma.toFixed(1)}, ${acimaDaMedia} alunos estão acima da média atual, a maior nota registrada foi ${maiorNota} e ela foi registrada nas entradas ${printArrayToStringFormatted(indexMelhoresNotas)}`
+        } else {
+          alert('valor não é válido')
+        }
+        //limpa e prepara o campo pra proxima invocação
+        entrada.value = ''
+        entrada.focus()
+      }
+
+      // //mostra na tela os numeros salvos e as posiçoes dos multiplos de 10
+      // function mostrarNumeros() {
+      // }
+
+      //checa se é a maior nota, atualiza valor no escopo global, sem retorno
+      function checaMaior(nota) {
+        if (Number(nota) > maiorNota) {
+          maiorNota = Number(nota)
+        }
+      }
+
+      //realiza soma dos valores de todas as notas salvas, atualiza valor no escopo global, sem retorno
+      function calcSomaNotas(nota) {
+        somaNotas = Number(somaNotas) + Number(nota)
+      }
+
+      //mediaTurma, retorna a media das notas da turma, Number
+      function calcMediaTurma(somaNotas, qtdNotas) {
+        return Number(somaNotas) / qtdNotas
+      }
+
+      //calcula qts alunos estao acima da media, retorna valor em Number
+      function calcAcimaDaMedia(arr, media) {
+        let alunosAcimaDaMedia = 0
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] > media) {
+            alunosAcimaDaMedia++
+          }
+        }
+        return alunosAcimaDaMedia
+      }
+
+      //salva o index das ocorrencias da melhor nota, retorna Array
+      function saveMelhorNotaIndex(arr, maiorNota) {
+        let arrPosMelhoresNotas = []
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] === maiorNota) {
+            arrPosMelhoresNotas.push(i)
+          }
+        }
+        return arrPosMelhoresNotas
+      }
+
+      ////////
+      function printArrayToStringFormatted(arr, spacer, isReverse = false) {
+        //principa check, verifica se param arr foi atribuido e é de fato uma array
+        if (!arr || !(Array.isArray(arr))) {
+          console.error('Parâmetros foram passados indevidamente')
+          if (!arr) { console.error('Param1: Não foi atribuida a Array') }
+          if (!(Array.isArray(arr))) { console.error('Param1: Parâmetro atribuído não é do tipo Array') }
+          return
+        }
+
+        if ((spacer === undefined) || (spacer === null) || (spacer.length === 0)) {
+          if (spacer !== null) {
+            console.warn('Param2: spacer atribuído não é do tipo String ou esta vazio. Será usado ", "')
+          }
+          spacer = ', '
+        }
+
+        //inicializa a string de saida como string
+        let stringFormatted = ''
+
+        //se isReverse é true, inverte a array com metodo reverse()
+        if (isReverse) arr = arr.reverse()
+
+        //itera por todos os iten da array e interpola, 'conteudo anterior' + 'item' + 'separador'
+        // ou se for ultimo item, nao adiciona separador
+        for (let i = 0; i < arr.length; i++) {
+          if (i === 0) {
+            stringFormatted = stringFormatted + arr[i]
+          } else stringFormatted = stringFormatted + spacer + arr[i]
+        }
+
+        return stringFormatted
+      }
+    </script>
+  </body>
+
+</html>

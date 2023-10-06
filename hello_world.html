@@ -49,10 +49,12 @@
       const resultado = document.getElementById('resultado')
       const inputs = {}
 
-      Array.from(listInputs).forEach((elemento) => {
+      listInputs.forEach((elemento) => {
         inputs[elemento.id] = elemento.value
 
       })
+
+      console.log(inputs)
 
       const { tosse, dorDeGarganta, tempCorpo, faltaAr } = inputs
 

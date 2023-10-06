@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 07 - Temperaturas</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="tooltip" data-tip="4. Crie um programa para armazenar informações meteorológicas.
+    - Crie um vetor para armazenar 30 temperaturas. (pre - inicializado)
+    - Calcular a média das temperaturas.
+    - O usuário pode informar um dia qualquer e o programa deve dizer se a temperatura desse dia estava acima ou abaixo da média. (dia = indice)
+">
+      <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Temperaturas</h1>
+    </div>
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Dia" id="diaEntrada" />
+    <div class="join join-horizontal gap-4">
+      <button onclick="verificarTemperatura()" class="btn btn-md btn-accent">Verificar Temperatura</button>
+    </div>
+
+    <output id="saida"></output>
+    <script>
+      // 27 4. Crie um programa para armazenar informações meteorológicas.
+      // 28 - Crie um vetor para armazenar 30 temperaturas. (pre - inicializado)
+      // 29 - Calcular a média das temperaturas.
+      // 30 - O usuário pode informar um dia qualquer e o programa deve dizer se a temperatura desse dia estava acima ou abaixo da média. (dia = indice)
+
+      //inicializa temperaturas como array
+      const temperaturas = []
+
+      //gera 30 temperaturas randomicas (entre 15 e 30graus)
+      for (let i = 0; i < 30; i++) {
+        temperaturas.push(Math.round((Math.random() * 15) + 15))
+      }
+      //mostra no console as temperaturas geradas
+      console.log(temperaturas)
+
+      //captura o input de entrada e objeto de saida
+      const dia = document.querySelector('#diaEntrada')
+      const saida = document.querySelector('#saida')
+
+      //captura o valor do campo, salva na array e reseta o valor do campo para vazio e com focus
+      function verificarTemperatura() {
+        const tempMedia = getTemperaturaMedia(temperaturas)
+        const tempDia = temperaturas[dia.value]
+        if (tempDia > tempMedia) {
+          saida.value = `No dia ${dia.value} a temperatura era ${tempDia}°C, ficando acima da média de ${tempMedia}°C`
+        } else if (tempDia < tempMedia) {
+          saida.value = `No dia ${dia.value} a temperatura era ${tempDia}°C, ficando abaixo da média de ${tempMedia}°C`
+        } else
+          saida.value = `No dia ${dia.value} a temperatura era ${tempDia}°C, ficando igual a média de ${tempMedia}°C`
+      }
+      //recebe uma array de temperaturas como param e retorna a media de temperatura como Number
+      function getTemperaturaMedia(arr) {
+        let somaTemperatura = 0
+        for (let i = 0; i < arr.length; i++) {
+          somaTemperatura = somaTemperatura + arr[i]
+        }
+        return parseInt(somaTemperatura / arr.length)
+      }
+    </script>
+  </body>
+
+</html>

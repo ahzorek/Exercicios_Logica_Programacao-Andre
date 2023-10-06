@@ -33,10 +33,14 @@
       function start() {
         const arrayDeNumerosDescendentesDe9 = []
 
-        let num = 9
+        let vet = new Array(10)
+        console.log(vet)
 
-        for (let i = 0; i < num; i++) {
-          arrayDeNumerosDescendentesDe9.unshift(i)
+        let num = 0
+
+        while (num < 10) {
+          arrayDeNumerosDescendentesDe9.unshift(num)
+          num++
         }
         console.log(arrayDeNumerosDescendentesDe9)
         saida.value = arrayDeNumerosDescendentesDe9.toString()

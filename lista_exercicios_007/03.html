@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 07 - Funcionárias</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="tooltip" data-tip="3. Faça um algoritmo que leia o nome, o sexo e o salário de 5 funcionários e guarde esses dados em três vetores.No final, mostre uma listagem contendo apenas os dados das funcionárias mulheres que ganham mais de R$5 mil.
+">
+      <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Funcionárias</h1>
+    </div>
+    <input type="text" class="input input-bordered join-item" placeholder="Nome" id="nomeEntrada" />
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Salário"
+      id="salarioEntrada" />
+    <select id="sexoEntrada" class="select select-bordered">
+      <option value="null" selected>Sexo</option>
+      <option value="fem">Feminino</option>
+      <option value="mas">Masculino</option>
+    </select>
+    <div class="join join-horizontal gap-4">
+      <button id="salvarButton" onclick="salvarDados()" class="btn btn-md btn">Salvar Dados</button>
+      <button id="processarButton" onclick="processarDados()" class="btn btn-md btn-accent">Processar
+        Dados</button>
+    </div>
+
+    <section style="display: none;" id="saida">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th>Index</th>
+              <th>Nome</th>
+              <th>Salário</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+          </tbody>
+    </section>
+    <script>
+      //  25 3. Faça um algoritmo que leia o nome, o sexo e o salário de 5 funcionários e guarde esses dados em três vetores.No final, mostre uma listagem contendo apenas os dados das funcionárias mulheres que ganham mais de R$5 mil.
+      const inputNome = document.querySelector('#nomeEntrada')
+      const inputSalarios = document.querySelector('#salarioEntrada')
+      const inputSexo = document.querySelector('#sexoEntrada')
+      const saida = document.querySelector('#saida')
+      const tBody = document.querySelector('tbody')
+
+      let nomes = []
+      let salarios = []
+      let sexos = []
+
+      //salva os dados passados na tela até que as arrays tenham 9 itens, apos, trava a entrada de dados e habilita o botao processar
+      function salvarDados() {
+        nomes.push(inputNome.value)
+        salarios.push(inputSalarios.value)
+        sexos.push(inputSexo.value)
+        if (nomes.length === 5) {
+          document.querySelector('#salvarButton').disabled = true
+          document.querySelector('#processarButton').disabled = false
+        } else {
+          inputNome.value = ''
+          inputSalarios.value = ''
+          inputSexo.value = 'null'
+          inputNome.focus()
+        }
+      }
+
+      //processa os dados a partir da array idades. se idade menor que 18, cria um novo elemento e adiciona para dentro da tabela de exibição. ao fim, altera a propriedade display da section output e exibe a tabela na tela
+      function processarDados() {
+        for (let i = 0; i < salarios.length; i++) {
+          const salario = salarios[i]
+          if (salario > 5000) {
+            if (sexos[i] === 'fem') {
+              const newRow = document.createElement('tr')
+              newRow.innerHTML = `
+                <th>${i}</th>
+                  <td>${nomes[i]}</td>
+                  <td>R$ ${salario}</td>
+                `
+              tBody.appendChild(newRow)
+            }
+          }
+        }
+        saida.setAttribute('style', 'display: contents;')
+      }
+
+    </script>
+  </body>
+
+</html>

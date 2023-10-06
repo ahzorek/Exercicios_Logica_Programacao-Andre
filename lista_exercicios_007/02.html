@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lista 07 - Idades</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <body class="relative bg-slate-700 mx-auto gap-6 flex flex-col justify-center items-center p-4 min-h-screen">
+    <div class="tooltip" data-tip="2. Crie um programa que leia o nome e a idade de 9 pessoas e guarde esses valores em dois vetores, em posições relacionadas. No final, mostre uma listagem contendo apenas os dados das pessoas menores de idade.
+">
+      <h1 class="text-5xl text-center text-slate-400 my-8">Lista 07 - Idades</h1>
+    </div>
+    <input type="text" class="input input-bordered join-item" placeholder="Nome" id="nomeEntrada" />
+    <input type="number" min="0" step="1" class="input input-bordered join-item" placeholder="Idade"
+      id="idadeEntrada" />
+    <div class="join join-horizontal gap-4">
+      <button id="salvarButton" onclick="salvarDados()" class="btn btn-md btn-accent">Salvar Dados</button>
+      <button id="processarButton" onclick="processarDados()" class="btn btn-md btn-accent" disabled>Processar
+        Dados</button>
+    </div>
+
+    <section style="display: none;" id="saida">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- aqui entram os dados -->
+          </tbody>
+    </section>
+    <script>
+      // 23 2. Crie um programa que leia o nome e a idade de 9 pessoas e guarde esses valores em dois vetores, em posições relacionadas. No final, mostre uma listagem contendo apenas os dados das pessoas menores de idade.
+
+      //captura o input de entrada e objeto de saida
+      const inputNome = document.querySelector('#nomeEntrada')
+      const inputIdade = document.querySelector('#idadeEntrada')
+      const saida = document.querySelector('#saida')
+      const tBody = document.querySelector('tbody')
+
+      let nomes = []
+      let idades = []
+
+      //salva os dados passados na tela até que as arrays tenham 9 itens, apos, trava a entrada de dados e habilita o botao processar
+      function salvarDados() {
+        nomes.push(inputNome.value)
+        idades.push(inputIdade.value)
+        if (idades.length === 9) {
+          document.querySelector('#salvarButton').disabled = true
+          document.querySelector('#processarButton').disabled = false
+        } else {
+          inputNome.value = ''
+          inputIdade.value = ''
+          inputNome.focus()
+        }
+      }
+
+      //processa os dados a partir da array idades. se idade menor que 18, cria um novo elemento e adiciona para dentro da tabela de exibição. ao fim, altera a propriedade display da section output e exibe a tabela na tela
+      function processarDados() {
+        for (let i = 0; i < idades.length; i++) {
+          const idade = idades[i]
+          if (idade < 18) {
+            const newRow = document.createElement('tr')
+            newRow.innerHTML = `
+              <td>${nomes[i]}</td>
+              <td>${idade}</td>
+              `
+            tBody.appendChild(newRow)
+          }
+        }
+        saida.setAttribute('style', 'display: contents;')
+      }
+
+    </script>
+  </body>
+
+</html>
