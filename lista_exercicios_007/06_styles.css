@@ -24,21 +24,31 @@
       background-color: sandybrown; */
     }
 
+    #devmode {
+      position: absolute;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      cursor: crosshair;
+    }
+
     .container {
       width: 100%;
       white-space: nowrap;
       display: flex;
-      transition: transform 350ms ease-in-out;
+      transition: transform 60ms ease-in-out;
     }
 
     .inner-div {
       flex: 0 0 100vw;
+      justify-content: center;
+      align-content: center;
+      place-items: flex-start;
       height: 100vh;
       background-color: rgb(220 220 220);
       text-align: center;
       font-size: 2rem;
-      display: grid;
-      place-items: center;
+      display: grid;      
       margin: 0;
       position: relative;
     }
@@ -57,7 +67,6 @@
     }
 
     fieldset > input {
-      /* width: 300px; */
       font-size: 1rem;
       box-sizing: border-box;
     }
@@ -74,10 +83,11 @@
       width: 100%;
       position: absolute;
       bottom: 5vh;
-      display: flex;
       flex-direction: row;
       justify-content: center;
       gap: 1rem;
+      display: none;
+      /* display: flex; */
     }
 
     .nav-button > span {
@@ -98,11 +108,22 @@
     #notas span {
       display: grid;
       place-items: center;
-      border:  1px solid rgb(50 50 50 / .7);
-      border-radius: .2rem;
-      flex-grow: 1;
+      /* border:  1px solid rgb(50 50 50 / .7); */
+      background-color: rgb( 240 240 240 / .8);
+      border-radius: .225rem;
       font-size: .6rem;
       text-transform: uppercase;
+      padding: .4rem;
+      flex-basis: 1;
+    }
+    .aprovado {
+      background-color: rgb(10, 134, 72)!important;
+      color: rgb(250 250 250);
+      
+    }
+    .reprovado {
+      background-color: rgb(177, 20, 59)!important;
+      color: rgb(250 250 250);
     }
 
     #notas span h6 {

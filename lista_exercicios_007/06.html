@@ -17,16 +17,45 @@
   <body>
     <div class="outer-container">
       <div class="container" id="movableContainer">
+        <div class="inner-div box-border">
+          <!-- div fantasma ativa dev mode -->
+          <div id="devmode" onclick="activateDev()"></div>
+          <!-- div fantasma ativa dev mode -->
+          <div class="flex flex-col gap-5">
+            <!-- menu navegaçao inicial -->
+            <button type="button" onclick="moveContainerTo(2)"
+              class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 18">
+                <path
+                  d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z" />
+              </svg>
+              Criar Novo Aluno
+            </button>
+            <button type="button" onclick="moveContainerTo(4)"
+              class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center">
+              <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 16 20">
+                <path
+                  d="M7.363 9.863a2 2 0 1 0 1.412 3.415A2 2 0 0 0 7.36 9.866l.003-.003ZM5 5V.13a2.98 2.98 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                <path
+                  d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-1.722 16.844a1 1 0 0 1-1.414 0L9.383 15.3a3.96 3.96 0 0 1-2.02.566 4 4 0 1 1 4-4 3.96 3.96 0 0 1-.566 2.02l1.547 1.547a1 1 0 0 1 0 1.411Z" />
+              </svg>
+              Verificar Aluno
+            </button>
+          </div>
+        </div>
         <div class="inner-div box-border" id="cadastroAluno">
+
           <section class="alerts">
-            <!-- aqui entram possiveis alertas -->
+            <!-- aqui entram possiveis alertas para essa tela -->
           </section>
           <!-- espaco para estrutura dos forms de cadastro aluno -->
           <form class="cadastro-aluno grid gap-6 mb-6">
             <h2 class="text-4xl font-medium">Cadastrar Novo Aluno</h2>
             <fieldset id="informacoesAluno" class="gap-4">
               <legend>Informações Aluno</legend>
-              <input title="Nome" type="text" name="firstName" id="firstName"
+              <input title="Nome" type="text" name="nomeDoAluno" id="nomeDoAluno"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 placeholder="Nome" required>
               <input
@@ -36,7 +65,6 @@
               <input
                 class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 title="Cidade" placeholder="Cidade" type="text" required>
-
               <select
                 class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 id="estados" title="Estado" placeholder="Estado" required>
@@ -70,7 +98,6 @@
                 <option value="Tocantins">Tocantins</option>
                 <option value="Exterior">Exterior</option>
               </select>
-
             </fieldset>
             <fieldset id="informacoesPais" class="gap-4">
               <legend>Informações dos Pais</legend>
@@ -82,60 +109,52 @@
                 placeholder="Nome do pai">
               <input type="tel" inputmode="numeric" name="telephone" id="telephone"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="00 0000 0000" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" required>
+                placeholder="Telefone" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" required>
             </fieldset>
             <button type="button" onclick="createAluno()"
               class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
               Dados</button>
           </form>
-
           <!-- fim espaco para estrutura dos forms de cadastro aluno -->
         </div>
         <div class="inner-div box-border" id="registroNotas">
           <section class="alerts">
-            <!-- aqui entram possiveis alertas -->
+            <!-- aqui entram possiveis alertas para essa tela -->
           </section>
           <!-- espaco para os forms de registro de notas dos alunos -->
-
           <form class="cadastro-aluno grid gap-6 mb-6">
             <h2 class="text-4xl font-medium">Cadastrar Notas</h2>
             <fieldset class="gap-4">
-              <legend>Nota 1</legend>
               <input type="number" name="notas" min="0" max="10" step="0.5"
                 class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Nota">
+                placeholder="Nota 1">
             </fieldset>
             <fieldset class="gap-4">
-              <legend>Nota 2</legend>
               <input type="number" name="notas" min="0" max="10" step="0.5"
                 class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Nota">
+                placeholder="Nota 2">
             </fieldset>
             <fieldset class="gap-4">
-              <legend>Nota 3</legend>
               <input type="number" name="notas" min="0" max="10" step="0.5"
                 class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Nota">
+                placeholder="Nota 3">
             </fieldset>
             <fieldset class="gap-4">
-              <legend>Nota 4</legend>
               <input type="number" name="notas" min="0" max="10" step="0.5"
                 class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                placeholder="Nota">
+                placeholder="Nota 4">
             </fieldset>
             <button type="button" onclick="salvarNotas()"
               class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
               Notas</button>
           </form>
-
-
           <!-- fim espaco para os forms de registro de notas dos alunos -->
         </div>
         <div class="inner-div box-border" id="consultaAluno">
           <section class="alerts">
-            <!-- aqui entram possiveis alertas -->
+            <!-- aqui entram possiveis alertas para essa tela -->
           </section>
-          <!-- espaco para verificar as informações de cada aluno individualmente -->
+          <!-- espaco para input select para escolher de qual aluno gerar o relatorio resumo -->
           <form class="cadastro-aluno grid gap-6 mb-6">
             <h2 class="text-4xl font-medium">Verificar Situação</h2>
             <fieldset id="informacoesPais" class="gap-4">
@@ -150,21 +169,32 @@
               class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Buscar
               Dados</button>
           </form>
-          <!-- fim espaco para verificar as informações de cada aluno individualmente -->
+          <!-- fim espaco para input select para escolher de qual aluno gerar o relatorio resumo -->
         </div>
 
-        <div class="inner-div box-border" id="resumoSlot">
-          <!-- resumo do aluno selecionado -->
+        <div class="inner-div box-border">
+          <output id="resumoSlot">
+            <!-- resumo do aluno selecionado entra aqui -->
 
+            <!-- resumo do aluno selecionado entra aqui -->
+          </output>
+          <button type="button" onclick="moveContainerTo(1)"
+            class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center gap-2">
+            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="none" viewBox="0 0 14 10">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 5H1m0 0 4 4M1 5l4-4" />
+            </svg>
+            Voltar
+          </button>
         </div>
       </div>
       <section class="nav-button">
-        <span id="backButton" onclick="moveContainer('back')">←</span>
+        <span id="backButton" onclick="moveContainer('prev')">←</span>
         <span id="nextButton" onclick="moveContainer('next')">→</span>
       </section>
     </div>
     <script>
-
       //  39 6. Crie um programa para gerenciar as notas dos alunos de uma escola.
       //  40 - Crie um vetor para armazenar o nome dos alunos.
       //  41 - Crie um vetor para armazenar o endereço dos alunos.
@@ -179,6 +209,7 @@
 
       //elementos de navegação
       const movableContainer = document.querySelector('#movableContainer')
+      const navButton__DEV = document.querySelector('.nav-button')
       const allInnerDivs = document.querySelectorAll('.inner-div')
       const alerts = document.querySelectorAll('.alerts')
       let currContainerPos = 0
@@ -193,10 +224,10 @@
       const nota1 = [6]
       const nota2 = [7]
       const nota3 = [6]
-      const nota4 = [4]
+      const nota4 = [8]
 
       //cadastro aluno
-      const alunoNome = document.querySelector('#firstName')
+      const alunoNome = document.querySelector('#nomeDoAluno')
       const enderecoInputs = document.querySelectorAll('.address')
       const alunoMae = document.querySelector('#nomeMae')
       const alunoPai = document.querySelector('#nomePai')
@@ -210,10 +241,10 @@
       //tela verificação
       const selectAluno = document.querySelector('#selectAlunos')
 
-      //tela resumo aluno
+      //tela resumo aluno (elemento de saida)
       const slotResumo = document.querySelector('#resumoSlot')
 
-
+      // captura os dados do aluno da tela e cria suas respectivas entradas nas arrays de dados, avança para a tela de adicionar notas
       function createAluno() {
         nomesAlunos.push(alunoNome.value)
         let endereco = ''
@@ -227,33 +258,53 @@
         nomesPais.push(alunoPai.value)
         telefonesPais.push(telefone.value)
 
-        pushAlunoToSelect(alunoNome.value)
-
+        pushNewAlunoToList(alunoNome.value)
         clearInputsFromArr(inputs)
-        moveContainer('next')
+
+        moveContainerTo(3)
 
       }
 
+      //captura as notas atraves dos inputs na tela. salva nas respectivas arrays e retorna para a tela inicial
       function salvarNotas() {
         for (let i = 0; i < 4; i++) {
-          arrayNotas[i].push(notasInputs[i].value)
-          notasInputs[i].value = ''
+          if (notasInputs[i].value) {
+            arrayNotas[i].push(Number(notasInputs[i].value))
+            notasInputs[i].value = ''
+          } else {
+            showAlert(`Nota ${i + 1}`, 'Nota não foi informada. Será considerado 0', 2)
+            arrayNotas[i].push(0)
+          }
         }
-        moveContainer('next')
-        // console.log(nota1, nota2, nota3, nota4)
+        moveContainerTo(1)
       }
 
+      // invocada apos salvar as informaçoes do aluno para suas respectivas arrays, insere o novo aluno recem criado na select list da tela de gerar os relatorios. recebe o nome do aluno para exebição e infere a chave pelo tamanho da array nomeAlunos (talvez nao ideal)
+      function pushNewAlunoToList(aluno) {
+        const chave = (nomesAlunos.length - 1)
+        const newAluno = document.createElement('option')
+        newAluno.setAttribute('value', chave)
+        newAluno.innerText = aluno
+        selectAluno.appendChild(newAluno)
+        // console.log('Criado aluno:: ', aluno, 'CHAVE:: ', chave)
+      }
+
+      // seleciona o aluno a partir de uma lista select, empurra o value key (index) para a função exibir relatorio do aluno e move a tela para o relatorio
+      // ou, se nao houve aluno selecionado, emite um alerta e aguarda
       function getAluno() {
         if (selectAluno.value !== 'null') {
           displayAluno(selectAluno.value)
-          moveContainer('next')
+          moveContainerTo(5)
+          selectAluno.value = 'null'
         } else
           showAlert('Erro!', 'Não foi selecionado um aluno.', 2)
       }
 
+      // recebe como chave o index do aluno, a partir desse valor preenche varios campos desse "relatorio", resumo do aluno. gera tbm uma nota media a partir das 3 notas coletadas.
       function displayAluno(key) {
         slotResumo.innerHTML = ''
         const media = (nota1[key] + nota2[key] + nota3[key] + nota4[key]) / 4
+        let status; if (media >= 7) { status = 'aprovado' } else { status = 'reprovado' }
         const resumoAluno = document.createElement('div')
         resumoAluno.setAttribute('class', 'text-left')
         const templateResumo = `
@@ -285,22 +336,33 @@
               <span>Nota 2<h6>${nota2[key]}</h6></span>
               <span>Nota 3<h6>${nota3[key]}</h6></span>
               <span>Nota 4<h6>${nota4[key]}</h6></span>
-              <span>Média<h6>${nota1[key]}</h6></span>
+              <span class="${status}">Nota Média<h6>${media.toFixed(1)}</h6></span>
             </section>
         `
         resumoAluno.innerHTML = templateResumo
         slotResumo.appendChild(resumoAluno)
       }
 
-      function pushAlunoToSelect(aluno) {
-        const chave = (nomesAlunos.length - 1)
-        const newAluno = document.createElement('option')
-        newAluno.setAttribute('value', chave)
-        newAluno.innerText = aluno
-        selectAluno.appendChild(newAluno)
-        // console.log('Criado aluno:: ', aluno, 'CHAVE:: ', chave)
+      // as funcoes abaixo desempenham papeis utilitarios, movendo a tela ou exibindo alertas ou gerando tempos de espera
+
+      // segunda implementaçao de uma funcao para mover o container pelas telas
+      // a primeira talvez nao tenha sido a melhor a longo prazo :)
+      // valor default pra 1. (se eu esquecer de passar o valor volta pra tela inicia.)
+      function moveContainerTo(screen = 1) {
+        // Mapa de screens
+        // screen 1 - Menu seletor ação
+        // screen 2 - Cadastro Aluno
+        // screen 3 - Cadastro Notas
+        // screen 4 - Seletor aluno
+        // screen 5 - Relatorio resumo aluno
+        const containerLocation = (screen - 1) * 100
+        movableContainer.style.transform = `translateX(-${containerLocation}vw)`
+
       }
 
+      // primeira implementaçao da funcao para mover o container pelas telas,
+      // recebe uma direção e um tamanho de pulo.
+      // ideal para navegação linear, nao foi muito longe em aplicabilidade
       function moveContainer(dir, v = 1) {
         if (dir === 'next') {
           if (currContainerPos < ((allInnerDivs.length - 1) * 100)) {
@@ -308,7 +370,7 @@
             movableContainer.style.transform = `translateX(-${currContainerPos}vw)`
           } else return
         }
-        if (dir === 'back') {
+        if (dir === 'prev') {
           if (currContainerPos > 0) {
             currContainerPos = currContainerPos - (100 * v)
             movableContainer.style.transform = `translateX(-${currContainerPos}vw)`
@@ -316,12 +378,14 @@
         }
       }
 
+      // itera por uma array de inputs para resetar seus valores
       function clearInputsFromArr(arr) {
         for (let i = 0; i < arr.length; i++) {
           arr[i].value = ''
         }
       }
 
+      // controla a exibição de alertas no topo da tela para tentar lidar com (varias) possiveis excecoes
       async function showAlert(error, message, loc) {
         if (!isShowingAlert) {
           isShowingAlert = true
@@ -338,6 +402,14 @@
         isShowingAlert = false
       }
 
+      // ativa botoes de seta de navegção que vao tela a tela. facilita a vida do dev. :)
+      function activateDev() {
+        if (navButton__DEV.style.display === 'none') {
+          navButton__DEV.style.display = 'flex'
+        } else
+          navButton__DEV.style.display = 'none'
+      }
+      // funcao serve para criar gaps de tempo entre a execução de outras funcoes, um atraso estrategico para produzir algum efeito ou coisa assim
       async function delay(time = 120) {
         await new Promise(resolve => setTimeout(resolve, time))
       }
