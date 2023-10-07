@@ -4,46 +4,344 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lista 07 - Numeros ordenados</title>
-  <link rel="stylesheet" href="../shared_assets/styles.css">
-
-  <!-- <link href="https://cdn.jsdelivr.net/npm/daisyui@3.8.2/dist/full.css" rel="stylesheet" type="text/css" />
-  <script src="https://cdn.tailwindcss.com"></script> -->
+  <title>Lista 07 - Gerenciamento de Alunos</title>
+  <!-- <link rel="stylesheet" href="../shared_assets/styles.css"> -->
+  <link rel="stylesheet" href="./06_styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
 
 </head>
 
 <body>
-  <style>
-    body {
-      height: 100vh;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    .container {
-      height: 100%;
-      overflow: hidden;
-      translate: 0;
-    }
-
-    .wrapper {
-      width: 100vw;
-      height: 100vh;
-      border: 2px dotted red;
-    }
-  </style>
+  </head>
 
   <body>
-    <div class="container">
-      <div class="wrapper"></div>
-      <div class="wrapper"></div>
-      <div class="wrapper"></div>
-      <div class="wrapper"></div>
+    <div class="outer-container">
+      <div class="container" id="movableContainer">
+        <div class="inner-div box-border" id="cadastroAluno">
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas -->
+          </section>
+          <!-- espaco para estrutura dos forms de cadastro aluno -->
+          <form class="cadastro-aluno grid gap-6 mb-6">
+            <h2 class="text-4xl font-medium">Cadastrar Novo Aluno</h2>
+            <fieldset id="informacoesAluno" class="gap-4">
+              <legend>Informações Aluno</legend>
+              <input title="Nome" type="text" name="firstName" id="firstName"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome" required>
+              <input
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                title="Rua, número, bairro" placeholder="Endereço (Rua, número, bairro)" type="text"
+                autocomplete="street-address" required>
+              <input
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                title="Cidade" placeholder="Cidade" type="text" required>
 
+              <select
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                id="estados" title="Estado" placeholder="Estado" required>
+                <option value="" disabled selected>Selecione um estado</option>
+                <option value="Acre">Acre</option>
+                <option value="Alagoas">Alagoas</option>
+                <option value="Amapá">Amapá</option>
+                <option value="Amazonas">Amazonas</option>
+                <option value="Bahia">Bahia</option>
+                <option value="Ceará">Ceará</option>
+                <option value="Distrito Federal">Distrito Federal</option>
+                <option value="Espírito Santo">Espírito Santo</option>
+                <option value="Goiás">Goiás</option>
+                <option value="Maranhão">Maranhão</option>
+                <option value="Mato Grosso">Mato Grosso</option>
+                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                <option value="Minas Gerais">Minas Gerais</option>
+                <option value="Pará">Pará</option>
+                <option value="Paraíba">Paraíba</option>
+                <option value="Paraná">Paraná</option>
+                <option value="Pernambuco">Pernambuco</option>
+                <option value="Piauí">Piauí</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                <option value="Rondônia">Rondônia</option>
+                <option value="Roraima">Roraima</option>
+                <option value="Santa Catarina">Santa Catarina</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Sergipe">Sergipe</option>
+                <option value="Tocantins">Tocantins</option>
+                <option value="Exterior">Exterior</option>
+              </select>
+
+            </fieldset>
+            <fieldset id="informacoesPais" class="gap-4">
+              <legend>Informações dos Pais</legend>
+              <input type="text" name="mothersName" id="nomeMae"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome da mãe">
+              <input type="text" name="fathersName" id="nomePai"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome do pai">
+              <input type="tel" inputmode="numeric" name="telephone" id="telephone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="00 0000 0000" pattern="[0-9]{2}-[0-9]{5}-[0-9]{4}" required>
+            </fieldset>
+            <button type="button" onclick="createAluno()"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
+              Dados</button>
+          </form>
+
+          <!-- fim espaco para estrutura dos forms de cadastro aluno -->
+        </div>
+        <div class="inner-div box-border" id="registroNotas">
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas -->
+          </section>
+          <!-- espaco para os forms de registro de notas dos alunos -->
+
+          <form class="cadastro-aluno grid gap-6 mb-6">
+            <h2 class="text-4xl font-medium">Cadastrar Notas</h2>
+            <fieldset class="gap-4">
+              <legend>Nota 1</legend>
+              <input type="number" name="notas" min="0" max="10" step="0.5"
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota">
+            </fieldset>
+            <fieldset class="gap-4">
+              <legend>Nota 2</legend>
+              <input type="number" name="notas" min="0" max="10" step="0.5"
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota">
+            </fieldset>
+            <fieldset class="gap-4">
+              <legend>Nota 3</legend>
+              <input type="number" name="notas" min="0" max="10" step="0.5"
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota">
+            </fieldset>
+            <fieldset class="gap-4">
+              <legend>Nota 4</legend>
+              <input type="number" name="notas" min="0" max="10" step="0.5"
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota">
+            </fieldset>
+            <button type="button" onclick="salvarNotas()"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
+              Notas</button>
+          </form>
+
+
+          <!-- fim espaco para os forms de registro de notas dos alunos -->
+        </div>
+        <div class="inner-div box-border" id="consultaAluno">
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas -->
+          </section>
+          <!-- espaco para verificar as informações de cada aluno individualmente -->
+          <form class="cadastro-aluno grid gap-6 mb-6">
+            <h2 class="text-4xl font-medium">Verificar Situação</h2>
+            <fieldset id="informacoesPais" class="gap-4">
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                id="selectAlunos" title="Alunos" required>
+                <option value="null" disabled selected>Selecione um aluno</option>
+                <option value="0">Ferris Bueller</option>
+              </select>
+            </fieldset>
+            <button type="button" onclick="getAluno()"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Buscar
+              Dados</button>
+          </form>
+          <!-- fim espaco para verificar as informações de cada aluno individualmente -->
+        </div>
+
+        <div class="inner-div box-border" id="resumoSlot">
+          <!-- resumo do aluno selecionado -->
+
+        </div>
+      </div>
+      <section class="nav-button">
+        <span id="backButton" onclick="moveContainer('back')">←</span>
+        <span id="nextButton" onclick="moveContainer('next')">→</span>
+      </section>
     </div>
-
     <script>
+
+      //  39 6. Crie um programa para gerenciar as notas dos alunos de uma escola.
+      //  40 - Crie um vetor para armazenar o nome dos alunos.
+      //  41 - Crie um vetor para armazenar o endereço dos alunos.
+      //  42 - Crie um vetor para armazenar o nome da mãe dos alunos.
+      //  43 - Crie um vetor para armazenar o nome do pai dos alunos.
+      //  44 - Crie um vetor para armazenar o telefone dos pais dos alunos.
+      //  45 - Crie 4 vetores para armazenar 4 notas por aluno.
+      //  46 - As informações nos vetores se relacionarão através dos indexadores dos vetores.
+      //  47 - Crie uma tela para cadastrar os alunos(nome, endereço, nome dos pais, telefone).
+      //  48 - Crie uma tela para cadastrar as notas dos alunos.
+      //  49 - Crie uma tela para consultar o cadastro e situação dos alunos.
+
+      //elementos de navegação
+      const movableContainer = document.querySelector('#movableContainer')
+      const allInnerDivs = document.querySelectorAll('.inner-div')
+      const alerts = document.querySelectorAll('.alerts')
+      let currContainerPos = 0
+      let isShowingAlert
+
+      //inicializa variaveis de armazenamento de dados
+      const nomesAlunos = ['Ferris Bueller']
+      const enderecoAlunos = ['4160 Country Club Drive']
+      const nomesMaes = ['Katie Bueller']
+      const nomesPais = ['Tom John Bueller']
+      const telefonesPais = ['00 12345 6789']
+      const nota1 = [6]
+      const nota2 = [7]
+      const nota3 = [6]
+      const nota4 = [4]
+
+      //cadastro aluno
+      const alunoNome = document.querySelector('#firstName')
+      const enderecoInputs = document.querySelectorAll('.address')
+      const alunoMae = document.querySelector('#nomeMae')
+      const alunoPai = document.querySelector('#nomePai')
+      const telefone = document.querySelector('#telephone')
+      const inputs = [alunoNome, alunoMae, alunoPai, telefone]
+
+      //registro notas
+      const notasInputs = document.querySelectorAll('.notas')
+      const arrayNotas = [nota1, nota2, nota3, nota4]
+
+      //tela verificação
+      const selectAluno = document.querySelector('#selectAlunos')
+
+      //tela resumo aluno
+      const slotResumo = document.querySelector('#resumoSlot')
+
+
+      function createAluno() {
+        nomesAlunos.push(alunoNome.value)
+        let endereco = ''
+        for (let i = 0; i < enderecoInputs.length; i++) {
+          const element = enderecoInputs[i].value
+          endereco = endereco + ' ' + element
+          enderecoInputs[i].value = ''
+        }
+        enderecoAlunos.push(endereco)
+        nomesMaes.push(alunoMae.value)
+        nomesPais.push(alunoPai.value)
+        telefonesPais.push(telefone.value)
+
+        pushAlunoToSelect(alunoNome.value)
+
+        clearInputsFromArr(inputs)
+        moveContainer('next')
+
+      }
+
+      function salvarNotas() {
+        for (let i = 0; i < 4; i++) {
+          arrayNotas[i].push(notasInputs[i].value)
+          notasInputs[i].value = ''
+        }
+        moveContainer('next')
+        // console.log(nota1, nota2, nota3, nota4)
+      }
+
+      function getAluno() {
+        if (selectAluno.value !== 'null') {
+          displayAluno(selectAluno.value)
+          moveContainer('next')
+        } else
+          showAlert('Erro!', 'Não foi selecionado um aluno.', 2)
+      }
+
+      function displayAluno(key) {
+        slotResumo.innerHTML = ''
+        const media = (nota1[key] + nota2[key] + nota3[key] + nota4[key]) / 4
+        const resumoAluno = document.createElement('div')
+        resumoAluno.setAttribute('class', 'text-left')
+        const templateResumo = `
+            <h2 class="text-4xl font-medium mb-6">Resumo do Aluno</h2>
+            <dl class="max-w-md text-gray-900 divide-y divide-gray-600 ">
+              <div class="flex flex-col pb-3">
+                <dt class="mb-1 text-gray-700 text-lg ">Nome</dt>
+                <dd class="text-lg font-semibold">${nomesAlunos[key]}</dd>
+              </div>
+              <div class="flex flex-col py-3">
+                <dt class="mb-1 text-gray-700 text-lg ">Endereço</dt>
+                <dd class="text-lg font-semibold">${enderecoAlunos[key]}</dd>
+              </div>
+              <div class="flex flex-col pt-3">
+                <dt class="mb-1 text-gray-700 text-lg">Mãe</dt>
+                <dd class="text-lg font-semibold">${nomesMaes[key]}</dd>
+              </div>
+              <div class="flex flex-col pt-3">
+                <dt class="mb-1 text-gray-700 text-lg">Pai</dt>
+                <dd class="text-lg font-semibold">${nomesPais[key]}</dd>
+              </div>
+              <div class="flex flex-col pt-3">
+                <dt class="mb-1 text-gray-700 text-lg">Telefone Contato</dt>
+                <dd class="text-lg font-semibold">${telefonesPais[key]}</dd>
+              </div>
+            </dl>
+            <section id="notas">
+              <span>Nota 1<h6>${nota1[key]}</h6></span>
+              <span>Nota 2<h6>${nota2[key]}</h6></span>
+              <span>Nota 3<h6>${nota3[key]}</h6></span>
+              <span>Nota 4<h6>${nota4[key]}</h6></span>
+              <span>Média<h6>${nota1[key]}</h6></span>
+            </section>
+        `
+        resumoAluno.innerHTML = templateResumo
+        slotResumo.appendChild(resumoAluno)
+      }
+
+      function pushAlunoToSelect(aluno) {
+        const chave = (nomesAlunos.length - 1)
+        const newAluno = document.createElement('option')
+        newAluno.setAttribute('value', chave)
+        newAluno.innerText = aluno
+        selectAluno.appendChild(newAluno)
+        // console.log('Criado aluno:: ', aluno, 'CHAVE:: ', chave)
+      }
+
+      function moveContainer(dir, v = 1) {
+        if (dir === 'next') {
+          if (currContainerPos < ((allInnerDivs.length - 1) * 100)) {
+            currContainerPos = currContainerPos + (100 * v)
+            movableContainer.style.transform = `translateX(-${currContainerPos}vw)`
+          } else return
+        }
+        if (dir === 'back') {
+          if (currContainerPos > 0) {
+            currContainerPos = currContainerPos - (100 * v)
+            movableContainer.style.transform = `translateX(-${currContainerPos}vw)`
+          } else return
+        }
+      }
+
+      function clearInputsFromArr(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          arr[i].value = ''
+        }
+      }
+
+      async function showAlert(error, message, loc) {
+        if (!isShowingAlert) {
+          isShowingAlert = true
+          const newAlert = document.createElement('div')
+          newAlert.setAttribute('class', "p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-200")
+          newAlert.innerHTML = `<span class="font-medium">${error}</span> ${message}`
+          alerts[loc].appendChild(newAlert)
+          alerts[loc].style.transform = 'translateY(0)'
+          await delay(1800)
+          alerts[loc].style.transform = 'translateY(-1000px)'
+          await delay(300)
+          alerts[loc].removeChild(newAlert)
+        }
+        isShowingAlert = false
+      }
+
+      async function delay(time = 120) {
+        await new Promise(resolve => setTimeout(resolve, time))
+      }
+
     </script>
   </body>
 

@@ -1,0 +1,111 @@
+    html,
+    body, * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
+    }
+    .outer-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .alerts{
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      padding: 2rem;
+      min-height: 100px;
+      transform: translateY(-1000px);
+      transition: transform 300ms ease-in-out;
+      /* border: salmon 2px dotted;
+      background-color: sandybrown; */
+    }
+
+    .container {
+      width: 100%;
+      white-space: nowrap;
+      display: flex;
+      transition: transform 350ms ease-in-out;
+    }
+
+    .inner-div {
+      flex: 0 0 100vw;
+      height: 100vh;
+      background-color: rgb(220 220 220);
+      text-align: center;
+      font-size: 2rem;
+      display: grid;
+      place-items: center;
+      margin: 0;
+      position: relative;
+    }
+
+    fieldset{
+      display: flex;
+      flex-direction: column;
+      border: none;
+
+    }
+    legend {
+      text-align: left;
+      font-size: .8rem;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    fieldset > input {
+      /* width: 300px; */
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    form > button {
+      width: 100%;
+    }
+
+    fieldset > select {
+      font-size: 1rem;
+    }
+
+    .nav-button {
+      width: 100%;
+      position: absolute;
+      bottom: 5vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .nav-button > span {
+      color: #ccc;
+      background-color: #222;
+      padding: 1rem;
+      aspect-ratio: 1;
+      border-radius: 100rem;
+      cursor: pointer;
+    }
+
+    #notas {
+      margin-block: 2rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    #notas span {
+      display: grid;
+      place-items: center;
+      border:  1px solid rgb(50 50 50 / .7);
+      border-radius: .2rem;
+      flex-grow: 1;
+      font-size: .6rem;
+      text-transform: uppercase;
+    }
+
+    #notas span h6 {
+      font-size: 1.2rem;
+    }
+

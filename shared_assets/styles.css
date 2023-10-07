@@ -36,6 +36,9 @@
   input[type="number"],
   input[type="password"],
   input[type="date"],
+  input[type="telephone"],
+  input,
+  
   select{
     position: relative;
     width: 100%;
