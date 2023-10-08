@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo - Estados e Capitais</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+
+<body>
+
+  <main>
+    <section class="player-register flex flex-col gap-2">
+      <!-- forms entrada players -->
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        </div>
+        <input id="player1"
+          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-1-color)] focus:border-[var(--player-1-color)] "
+          placeholder="Jogador 1" required>
+        <button id="submitPlayer1" onclick="createPlayer(0)"
+          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
+      </div>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        </div>
+        <input id="player2"
+          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-2-color)] focus:border-[var(--player-2-color)]"
+          placeholder="Jogador 2" required>
+        <button id="submitPlayer2" onclick="createPlayer(1)"
+          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
+      </div>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        </div>
+        <input id="player3"
+          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-3-color)] focus:border-[var(--player-3-color)]"
+          placeholder="Jogador 3" required>
+        <button id="submitPlayer3" onclick="createPlayer(2)"
+          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
+      </div>
+      <div class="relative">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        </div>
+        <input id="player4"
+          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-4-color)] focus:border-[var(--player-4-color)]"
+          placeholder="Jogador 4" required>
+        <button id="submitPlayer4" onclick="createPlayer(3)"
+          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
+      </div>
+      <button disabled type="button"
+        class="gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
+        Iniciar
+        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor" viewBox="0 0 20 20">
+          <path
+            d="m7.164 3.805-4.475.38L.327 6.546a1.114 1.114 0 0 0 .63 1.89l3.2.375 3.007-5.006ZM11.092 15.9l.472 3.14a1.114 1.114 0 0 0 1.89.63l2.36-2.362.38-4.475-5.102 3.067Zm8.617-14.283A1.613 1.613 0 0 0 18.383.291c-1.913-.33-5.811-.736-7.556 1.01-1.98 1.98-6.172 9.491-7.477 11.869a1.1 1.1 0 0 0 .193 1.316l.986.985.985.986a1.1 1.1 0 0 0 1.316.193c2.378-1.3 9.889-5.5 11.869-7.477 1.746-1.745 1.34-5.643 1.01-7.556Zm-3.873 6.268a2.63 2.63 0 1 1-3.72-3.72 2.63 2.63 0 0 1 3.72 3.72Z" />
+        </svg>
+      </button>
+      <!-- fim forms entrada players -->
+      <section class="game-area">
+        <!-- area onde os elementos que vao reproduzir a logica do jogo aparecem -->
+        <h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">
+          Qual é a capital <span id="prepo">de</span> <mark id="estado-pergunta"
+            class="px-2 text-slate-800 rounded-xl bg-[var(--player-4-color)]">Santa
+            Catarina</mark>?
+        </h2>
+        <input type="text" id="input-resposta"
+          class="block w-full p-6 border rounded-2xl text-2xl  sm:text-md focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500">
+      </section>
+    </section>
+    <div class="players-area">
+      <section class="player-corner">
+        <div class="block max-w-sm p-6  border rounded-lg shadow bg-gray-800 border-gray-700">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
+          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
+        </div>
+
+      </section>
+      <section class="player-corner">
+        <div
+          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
+          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
+        </div>
+      </section>
+      <section class="player-corner">
+        <div
+          class="block text-right max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
+          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
+        </div>
+      </section>
+      <section class="player-corner">
+        <div
+          class="card-jogador block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
+          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
+        </div>
+      </section>
+    </div>
+    <!-- fim do bloco de jogadores -->
+    <nav id="acoes">
+      <div class="flex gap-4">
+        <button type="button"
+          class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
+          Jogar Rodada
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+              d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM13.5 5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm-7 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM10 16c-3.047 0-5.5-2.735-5.5-5a.5.5 0 0 1 1 0 11.7 11.7 0 0 0 4.5.583c2.548 0 4.221-.371 4.5-.65a.515.515 0 0 1 .026-.106.457.457 0 0 1 .481-.372.531.531 0 0 1 .493.545c0 2.265-2.453 5-5.5 5Z" />
+          </svg>
+        </button>
+        <button disabled type="button"
+          class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 rounded-lg text-center">
+          Encerrar Jogo
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+        </button>
+      </div>
+      <!-- barra de acoes do jogo entre rodadas -->
+    </nav>
+    <nav id="dev">
+      <!-- botoes teste desenvolvimento -->
+      <button onclick="testEstado()">trocar estado</button>
+      <button onclick="testValidar()">testar comparaçao com input</button>
+      <button onclick="verificarResposta()">testar resposta</button>
+    </nav>
+    <!-- tela de alertar e transições de estado -->
+    <section class="transition-screen">
+      <output id="icon"></output>
+      <output id="title"></output>
+      <output id="message"></output>
+      <output id="extra"></output>
+      <!-- tela de alertar e transições de estado -->
+    </section>
+  </main>
+
+  <script>
+    //  51  7. Crie um jogo de perguntas e respostas. O programa deverá sortear aleatoriamente um estado brasileiro e o jogador deverá responder informando qual é a respectiva capital.
+    //  52 - Cadastrar todos os estados Brasileiros  e suas respectivas capitais.
+    //  53 - Permitir 4 jogadores.
+    //  54 - A cada acerto é somado 1 ponto para o jogador.
+    //  55 - Ao final do jogo, informar quem ganhou e sua respectiva pontuação(poderá haver empates).
+    //  56 - Apresentar os resultados em ordem decrescente (do primeiro ao ultimo colocado).
+
+    //inicializando os arrays com os valores chave para o jogo
+    const estados = [
+      'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal',
+      'Espírito Santo', 'Goiás', 'Maranhão', 'Mato Grosso', 'Mato Grosso do Sul',
+      'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí', 'Rio de Janeiro',
+      'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina',
+      'São Paulo', 'Sergipe', 'Tocantins'
+    ]
+
+    const preposicoes = [
+      'do', 'de', 'do', 'do', 'da', 'do', 'do',
+      'do', 'de', 'do', 'de', 'do', 'de', 'do',
+      'da', 'da', 'de', 'do', 'do', 'do', 'do',
+      'do', 'do', 'de', 'de', 'de', 'de', 'do'
+    ]
+
+    const capitais = [
+      'Rio Branco', 'Maceió', 'Macapá', 'Manaus', 'Salvador', 'Fortaleza', 'Brasília',
+      'Vitória', 'Goiânia', 'São Luís', 'Cuiabá', 'Campo Grande', 'Belo Horizonte', 'Belém',
+      'João Pessoa', 'Curitiba', 'Recife', 'Teresina', 'Rio de Janeiro', 'Natal', 'Porto Alegre',
+      'Porto Velho', 'Boa Vista', 'Florianópolis', 'São Paulo', 'Aracaju', 'Palmas'
+    ]
+
+    //inicializa array que sera a 'base de dados' dos jogadores
+    const PLAYERS = [
+
+    ]
+
+    let isFirstRound = true
+
+    let GAME_STATE = {
+      state: 'idle',
+      currRound: 0,
+      players: PLAYERS,
+      currPlayer: null,
+      rounds: [
+      ]
+    }
+
+    let ROUND = {
+      estadoSorteado: null,
+      key: null,
+      expectedOutput: null,
+      receivedOutput: null,
+      match: null,
+      isOver: null,
+    }
+
+    //capturando dados dos nomes dos jogadores e ref ao botao de ativar jogador
+    const playerNamesInputs = document.querySelectorAll('.player-name')
+    const activatePlayerButtons = document.querySelectorAll('.activate-player')
+
+    //capturando elementos para construir a tela de jogo
+    const ESTADO_PERGUNTA = document.querySelector('#estado-pergunta')
+    const prepo = document.querySelector('#prepo')
+    const RESPOSTA = document.querySelector('#input-resposta')
+
+    function createPlayer(key) {
+      PLAYERS.push({
+        id: self.crypto.randomUUID(),
+        name: playerNamesInputs[key].value,
+        points: 0
+      })
+      console.log('ADICIONADO ::: ', PLAYERS[key])
+      playerNamesInputs[key].disabled = true
+      activatePlayerButtons[key].disabled = true
+      activatePlayerButtons[key].innerText = 'Pronto'
+
+    }
+
+    function testEstado() {
+      const key = Math.floor(Math.random() * estados.length)
+      const sorteado = estados[key]
+      console.log('CHAVE SORTEADA É :: ', key, estados[key])
+      prepo.innerText = preposicoes[key]
+      ESTADO_PERGUNTA.innerText = sorteado
+      salvaTentativa(key)
+    }
+
+    function startNewRound() {
+      if (isFirstRound) {
+        GAME_STATE.currRound = 0
+        GAME_STATE.currPlayer = 0
+      }
+      GAME_STATE.currRound += 1
+      if ((GAME_STATE.currPlayer + 1) > PLAYERS.length) {
+        GAME_STATE.currPlayer = 0
+      } else {
+        GAME_STATE.currPlayer = + 1
+      }
+
+    }
+
+    //cria um novo round e salva no objeto estado do jogo
+    function salvaTentativa(key, playerKey) {
+      ROUND = {
+        player: playerKey,
+        key: GAME_STATE.currRound,
+        estadoSorteado: estados[key],
+        expectedOutput: capitais[key],
+        receivedOutput: null,
+        isEqual: null,
+        isOver: false,
+      }
+      GAME_STATE = {
+        ...GAME_STATE,
+        rounds: [
+          ...GAME_STATE.rounds,
+          ROUND
+        ]
+      }
+    }
+
+    //recebe a resposta do jogador na tela e realiza as comparações. invoca açoes de acordo com o resultado, erro ou acerto
+    function verificarResposta() {
+      const round = GAME_STATE.currRound
+      const expected = GAME_STATE.rounds[round].expectedOutput
+      if (RESPOSTA.value === expected) {
+        alert('yes')
+        updateRound(round, 'receivedOutput', RESPOSTA.value)
+        updateRound(round, 'isEqual', true)
+      }
+      else {
+        alert('nope')
+        updateRound(round, 'receivedOutput', RESPOSTA.value)
+        updateRound(round, 'isEqual', false)
+      }
+    }
+
+    //manipula um round salvo dentro do objeto estado do jogo, recebe o index desse round e params key e value
+    function updateRound(index, key, value) {
+      let UPDATING = GAME_STATE.rounds[index]
+      UPDATING[key] = value
+      console.log('gamestate foi atualizado')
+
+    }
+
+
+  </script>
+
+
+</body>
+
+</html>
