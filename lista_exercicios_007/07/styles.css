@@ -15,6 +15,25 @@ body {
   background-color: rgb(13 13 13);
 }
 
+.block-small-screens{
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  color: aliceblue;
+  z-index: 99999;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 4rem;
+}
+
+@media screen and (min-width: 960px) {
+  .block-small-screens {
+    display: none;
+  }
+}
+
 main {
   position: relative;
   display: flex;
@@ -43,7 +62,7 @@ nav {
 
 #acoes {
   transition: all 120ms ease-in-out;
-  transform: translateY(0000px);
+  transform: translateY(100px);
   
 }
 #dev {
@@ -67,33 +86,31 @@ section {
   /* transform: translateY(-1000px); */
 }
 
-.player-register input::placeholder{
-  color: rgb(30 30 30);
-}
-.player-corner {
-  position: absolute;
-  width: 50vw;
-  height: 40svh;
-  padding: 4rem;
-  /* border: 2px dotted whitesmoke; */
-  isolation: isolate;
-
-}
 
 .game-area {
   min-width: 60svw;
   width: 100%;
   min-height: 75svh;
-  /* border: 5px dotted red; */
+  border: 5px dotted red;
   text-align: center;
   gap: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 5rem;
+  margin-bottom: 6rem;
   align-content: center;
   display: none;
   transform: scale(0);
+}
+
+.player-corner {
+  position: absolute;
+  width: 50vw;
+  height: 40svh;
+  padding: 4rem;
+  border: 2px dotted whitesmoke;
+  isolation: isolate;
 }
 
 .player-corner::after{
@@ -103,7 +120,7 @@ section {
   height: 100%;
   border-radius: 50rem;
   z-index: -1;
-  filter: blur(100px) opacity(.6);
+  filter: blur(100px) opacity(.4);
 }
 
 .player-corner:nth-child(1){
@@ -118,19 +135,22 @@ section {
   transform: translate(-50%, -50%);
   background-color: var(--player-1-color);
 }
+
 .player-corner:nth-child(2){
   top: 0;
   right: 0;
   text-align: right;
 }
+
 .player-corner:nth-child(2) div{
   margin: auto 0 auto auto;
 }
+
 .player-corner:nth-child(2)::after{
   transform: translate(50%, -50%);
   background-color: var(--player-2-color);
-
 }
+
 .player-corner:nth-child(3){
   bottom: 0;
   right: 0;
@@ -143,15 +163,18 @@ section {
   margin-left: auto;
   margin-top: auto;
 }
+
 .player-corner:nth-child(3)::after{
   background-color: var(--player-3-color);
   transform: translate(50%, 50%);
 
 }
+
 .player-corner:nth-child(4){
   bottom: 0;
   left: 0;
 }
+
 .player-corner:nth-child(4)::after{
   transform: translate(-50%, 50%);
   background-color: var(--player-4-color);
@@ -169,7 +192,7 @@ section {
   background-color: rgb(20 20 20 / .7);
   backdrop-filter: blur(30px);
   transform: scale(0);
-  transition: 250ms all ease-in-out;
+  transition: 120ms all ease-in-out;
   display: flex;
   gap: 2rem;
   flex-direction: column;
@@ -178,4 +201,3 @@ section {
   align-content: space-around;
 
 }
-

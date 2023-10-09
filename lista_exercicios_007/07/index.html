@@ -13,35 +13,38 @@
 <body>
 
   <main>
+    <!-- bloquear telas pequenas pq a responsividade é péssima -->
+    <div class="block-small-screens">Desculpe.<br>
+      Este jogo está disponível apenas para dispositivos com telas maiores e input de cursor.</div>
     <section class="player-register flex flex-col gap-6">
       <!-- forms entrada players -->
+      <h1 class="mb-4 text-4xl font-extrabold text-center text-2xl text-white">
+        Jogo dos Estados e Capitais </h1>
       <div class="flex flex-col gap-4">
         <div class="relative">
           <input id="player1"
-            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-1-color)] focus:border-[var(--player-1-color)] "
+            class="player-name block w-full p-4 text-sm  border rounded-xl focus:border-blue-500 bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500"
             placeholder="Jogador 1" required>
           <button id="submitPlayer1" onclick="createPlayer(0)"
             class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
         <div class="relative">
           <input id="player2"
-            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-2-color)] focus:border-[var(--player-2-color)]"
+            class="player-name block w-full p-4 text-sm  border rounded-xl focus:border-blue-500 bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500"
             placeholder="Jogador 2" required>
           <button id="submitPlayer2" onclick="createPlayer(1)"
             class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
         <div class="relative">
           <input id="player3"
-            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-3-color)] focus:border-[var(--player-3-color)]"
+            class="player-name block w-full p-4 text-sm  border rounded-xl focus:border-blue-500 bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500"
             placeholder="Jogador 3" required>
           <button id="submitPlayer3" onclick="createPlayer(2)"
             class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
         <div class="relative">
-          <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3">
-          </div> -->
           <input id="player4"
-            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-4-color)] focus:border-[var(--player-4-color)]"
+            class="player-name block w-full p-4 text-sm  border rounded-xl focus:border-blue-500 bg-gray-900 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500"
             placeholder="Jogador 4" required>
           <button id="submitPlayer4" onclick="createPlayer(3)"
             class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
@@ -50,8 +53,8 @@
       <button type="button" onclick="startNewRound(true)"
         class="gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
         Iniciar
-        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-          fill="currentColor" viewBox="0 0 20 20">
+        <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+          viewBox="0 0 20 20">
           <path
             d="m7.164 3.805-4.475.38L.327 6.546a1.114 1.114 0 0 0 .63 1.89l3.2.375 3.007-5.006ZM11.092 15.9l.472 3.14a1.114 1.114 0 0 0 1.89.63l2.36-2.362.38-4.475-5.102 3.067Zm8.617-14.283A1.613 1.613 0 0 0 18.383.291c-1.913-.33-5.811-.736-7.556 1.01-1.98 1.98-6.172 9.491-7.477 11.869a1.1 1.1 0 0 0 .193 1.316l.986.985.985.986a1.1 1.1 0 0 0 1.316.193c2.378-1.3 9.889-5.5 11.869-7.477 1.746-1.745 1.34-5.643 1.01-7.556Zm-3.873 6.268a2.63 2.63 0 1 1-3.72-3.72 2.63 2.63 0 0 1 3.72 3.72Z" />
         </svg>
@@ -70,10 +73,10 @@
         <input type="text" id="input-resposta"
           class="block w-full p-6 border rounded-2xl text-2xl  sm:text-md focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500">
         <button type="button" onclick="verificarResposta()"
-          class="absolute right-4 bottom-4 gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
+          class="absolute right-4 bottom-4 gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-slate-800 hover:bg-slate-900 focus:ring-4 focus:ring-slate-500 rounded-lg text-center">
           Enviar resposta
-          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-            fill="currentColor" viewBox="0 0 18 20">
+          <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 18 20">
             <path
               d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
           </svg>
@@ -81,33 +84,8 @@
       </div>
     </section>
     <div class="players-area">
-      <!-- <section class="player-corner">
-        <div class="block max-w-sm p-6  border rounded-lg shadow bg-gray-800 border-gray-700">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
-          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
-        </div>
-      </section>
-      <section class="player-corner">
-        <div
-          class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
-          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
-        </div>
-      </section>
-      <section class="player-corner">
-        <div
-          class="block text-right max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
-          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
-        </div>
-      </section>
-      <section class="player-corner">
-        <div
-          class="card-jogador block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-          <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
-          <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
-        </div>
-      </section> -->
+      <!-- aqui sao inseridos dinamicamente os jogadores.
+      no minimo 2, no maximo 4 -->
     </div>
     <!-- fim do bloco de jogadores -->
     <nav id="acoes">
@@ -137,6 +115,8 @@
       <!-- botoes teste desenvolvimento -->
       <!-- <button onclick="geraNovaPergunta()">trocar estado</button>
       <button onclick="verificarResposta()">testar resposta</button> -->
+      <button onclick="inicializaTransicao('A', 'B', 'success')">abre tela transição</button>
+      <button onclick="encerraTransicao()">fecha tela transição</button>
     </nav>
     <!-- tela de alertar e transições de estado -->
     <section class="transition-screen">
@@ -236,13 +216,13 @@
 
     }
 
-    function atualizaJogadoresParaTela() {
+    function atualizaTela() {
       areaJogadores.innerHTML = ''
       for (let i = 0; i < PLAYERS.length; i++) {
         let playerCorner = document.createElement('section')
         playerCorner.setAttribute('class', 'player-corner')
         playerCorner.innerHTML = `
-          <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+          <div class="block max-w-sm p-6  border rounded-lg shadow bg-gray-800 border-gray-700">
             <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
               ${PLAYERS[i].name}
             </h5>
@@ -285,7 +265,7 @@
           telaDeJogo.style.display = 'flex'
           await delay(100)
           telaDeJogo.style.transform = 'scale(1)'
-          atualizaJogadoresParaTela()
+          atualizaTela()
           geraNovaPergunta()
           await delay(600)
           encerraTransicao()
@@ -330,7 +310,7 @@
     function inicializaJogada(key, playerKey) {
       ROUND = {
         player: GAME_STATE.currPlayerName,
-        key: GAME_STATE.currRound,
+        roundPlayed: GAME_STATE.currRound,
         estadoSorteado: estados[key],
         expectedOutput: capitais[key],
         receivedOutput: null,
@@ -352,12 +332,12 @@
         const play = GAME_STATE.currPlay
         const expected = GAME_STATE.rounds[play].expectedOutput
         if (RESPOSTA.value === expected) {
-          inicializaTransicao('🎉', 'Acertou!')
+          inicializaTransicao('🎉', 'Acertou!', 'success')
           jogadorAcertou()
-          atualizaJogadoresParaTela()
+          atualizaTela()
         }
         else {
-          inicializaTransicao('😥', 'Errada')
+          inicializaTransicao('😥', 'Errada', 'error')
         }
         atualizaJogada(play, 'receivedOutput', RESPOSTA.value)
         proximoJogador()
@@ -392,11 +372,16 @@
       await new Promise(resolve => setTimeout(resolve, time))
     }
 
-    function inicializaTransicao(icon = '⚡️', title = 'Carregando', message = '') {
-      document.querySelector('.transition-screen').style.transform = 'scale(1)'
+    function inicializaTransicao(icon = '⚡️', title = 'Carregando', type) {
+      const screen = document.querySelector('.transition-screen')
+      if (type === 'success') {
+        screen.style.backgroundColor = 'rgb(15 120 70 / .6)'
+      } else if (type === 'error') {
+        screen.style.backgroundColor = 'rgb(160 20 40 / .6)'
+      }
+      screen.style.transform = 'scale(1)'
       outIcon.value = icon
       outTitle.value = title
-      outMessage.value = message
       // console.log('em transição')
     }
 
