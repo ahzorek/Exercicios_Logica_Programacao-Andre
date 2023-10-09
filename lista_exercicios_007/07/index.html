@@ -13,45 +13,41 @@
 <body>
 
   <main>
-    <section class="player-register flex flex-col gap-2">
+    <section class="player-register flex flex-col gap-6">
       <!-- forms entrada players -->
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+      <div class="flex flex-col gap-4">
+        <div class="relative">
+          <input id="player1"
+            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-1-color)] focus:border-[var(--player-1-color)] "
+            placeholder="Jogador 1" required>
+          <button id="submitPlayer1" onclick="createPlayer(0)"
+            class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
-        <input id="player1"
-          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-1-color)] focus:border-[var(--player-1-color)] "
-          placeholder="Jogador 1" required>
-        <button id="submitPlayer1" onclick="createPlayer(0)"
-          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
-      </div>
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div class="relative">
+          <input id="player2"
+            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-2-color)] focus:border-[var(--player-2-color)]"
+            placeholder="Jogador 2" required>
+          <button id="submitPlayer2" onclick="createPlayer(1)"
+            class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
-        <input id="player2"
-          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-2-color)] focus:border-[var(--player-2-color)]"
-          placeholder="Jogador 2" required>
-        <button id="submitPlayer2" onclick="createPlayer(1)"
-          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
-      </div>
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div class="relative">
+          <input id="player3"
+            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-3-color)] focus:border-[var(--player-3-color)]"
+            placeholder="Jogador 3" required>
+          <button id="submitPlayer3" onclick="createPlayer(2)"
+            class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
-        <input id="player3"
-          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-3-color)] focus:border-[var(--player-3-color)]"
-          placeholder="Jogador 3" required>
-        <button id="submitPlayer3" onclick="createPlayer(2)"
-          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
-      </div>
-      <div class="relative">
-        <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+        <div class="relative">
+          <!-- <div class="absolute inset-y-0 left-0 flex items-center pl-3">
+          </div> -->
+          <input id="player4"
+            class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-4-color)] focus:border-[var(--player-4-color)]"
+            placeholder="Jogador 4" required>
+          <button id="submitPlayer4" onclick="createPlayer(3)"
+            class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
         </div>
-        <input id="player4"
-          class="player-name block w-full p-4 text-sm text-gray-800 border rounded-xl bg-gray-50/75 focus:ring-[var(--player-4-color)] focus:border-[var(--player-4-color)]"
-          placeholder="Jogador 4" required>
-        <button id="submitPlayer4" onclick="createPlayer(3)"
-          class="activate-player text-white absolute right-2.5 bottom-2.5 bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 ">Entrar</button>
       </div>
-      <button disabled type="button"
+      <button type="button" onclick="startNewRound(true)"
         class="gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
         Iniciar
         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -61,24 +57,35 @@
         </svg>
       </button>
       <!-- fim forms entrada players -->
-      <section class="game-area">
-        <!-- area onde os elementos que vao reproduzir a logica do jogo aparecem -->
-        <h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl lg:text-6xl text-white">
-          Qual é a capital <span id="prepo">de</span> <mark id="estado-pergunta"
-            class="px-2 text-slate-800 rounded-xl bg-[var(--player-4-color)]">Santa
-            Catarina</mark>?
-        </h2>
+    </section>
+    <section class="game-area">
+      <!-- area onde os elementos que vao reproduzir a logica do jogo aparecem -->
+      <h5 class="text-white text-lg"><span id="jogando"></span> está jogando...</h5>
+      <h2 class="mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl text-white">
+        Qual é a capital <span id="prepo">de</span> <mark id="estado-pergunta"
+          class="px-2 text-slate-800 rounded-xl bg-[var(--player-4-color)]">Santa
+          Catarina</mark>?
+      </h2>
+      <div class="relative w-full">
         <input type="text" id="input-resposta"
           class="block w-full p-6 border rounded-2xl text-2xl  sm:text-md focus:border-blue-500 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500">
-      </section>
+        <button type="button" onclick="verificarResposta()"
+          class="absolute right-4 bottom-4 gap-2 px-6 py-3.5 text-base font-medium text-white flex justify-center bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 rounded-lg text-center">
+          Enviar resposta
+          <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 18 20">
+            <path
+              d="m17.914 18.594-8-18a1 1 0 0 0-1.828 0l-8 18a1 1 0 0 0 1.157 1.376L8 18.281V9a1 1 0 0 1 2 0v9.281l6.758 1.689a1 1 0 0 0 1.156-1.376Z" />
+          </svg>
+        </button>
+      </div>
     </section>
     <div class="players-area">
-      <section class="player-corner">
+      <!-- <section class="player-corner">
         <div class="block max-w-sm p-6  border rounded-lg shadow bg-gray-800 border-gray-700">
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
           <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
         </div>
-
       </section>
       <section class="player-corner">
         <div
@@ -100,7 +107,7 @@
           <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">Jogador 1</h5>
           <h6 class="text-xl font-medium tracking-tight text-white">5 pontos</h6>
         </div>
-      </section>
+      </section> -->
     </div>
     <!-- fim do bloco de jogadores -->
     <nav id="acoes">
@@ -128,16 +135,18 @@
     </nav>
     <nav id="dev">
       <!-- botoes teste desenvolvimento -->
-      <button onclick="testEstado()">trocar estado</button>
-      <button onclick="testValidar()">testar comparaçao com input</button>
-      <button onclick="verificarResposta()">testar resposta</button>
+      <!-- <button onclick="geraNovaPergunta()">trocar estado</button>
+      <button onclick="verificarResposta()">testar resposta</button> -->
     </nav>
     <!-- tela de alertar e transições de estado -->
     <section class="transition-screen">
-      <output id="icon"></output>
-      <output id="title"></output>
-      <output id="message"></output>
-      <output id="extra"></output>
+      <h2 class="text-8xl"><output id="out-icon"></output></h2>
+      <h5 class="mb-2 text-4xl font-bold tracking-tight text-white">
+        <output id="out-title"></output>
+      </h5>
+      <p class="mb-2 text-lg font-bold tracking-tight text-white">
+        <output id="out-message"></output>
+      </p>
       <!-- tela de alertar e transições de estado -->
     </section>
   </main>
@@ -174,17 +183,15 @@
     ]
 
     //inicializa array que sera a 'base de dados' dos jogadores
-    const PLAYERS = [
-
-    ]
-
-    let isFirstRound = true
+    const PLAYERS = []
 
     let GAME_STATE = {
       state: 'idle',
       currRound: 0,
+      currPlay: 0,
       players: PLAYERS,
       currPlayer: null,
+      currPlayerName: null,
       rounds: [
       ]
     }
@@ -194,65 +201,141 @@
       key: null,
       expectedOutput: null,
       receivedOutput: null,
-      match: null,
-      isOver: null,
     }
 
     //capturando dados dos nomes dos jogadores e ref ao botao de ativar jogador
+    const playerRegisterInputs = document.querySelector('.player-register')
     const playerNamesInputs = document.querySelectorAll('.player-name')
     const activatePlayerButtons = document.querySelectorAll('.activate-player')
 
     //capturando elementos para construir a tela de jogo
+    const telaDeJogo = document.querySelector('.game-area')
     const ESTADO_PERGUNTA = document.querySelector('#estado-pergunta')
     const prepo = document.querySelector('#prepo')
     const RESPOSTA = document.querySelector('#input-resposta')
+    const jogando = document.querySelector('#jogando')
+
+    //elementos relacionado aos cards de cada jogador
+    const areaJogadores = document.querySelector('.players-area')
+
+    //elementos para exibir mensagens entre as jogadas
+    const outIcon = document.querySelector("#out-icon")
+    const outTitle = document.querySelector("#out-title")
+    const outMessage = document.querySelector("#out-message")
+
 
     function createPlayer(key) {
       PLAYERS.push({
-        id: self.crypto.randomUUID(),
-        name: playerNamesInputs[key].value,
+        name: playerNamesInputs[key].value || `Jogador ${key + 1}`,
         points: 0
       })
-      console.log('ADICIONADO ::: ', PLAYERS[key])
+      console.log('ADICIONADO::', PLAYERS[(PLAYERS.length - 1)])
       playerNamesInputs[key].disabled = true
       activatePlayerButtons[key].disabled = true
       activatePlayerButtons[key].innerText = 'Pronto'
 
     }
 
-    function testEstado() {
+    function atualizaJogadoresParaTela() {
+      areaJogadores.innerHTML = ''
+      for (let i = 0; i < PLAYERS.length; i++) {
+        let playerCorner = document.createElement('section')
+        playerCorner.setAttribute('class', 'player-corner')
+        playerCorner.innerHTML = `
+          <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-white">
+              ${PLAYERS[i].name}
+            </h5>
+            <h6 class="text-xl font-medium tracking-tight text-white">${PLAYERS[i].points} pontos</h6>
+          </div>
+        `
+        areaJogadores.appendChild(playerCorner)
+      }
+
+    }
+
+    //gera aleatoriamente uma nova key para definir que estado sera perguntado, atualiza a tela e salva os dados no estado do jogo
+    function geraNovaPergunta() {
       const key = Math.floor(Math.random() * estados.length)
-      const sorteado = estados[key]
-      console.log('CHAVE SORTEADA É :: ', key, estados[key])
+      // console.log('CHAVE SORTEADA É :: ', key, estados[key])
       prepo.innerText = preposicoes[key]
-      ESTADO_PERGUNTA.innerText = sorteado
-      salvaTentativa(key)
+      jogando.innerText = GAME_STATE.currPlayerName
+      ESTADO_PERGUNTA.innerText = estados[key]
+      ESTADO_PERGUNTA.setAttribute('class',
+        `px-2 text-slate-800 rounded-xl bg-[var(--player-${(GAME_STATE.currPlayer + 1)}-color)]`)
+      inicializaJogada(key)
     }
 
-    function startNewRound() {
-      if (isFirstRound) {
-        GAME_STATE.currRound = 0
+    //inicializa uma nova rodada com as configurações necessarias
+    async function startNewRound(isFirstRound) {
+      if (PLAYERS.length > 1) {
+        if (!isFirstRound) {
+          GAME_STATE.currRound += 1
+          GAME_STATE.currPlay += 1
+        }
         GAME_STATE.currPlayer = 0
-      }
-      GAME_STATE.currRound += 1
-      if ((GAME_STATE.currPlayer + 1) > PLAYERS.length) {
-        GAME_STATE.currPlayer = 0
+        GAME_STATE.currPlayerName = PLAYERS[GAME_STATE.currPlayer].name
+        GAME_STATE.state = 'ongoing'
+        console.log('nova rodada')
+        if (isFirstRound) {
+          inicializaTransicao()
+          playerRegisterInputs.style.transform = 'scale(0)'
+          await delay(600)
+          playerRegisterInputs.style.display = 'none'
+          telaDeJogo.style.display = 'flex'
+          await delay(100)
+          telaDeJogo.style.transform = 'scale(1)'
+          atualizaJogadoresParaTela()
+          geraNovaPergunta()
+          await delay(600)
+          encerraTransicao()
+          console.log(GAME_STATE.currPlayerName, 'está jogando')
+        } else if (GAME_STATE.state === 'idle') {
+          geraNovaPergunta()
+          encerraTransicao()
+        }
       } else {
-        GAME_STATE.currPlayer = + 1
+        alert('precisa ter 2 jogadores ou mais')
+        return
       }
-
     }
+
+    //criar uma funcao para chcar se a key sorteada nao é repetida
+
+    //criar uma funçao que atualiza a pontuação do usuario
+    function jogadorAcertou() {
+      PLAYERS[GAME_STATE.currPlayer].points += 1
+    }
+
+    //criar uma função que avança para o proximo usuario
+    async function proximoJogador() {
+      //se for, poe o jogo em 'idle' e traz os botoe de nova rodada e  encerrar
+      //se nao for, segue para o proximo jogador
+      if ((GAME_STATE.currPlayer + 1) >= PLAYERS.length) {
+        GAME_STATE.state = 'idle'
+        startNewRound()
+      } else {
+        GAME_STATE.currPlayer += 1
+        GAME_STATE.currPlay += 1
+      }
+      GAME_STATE.currPlayerName = PLAYERS[GAME_STATE.currPlayer].name
+      console.log(GAME_STATE.currPlayerName, 'está jogando')
+      await delay(1200)
+      geraNovaPergunta()
+      encerraTransicao()
+    }
+
 
     //cria um novo round e salva no objeto estado do jogo
-    function salvaTentativa(key, playerKey) {
+    function inicializaJogada(key, playerKey) {
       ROUND = {
-        player: playerKey,
+        player: GAME_STATE.currPlayerName,
         key: GAME_STATE.currRound,
         estadoSorteado: estados[key],
         expectedOutput: capitais[key],
         receivedOutput: null,
-        isEqual: null,
-        isOver: false,
+        // isEqual: null,
+        // isOver: false,
       }
       GAME_STATE = {
         ...GAME_STATE,
@@ -265,26 +348,61 @@
 
     //recebe a resposta do jogador na tela e realiza as comparações. invoca açoes de acordo com o resultado, erro ou acerto
     function verificarResposta() {
-      const round = GAME_STATE.currRound
-      const expected = GAME_STATE.rounds[round].expectedOutput
-      if (RESPOSTA.value === expected) {
-        alert('yes')
-        updateRound(round, 'receivedOutput', RESPOSTA.value)
-        updateRound(round, 'isEqual', true)
-      }
-      else {
-        alert('nope')
-        updateRound(round, 'receivedOutput', RESPOSTA.value)
-        updateRound(round, 'isEqual', false)
-      }
+      if (RESPOSTA.value) {
+        const play = GAME_STATE.currPlay
+        const expected = GAME_STATE.rounds[play].expectedOutput
+        if (RESPOSTA.value === expected) {
+          inicializaTransicao('🎉', 'Acertou!')
+          jogadorAcertou()
+          atualizaJogadoresParaTela()
+        }
+        else {
+          inicializaTransicao('😥', 'Errada')
+        }
+        atualizaJogada(play, 'receivedOutput', RESPOSTA.value)
+        proximoJogador()
+        RESPOSTA.value = ''
+      } else alert('resposta está vazia')
     }
 
     //manipula um round salvo dentro do objeto estado do jogo, recebe o index desse round e params key e value
-    function updateRound(index, key, value) {
+    function atualizaJogada(index, key, value) {
       let UPDATING = GAME_STATE.rounds[index]
       UPDATING[key] = value
-      console.log('gamestate foi atualizado')
+      console.log('objeto de estado do jogo foi atualizado')
+    }
 
+    //transiciona entre tela realizando colocando timers e executando uma callback function
+    // async function exibirTransicao(callback = null, time = 1200, icon, title, message, extra) {
+    //   document.querySelector('.transition-screen').style.transform = 'scale(1)'
+    //   await delay(time)
+    //   if (callback !== null) {
+    //     callback()
+    //   }
+    //   document.querySelector('.transition-screen').style.transform = 'scale(0)'
+
+    // }
+
+    // function callBackSender(param) {
+    //   console.log(param)
+    // }
+
+    // funcao serve para criar gaps de tempo entre a execução de outras funcoes, um atraso estrategico para produzir algum efeito ou coisa assim
+    async function delay(time = 120) {
+      await new Promise(resolve => setTimeout(resolve, time))
+    }
+
+    function inicializaTransicao(icon = '⚡️', title = 'Carregando', message = '') {
+      document.querySelector('.transition-screen').style.transform = 'scale(1)'
+      outIcon.value = icon
+      outTitle.value = title
+      outMessage.value = message
+      // console.log('em transição')
+    }
+
+    function encerraTransicao() {
+      document.querySelector('.transition-screen').style.transform = 'scale(0)'
+      // console.log('saindo da transição');
     }
 
 
