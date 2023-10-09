@@ -341,7 +341,7 @@
       if (RESPOSTA.value) {
         const play = GAME_STATE.currPlay
         const expected = GAME_STATE.rounds[play].expectedOutput
-        if (RESPOSTA.value === expected) {
+        if (compareWithMaxErrors(RESPOSTA.value, expected, 3)) {
           inicializaTransicao('🎉', 'Acertou!', 'success')
           jogadorAcertou()
           atualizaTela()
@@ -362,20 +362,29 @@
       // console.log('objeto de estado do jogo foi atualizado')
     }
 
-    //transiciona entre tela realizando colocando timers e executando uma callback function
-    // async function exibirTransicao(callback = null, time = 1200, icon, title, message, extra) {
-    //   document.querySelector('.transition-screen').style.transform = 'scale(1)'
-    //   await delay(time)
-    //   if (callback !== null) {
-    //     callback()
-    //   }
-    //   document.querySelector('.transition-screen').style.transform = 'scale(0)'
+    //normaliza as strings para efeito de melhorar a comparação
+    function normalized(str) {
+      return str.replace(/\s+/g, "").toLowerCase()
+    }
 
-    // }
+    //realiza comparação caractere a caractere para possibilitar que mesmo com X variações (ou erros) o jogador ainda pontue
+    function compareWithMaxErrors(input, expected, maxErrors = 2) {
+      const stringJogador = normalized(input)
+      const stringExpected = normalized(expected)
 
-    // function callBackSender(param) {
-    //   console.log(param)
-    // }
+      let errors = 0
+
+      for (let i = 0; i < stringExpected.length; i++) {
+        // console.log('char esperado ::::', stringExpected[i])
+        // console.log('char comparado :::', stringJogador[i])
+        if (stringJogador[i] !== stringExpected[i]) {
+          errors++
+        }
+      }
+      const charFaltando = (stringExpected.length - stringJogador.length)
+      console.log('foram observados::: ', errors, 'erros e ', charFaltando, ' caracteres faltando')
+      return (errors <= maxErrors) && (charFaltando < 2)
+    }
 
     // funcao serve para criar gaps de tempo entre a execução de outras funcoes, um atraso estrategico para produzir algum efeito ou coisa assim
     async function delay(time = 120) {
