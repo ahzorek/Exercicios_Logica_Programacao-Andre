@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  padding: 0;
+  --color: rgb(220 220 220 / 80%);
+  font-family: sans-serif;
+  color: rgb(200 200 200);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(30 30 30);
+  justify-content: center;
+  align-items: center;
+}
+
+.bar {
+  --bg-color: red;
+  height: 2rem;
+  accent-color: var(--bg-color);
+  transition: all 100ms ease-in-out;
+}
