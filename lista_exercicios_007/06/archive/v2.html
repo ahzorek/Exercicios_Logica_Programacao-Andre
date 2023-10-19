@@ -1,0 +1,224 @@
+<!--
+    Programa: Gerenciamento de Alunos
+    Descrição:
+    Uma escola solicitou a criação de um progrma onde possam ser relizados cadastros de alunos, levando seus dados e a adição de suas notas. Ao final o programa deve gerar um relatório do aluno, contendo suas informações, suas notas e seja verificado se a média dessas notas é suficiente para a aprovação do aluno.
+    Autor: Andre H. Zorek
+    Data: 06.10.2023
+
+    Histórico de Alterações: 
+    V |   Data   | Autor/Descrição 
+    ----------------------------------------------------------------------------
+    0 | 08.10.23 | Andre H. Zorek    
+      |          | Programa inicial finalizado. Apresenta alguns bugs conhecidos e não realiza validação (nem mesmo básica) na maioria dos campos.
+    ----------------------------------------------------------------------------
+    1 | 19.10.23 | Andre H. Zorek    
+      |          | Converte a versão inicial do programa do uso de chamadas de Javascript inline para event handlers nivel 2 e validação básica de campos.
+    ----------------------------------------------------------------------------
+    2 | 19.10.23 | Andre H. Zorek    
+      |          | Implementa separation of concerns e adiciona script da posthog para produzir relatorios analytics do programa
+    ----------------------------------------------------------------------------
+!-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerenciamento de Alunos</title>
+  <link rel="stylesheet" href="css/06_styles.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="js/main.js" defer></script>
+  <script>
+    !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.async = !0, p.src = s.api_host + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
+    posthog.init('phc_8QVdOjSJMUi29BJO1l3hbnspk5c4MNWQfrbyYvlVDXu', { api_host: 'https://app.posthog.com' })
+  </script>
+
+</head>
+
+<body>
+  </head>
+
+  <body>
+    <div class="outer-container">
+      <div class="container" id="movableContainer">
+        <div class="inner-div box-border">
+          <!-- div fantasma ativa dev mode -->
+          <div id="devmode"></div>
+          <!-- div fantasma ativa dev mode -->
+          <div class="flex flex-col gap-5">
+            <!-- menu navegaçao inicial -->
+            <button type="button" id="goToCriarAlunoBtn"
+              class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center">
+              <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white"
+                viewBox="0 0 20 18">
+                <path
+                  d="M6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Zm11-3h-2V5a1 1 0 0 0-2 0v2h-2a1 1 0 1 0 0 2h2v2a1 1 0 0 0 2 0V9h2a1 1 0 1 0 0-2Z" />
+              </svg>
+              Criar Novo Aluno
+            </button>
+            <button type="button" id="goToVerificarAlunoBtn"
+              class="gap-2 px-6 py-3.5 text-base font-medium text-white inline-flex items-center bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center">
+              <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="white"
+                viewBox="0 0 16 20">
+                <path
+                  d="M7.363 9.863a2 2 0 1 0 1.412 3.415A2 2 0 0 0 7.36 9.866l.003-.003ZM5 5V.13a2.98 2.98 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z" />
+                <path
+                  d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2Zm-1.722 16.844a1 1 0 0 1-1.414 0L9.383 15.3a3.96 3.96 0 0 1-2.02.566 4 4 0 1 1 4-4 3.96 3.96 0 0 1-.566 2.02l1.547 1.547a1 1 0 0 1 0 1.411Z" />
+              </svg>
+              Verificar Aluno
+            </button>
+          </div>
+        </div>
+        <div class="inner-div box-border" id="cadastroAluno">
+
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas para essa tela -->
+          </section>
+          <!-- espaco para estrutura dos forms de cadastro aluno -->
+          <form class="cadastro-aluno grid gap-6 mb-6" id="formRegistroAluno">
+            <h2 class="text-4xl font-medium">Cadastrar Novo Aluno</h2>
+            <fieldset id="informacoesAluno" class="gap-4">
+              <legend>Informações Aluno</legend>
+              <input title="Nome" type="text" name="nomeDoAluno" id="nomeDoAluno"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome" required>
+              <input
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                title="Rua, número, bairro" placeholder="Endereço (Rua, número, bairro)" type="text"
+                autocomplete="street-address" required>
+              <input
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                title="Cidade" placeholder="Cidade" type="text" required>
+              <select
+                class="address bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                id="estados" title="Estado" placeholder="Estado" required>
+                <option value="" disabled selected>Selecione um estado</option>
+                <option value="Acre">Acre</option>
+                <option value="Alagoas">Alagoas</option>
+                <option value="Amapá">Amapá</option>
+                <option value="Amazonas">Amazonas</option>
+                <option value="Bahia">Bahia</option>
+                <option value="Ceará">Ceará</option>
+                <option value="Distrito Federal">Distrito Federal</option>
+                <option value="Espírito Santo">Espírito Santo</option>
+                <option value="Goiás">Goiás</option>
+                <option value="Maranhão">Maranhão</option>
+                <option value="Mato Grosso">Mato Grosso</option>
+                <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+                <option value="Minas Gerais">Minas Gerais</option>
+                <option value="Pará">Pará</option>
+                <option value="Paraíba">Paraíba</option>
+                <option value="Paraná">Paraná</option>
+                <option value="Pernambuco">Pernambuco</option>
+                <option value="Piauí">Piauí</option>
+                <option value="Rio de Janeiro">Rio de Janeiro</option>
+                <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+                <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+                <option value="Rondônia">Rondônia</option>
+                <option value="Roraima">Roraima</option>
+                <option value="Santa Catarina">Santa Catarina</option>
+                <option value="São Paulo">São Paulo</option>
+                <option value="Sergipe">Sergipe</option>
+                <option value="Tocantins">Tocantins</option>
+                <option value="Exterior">Exterior</option>
+              </select>
+            </fieldset>
+            <fieldset id="informacoesPais" class="gap-4">
+              <legend>Informações dos Pais</legend>
+              <input type="text" name="mothersName" id="nomeMae"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome da mãe" required>
+              <input type="text" name="fathersName" id="nomePai"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nome do pai" required>
+              <input type="tel" inputmode="numeric" name="telephone" id="telephone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Telefone" required>
+            </fieldset>
+            <button type="submit"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
+              Dados</button>
+          </form>
+          <!-- fim espaco para estrutura dos forms de cadastro aluno -->
+        </div>
+        <div class="inner-div box-border" id="registroNotas">
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas para essa tela -->
+          </section>
+          <!-- espaco para os forms de registro de notas dos alunos -->
+          <form class="cadastro-aluno grid gap-6 mb-6" id="registrarNotasAluno" method="post">
+            <h2 class="text-4xl font-medium">Cadastrar Notas</h2>
+            <fieldset class="gap-4">
+              <input type="number" name="nota1" min="0" max="10" step="0.5" required
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota 1">
+            </fieldset>
+            <fieldset class="gap-4">
+              <input type="number" name="nota2" min="0" max="10" step="0.5" required
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota 2">
+            </fieldset>
+            <fieldset class="gap-4">
+              <input type="number" name="nota3" min="0" max="10" step="0.5" required
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota 3">
+            </fieldset>
+            <fieldset class="gap-4">
+              <input type="number" name="nota4" min="0" max="10" step="0.5" required
+                class="notas bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="Nota 4">
+            </fieldset>
+            <button type="submit"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Salvar
+              Notas</button>
+          </form>
+          <!-- fim espaco para os forms de registro de notas dos alunos -->
+        </div>
+        <div class="inner-div box-border" id="consultaAluno">
+          <section class="alerts">
+            <!-- aqui entram possiveis alertas para essa tela -->
+          </section>
+          <!-- espaco para input select para escolher de qual aluno gerar o relatorio resumo -->
+          <form class="cadastro-aluno grid gap-6 mb-6">
+            <h2 class="text-4xl font-medium">Verificar Situação</h2>
+            <fieldset id="informacoesPais" class="gap-4">
+              <select
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                id="selectAlunos" title="Alunos" required>
+                <option value="null" disabled selected>Selecione um aluno</option>
+                <option value="0">Ferris Bueller</option>
+              </select>
+            </fieldset>
+            <button type="button" id="selecionaAluno"
+              class="px-6 py-3.5 text-base font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Buscar
+              Dados</button>
+          </form>
+          <!-- fim espaco para input select para escolher de qual aluno gerar o relatorio resumo -->
+        </div>
+
+        <div class="inner-div box-border">
+          <output id="resumoSlot">
+            <!-- resumo do aluno selecionado entra aqui -->
+
+            <!-- resumo do aluno selecionado entra aqui -->
+          </output>
+          <button type="button" id="goToStartBtn"
+            class="px-5 py-2.5 text-sm font-medium text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center gap-2">
+            <svg class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+              viewBox="0 0 14 10">
+              <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 5H1m0 0 4 4M1 5l4-4" />
+            </svg>
+            Voltar
+          </button>
+        </div>
+      </div>
+      <section class="nav-button">
+        <span id="backButton" onclick="moveContainer('prev')">←</span>
+        <span id="nextButton" onclick="moveContainer('next')">→</span>
+      </section>
+    </div>
+  </body>
+
+</html>
